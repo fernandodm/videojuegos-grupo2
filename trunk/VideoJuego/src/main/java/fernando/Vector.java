@@ -1,12 +1,12 @@
 package fernando;
 
-public class Vector2D {
+public class Vector {
 
 	private double x;
 	private double y;
 	private double module;
 
-	public Vector2D(double x, double y) {
+	public Vector(double x, double y) {
 		this.x = x;
 		this.y = y;
 		this.module = -1;
@@ -24,17 +24,17 @@ public class Vector2D {
 		return module;
 	}
 	
-	public Vector2D asVersor(){
+	public Vector asVersor(){
 		//TODO, usar un delta?
-		return this.getModule() != 1 ? new Vector2D(this.x/this.getModule(), this.y/this.getModule()) : this;
+		return this.getModule() != 1 ? new Vector(this.x/this.getModule(), this.y/this.getModule()) : this;
 	}
 	
-	public Vector2D producto(double valor){
-		return new Vector2D(x * valor , y * valor);
+	public Vector producto(double valor){
+		return new Vector(x * valor , y * valor);
 	}
 
-	public Vector2D suma(Vector2D vector2d) {
-		return new Vector2D(this.x + vector2d.getX(), this.y + vector2d.getY());
+	public Vector suma(Vector vector2d) {
+		return new Vector(this.x + vector2d.getX(), this.y + vector2d.getY());
 	}
 	
 	public double getX() {
@@ -66,7 +66,7 @@ public class Vector2D {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Vector2D other = (Vector2D) obj;
+		Vector other = (Vector) obj;
 		if (Double.doubleToLongBits(module) != Double
 				.doubleToLongBits(other.module))
 			return false;
