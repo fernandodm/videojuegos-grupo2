@@ -15,14 +15,14 @@ public class GamePelotita extends Game {
 	@Override
 	protected void setUpScenes() {
 		PelotitaScene pelotitaScene = new PelotitaScene();
-		Pelota pelota = new Pelota(30, 400, 0, new Vector2D(5, -2), 500);
+		Pelota pelota = new Pelota(30, 2, 2, new Vector(5, -2), 900);
 		((PelotitaScene) pelotitaScene).setPelota(pelota);
 		this.setCurrentScene(pelotitaScene);
 	}
 
 	@Override
 	public Dimension getDisplaySize() {
-		return new Dimension(1000, 900);
+		return new Dimension(200, 200);
 	}
 
 	@Override
