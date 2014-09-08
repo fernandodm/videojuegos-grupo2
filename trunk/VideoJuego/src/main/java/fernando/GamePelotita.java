@@ -42,6 +42,9 @@ public class GamePelotita extends Game {
 				scene.addComponent(new GameComponent<GameScene>(new Rectangle(
 						color, 48, 18), x * 50, y * 20) {
 
+					private  double anguloMayor = Math.PI / 3;
+					private  double anguloMenor = -Math.PI / 3;
+
 					@Override
 					public void update(DeltaState deltaState) {
 						Vector nuevaPosicion = pelota
@@ -52,9 +55,53 @@ public class GamePelotita extends Game {
 								.suma(new Vector(pelota.getX(), pelota.getY()));
 						if (colisiona(this, pelota, nuevaPosicion)) {
 							scene.removeComponent(this);
-
+							apply(pelota,nuevaPosicion,scene);
 						}
 
+					}
+
+					public void apply(Pelota pelota, Vector nuevaPosicion,
+							GameScene scene) {
+						double puntoDeColision = getPuntoColision(this, pelota,
+								nuevaPosicion);
+
+						double signoY = Math.signum(pelota.getDireccion()
+								.getY());
+
+						double anguloNuevo = ((anguloMayor - anguloMenor) / this
+								.getAppearance().getWidth())
+								* puntoDeColision
+								+ anguloMenor;
+						// aprovecho e invierto el signo que traia Y con el
+						// truquito de
+						// multiplicarlo por -1
+						pelota.setDireccion(new Vector(Math.sin(anguloNuevo),
+								(-1) * signoY * Math.cos(anguloNuevo)));
+
+						// pelota.setX(nuevaPosicion.getX());
+						pelota.setY(signoY > 0 ? this.getY()
+								- pelota.getAppearance().getHeight() - 1 : this
+								.getY() + this.getAppearance().getHeight() + 1);
+
+					}
+
+					private double getPuntoColision(
+							GameComponent<GameScene> raqueta, Pelota pelota,
+							Vector nuevaPosicion) {
+						if (pelota.getX() > raqueta.getX()
+								&& pelota.getX()
+										+ pelota.getAppearance().getWidth() < raqueta
+										.getX()
+										+ raqueta.getAppearance().getWidth()) {
+							double xCentroPelota = nuevaPosicion.getX()
+									+ pelota.getAppearance().getWidth() / 2;
+
+							return xCentroPelota - raqueta.getX();
+						} else if (pelota.getX() < raqueta.getX()) {
+							return 0;
+						} else {
+							return raqueta.getAppearance().getWidth();
+						}
 					}
 
 					public boolean colisiona(
