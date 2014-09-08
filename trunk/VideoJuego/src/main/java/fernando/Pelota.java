@@ -1,6 +1,9 @@
 package fernando;
 
 import java.awt.Color;
+
+import yoni.Raqueta;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
@@ -9,12 +12,20 @@ public class Pelota extends GameComponent<PelotitaScene> {
 
 	private Vector direccion;
 	private double velocidad;
+	private Raqueta raqueta;
 	
 	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial) {
 		super(new Circle(Color.BLUE, radio), xInicial, xInicial);
 		this.direccion = direccionInicial.asVersor();
 		this.velocidad = velocidadInicial;
 
+	}
+
+	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial, Raqueta raqueta) {
+		super(new Circle(Color.BLUE, radio), xInicial, xInicial);
+		this.direccion = direccionInicial.asVersor();
+		this.velocidad = velocidadInicial;
+		this.raqueta = raqueta;
 	}
 
 	@Override
@@ -41,6 +52,14 @@ public class Pelota extends GameComponent<PelotitaScene> {
 			setDireccion(new Vector(-1*getDireccion().getX(), getDireccion().getY()));
 			this.setX(0);
 			}
+		
+		
+		//CHOQUE RAqeta
+//		if((nuevaPosicion.getX() < this.raqueta.getxMax() && nuevaPosicion.getX() > this.raqueta.getxMin())
+//		   && (this.raqueta.getY()+1 >=  nuevaPosicion.getY() && this.raqueta.getY()-1 <=  nuevaPosicion.getY())){
+//			setDireccion(new Vector(getDireccion().getX(), -1*getDireccion().getY()));
+//			}
+		//CHOQUE RAqeta
 		
 		
 		super.update(deltaState);
