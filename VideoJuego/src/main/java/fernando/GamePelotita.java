@@ -3,6 +3,10 @@ package fernando;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import yoni.Raqueta;
+import yoni.RaquetaStrategy;
+import yoni.Tuning;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
@@ -21,11 +25,32 @@ public class GamePelotita extends Game {
 
 	@Override
 	protected void setUpScenes() {
+		
 		PelotitaScene pelotitaScene = new PelotitaScene();
 		Pelota pelota = new Pelota(30, 300, 2, new Vector(5, -2), 900);
 		((PelotitaScene) pelotitaScene).setPelota(pelota);
+		
+		//RAqueta
+		Dimension dimension = new Dimension(Tuning.getInteger("dimension.width", 800),
+				Tuning.getInteger("dimension.height", 600));
+		Color colorPlayer = Tuning.getColor("player.color", Color.BLUE);
+		double velocidadRaquetaPlayer = Tuning.getDouble("player.speed", 1110.8);
+		int raquetaAncho = (int) dimension.getWidth() / 8;
+		int raquetaAlto = 3;
+		double raquetaX = dimension.getWidth() / 2 - raquetaAncho / 2;
+		Raqueta raqueta = new Raqueta(raquetaX, 9 * dimension
+				.getHeight() / 10, raquetaAncho, raquetaAlto, colorPlayer,
+				velocidadRaquetaPlayer, 0, dimension.getWidth(),
+				Tuning.newInstance("player.strategy", RaquetaStrategy.class));
+		//
+
+//		pelotitaScene.addComponent(raqueta);
+		
+		((PelotitaScene) pelotitaScene).setRaqueta(raqueta);
 		renderElements(pelotitaScene, pelota);
 		this.setCurrentScene(pelotitaScene);
+		
+		
 	}
 
 	public void renderElements(final GameScene scene, final Pelota pelota) {
@@ -57,7 +82,6 @@ public class GamePelotita extends Game {
 							scene.removeComponent(this);
 							apply(pelota,nuevaPosicion,scene);
 						}
-
 					}
 
 					public void apply(Pelota pelota, Vector nuevaPosicion,
