@@ -53,5 +53,9 @@ public class Pelota extends GameComponent<PelotitaScene> {
 	public Vector getDireccion() {
 		return this.direccion;
 	}
+	
+	public double getVelocidad(){
+		return velocidad;
+	}
 
 }
