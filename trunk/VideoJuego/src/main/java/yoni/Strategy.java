@@ -3,9 +3,9 @@ package yoni;
 import com.uqbar.vainilla.DeltaState;
 
 import fernando.Pelota;
-import fernando.PelotitaScene;
+import fernando.ArkanoidScene;
 
 public interface Strategy {
 
-	public void update(Raqueta raqueta, PelotitaScene scene, DeltaState deltaState);
+	public void update(Raqueta raqueta, ArkanoidScene scene, DeltaState deltaState);
 }
