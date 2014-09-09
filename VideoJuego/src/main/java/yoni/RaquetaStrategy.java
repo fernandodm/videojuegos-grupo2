@@ -4,14 +4,14 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.events.constants.Key;
 
 import fernando.Pelota;
-import fernando.PelotitaScene;
+import fernando.ArkanoidScene;
 
 public class RaquetaStrategy implements Strategy	 {
 	private Key leftKey = Key.LEFT;
 	private Key rigthKey = Key.RIGHT;
 	
 	
-	public void update(Raqueta raqueta, PelotitaScene scene, DeltaState deltaState) {
+	public void update(Raqueta raqueta, ArkanoidScene scene, DeltaState deltaState) {
 		if(deltaState.isKeyBeingHold(rigthKey)) {
 			raqueta.derecha(deltaState.getDelta());
 		}

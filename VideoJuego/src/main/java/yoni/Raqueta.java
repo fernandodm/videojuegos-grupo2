@@ -8,10 +8,10 @@ import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.appearances.Rectangle;
 
-import fernando.GamePelotita;
-import fernando.PelotitaScene;
+import fernando.ArkanoidGame;
+import fernando.ArkanoidScene;
 
-public class Raqueta extends GameComponent<PelotitaScene> {
+public class Raqueta extends GameComponent<ArkanoidScene> {
 
 
 	private double velocidad;

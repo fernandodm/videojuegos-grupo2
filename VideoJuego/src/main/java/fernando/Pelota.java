@@ -2,17 +2,17 @@ package fernando;
 
 import java.awt.Color;
 
-import yoni.Raqueta;
-
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
+import com.uqbar.vainilla.colissions.CollisionDetector;
+import com.uqbar.vainilla.events.constants.Key;
 
-public class Pelota extends GameComponent<PelotitaScene> {
-
+public class Pelota extends GameComponent<ArkanoidScene> {
+	
 	private Vector direccion;
 	private double velocidad;
-	private Raqueta raqueta;
+	private Paleta raqueta;
 	
 	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial) {
 		super(new Circle(Color.BLUE, radio), xInicial, xInicial);
@@ -21,7 +21,7 @@ public class Pelota extends GameComponent<PelotitaScene> {
 
 	}
 
-	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial, Raqueta raqueta) {
+	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial, Paleta raqueta) {
 		super(new Circle(Color.BLUE, radio), xInicial, xInicial);
 		this.direccion = direccionInicial.asVersor();
 		this.velocidad = velocidadInicial;
@@ -61,7 +61,9 @@ public class Pelota extends GameComponent<PelotitaScene> {
 //			}
 		//CHOQUE RAqeta
 		
-		
+		if(this.raqueta.mustApply(this, nuevaPosicion)){
+			this.raqueta.apply(this, nuevaPosicion);
+		}
 		super.update(deltaState);
 	}
 	
@@ -76,5 +78,6 @@ public class Pelota extends GameComponent<PelotitaScene> {
 	public double getVelocidad(){
 		return velocidad;
 	}
-
+	
+	
 }

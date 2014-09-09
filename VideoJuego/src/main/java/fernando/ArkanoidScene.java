@@ -1,14 +1,12 @@
 package fernando;
 
-import yoni.Raqueta;
-
 import com.uqbar.vainilla.GameScene;
 
-public class PelotitaScene extends GameScene {
+public class ArkanoidScene extends GameScene {
 
 
 	private Pelota pelota;
-	private Raqueta raqueta;
+	private Paleta raqueta;
 	
 	public Pelota getPelota() {
 		return pelota;
@@ -19,16 +17,13 @@ public class PelotitaScene extends GameScene {
 		this.pelota = pelota;
 	}
 	
-	
-	
-
-	public Raqueta getRaqueta() {
+	public Paleta getRaqueta() {
 		return raqueta;
 	}
 
-	public void setRaqueta(Raqueta raqueta) {
+	public void setRaqueta(Paleta raqueta) {
+		this.addComponent(raqueta);
 		this.raqueta = raqueta;
 	}
-
 
 }
