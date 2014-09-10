@@ -20,6 +20,7 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 
 	private double xMin;
 	private double xMax;
+	private boolean flag = false;
 
 	public Paleta(double x, double y, int ancho, int alto, Color color,
 			double velocidad, double xMin, double xMax) {
@@ -40,7 +41,10 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 
 	@Override
 	public void update(DeltaState deltaState) {
-		this.update(this, deltaState);
+		if(deltaState.isKeyPressed(Key.A) || this.isFlag()){
+			this.setFlag(true);
+			this.update(this, deltaState);
+		}
 		super.update(deltaState);
 	}
 
@@ -140,6 +144,14 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 
 	public void setRigthKey(Key rigthKey) {
 		this.rigthKey = rigthKey;
+	}
+
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
 	}
 
 }
