@@ -1,16 +1,11 @@
-package fernando;
+package Arkanoid;
 
 import java.awt.Color;
 import java.awt.Dimension;
 
-import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
-import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
-import com.uqbar.vainilla.appearances.Rectangle;
-import com.uqbar.vainilla.colissions.CollisionDetector;
-import com.uqbar.vainilla.events.constants.Key;
 
 public class ArkanoidGame extends Game {
 
@@ -30,14 +25,14 @@ public class ArkanoidGame extends Game {
 	
 
 	public GameScene buildArkanoidScene() {
+		
 		Paleta raqueta = new Paleta(200, 450, 50, 5, Color.BLACK, 500, 0, this.getDisplayWidth());
-	
+		Marcador marcador = new Marcador(50, this.getDisplayHeight() - 35,Color.GREEN);
+		Pelota pelota = new Pelota(20, 200, 430, new Vector(5, 5), 500, raqueta, marcador);
 		ArkanoidScene arkanoidScene = new ArkanoidScene();
-		Pelota pelota = new Pelota(20, 200, 430, new Vector(5, 5), 500, raqueta);
 		arkanoidScene.setPelota(pelota);
 		arkanoidScene.setRaqueta(raqueta);
-		Marcador marcador = new Marcador(50, this.getDisplayHeight() - 35,Color.GREEN);
-		arkanoidScene.addComponent(marcador);
+		arkanoidScene.setMarcador(marcador);
 		renderElements(arkanoidScene, pelota, marcador);
 		return arkanoidScene;
 	}
@@ -66,7 +61,7 @@ public class ArkanoidGame extends Game {
 
 	@Override
 	public String getTitle() {
-		return "Pelotita";
+		return "Arkanoid";
 	}
 
 	public static void main(String[] args) {

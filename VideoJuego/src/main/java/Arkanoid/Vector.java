@@ -1,4 +1,4 @@
-package fernando;
+package Arkanoid;
 
 public class Vector {
 

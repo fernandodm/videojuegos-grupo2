@@ -1,16 +1,16 @@
-package fernando;
+package Arkanoid;
 
 import java.awt.Color;
 import java.awt.Font;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
-import com.uqbar.vainilla.appearances.Appearance;
 import com.uqbar.vainilla.appearances.Label;
 
 public class Marcador extends GameComponent<ArkanoidScene> {
 
 	private int value;
+	private int vidas = 2;
 	
 	public Marcador(double x, double y, Color color) {		
 		super(new Label(new Font("verdana",  Font.BOLD, 24), color, "0"), x, y);
@@ -23,6 +23,14 @@ public class Marcador extends GameComponent<ArkanoidScene> {
 
 	public void setValue(int value) {
 		this.value = value;
+	}
+	
+	public int getVidas() {
+		return vidas;
+	}
+
+	public void setVidas(int vidas) {
+		this.vidas = vidas;
 	}
 	
 	public void gol() {
@@ -38,6 +46,7 @@ public class Marcador extends GameComponent<ArkanoidScene> {
 	public boolean isBetter(Marcador other) {
 		return this.value > other.value;
 	}
+
 
 //	public boolean finJuego(ArkanoidScene scene) {
 //		return this.value >= scene.getMaxScore();

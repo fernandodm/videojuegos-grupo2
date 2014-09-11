@@ -1,13 +1,9 @@
-package fernando;
+package Arkanoid;
 
 import java.awt.Color;
-
-import javax.swing.plaf.SliderUI;
-
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
-import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.events.constants.Key;
 
 public class Pelota extends GameComponent<ArkanoidScene> {
@@ -16,21 +12,14 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 	private double velocidad;
 	private Paleta raqueta;
 	private boolean flag = false;
-	private int vidas = 2;
-	
-	
-	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial) {
-		super(new Circle(Color.BLUE, radio), xInicial, xInicial);
-		this.direccion = direccionInicial.asVersor();
-		this.velocidad = velocidadInicial;
+	private Marcador marcador;
 
-	}
-
-	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial, Paleta raqueta) {
+	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial, Paleta raqueta, Marcador marcador) {
 		super(new Circle(Color.BLUE, radio), xInicial, yInicial);
 		this.direccion = direccionInicial.asVersor();
 		this.velocidad = velocidadInicial;
 		this.raqueta = raqueta;
+		this.setMarcador(marcador);
 	}
 
 	@Override
@@ -38,12 +27,25 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 		
 		if(deltaState.isKeyPressed(Key.A) || this.isFlag()){
 			this.setFlag(true);
-		//para q se mueva
-		Vector nuevaPosicion = this.direccion.producto(velocidad*deltaState.getDelta()).suma(new Vector(this.getX(), this.getY()));
-		this.setX(nuevaPosicion.getX());
-		this.setY(nuevaPosicion.getY());
+			//para q se mueva
+			Vector nuevaPosicion = this.direccion.producto(velocidad*deltaState.getDelta()).suma(new Vector(this.getX(), this.getY()));
+			this.setX(nuevaPosicion.getX());
+			this.setY(nuevaPosicion.getY());
 		
-		//choques	
+			this.verificarChoques(nuevaPosicion);
+			this.verificarChoquePaleta(nuevaPosicion);
+		
+		}
+		super.update(deltaState);
+	}
+	
+	private void verificarChoquePaleta(Vector nuevaPosicion) {
+		if(Colision.mustApply(this.raqueta, this, nuevaPosicion))
+			Colision.apply(this.raqueta,this, nuevaPosicion);
+	}
+
+	private void verificarChoques(Vector nuevaPosicion) {
+			
 		if(nuevaPosicion.getY() < 0){
 			setDireccion(new Vector(getDireccion().getX(), -1*getDireccion().getY()));
 			this.setY(0);
@@ -58,21 +60,17 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 			this.setX(0);
 			}
 		if(nuevaPosicion.getY() + getAppearance().getHeight() >= getGame().getDisplayHeight() ){
-			if(this.vidas==0){
+			if(this.getMarcador().getVidas()==0){
 			super.getScene().fin();
 			}else{
-				this.vidas--;
+				this.getMarcador().setVidas(this.getMarcador().getVidas()-1);;
 				this.setFlag(false);
 				super.getScene().reiniciar();
 			}
 		}
 		
-		if(this.raqueta.mustApply(this, nuevaPosicion)){
-			this.raqueta.apply(this, nuevaPosicion);
-		}}
-		super.update(deltaState);
 	}
-	
+
 	public void setDireccion(Vector vector2d) {
 		this.direccion = vector2d.asVersor();
 	}
@@ -91,6 +89,14 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 
 	public void setFlag(boolean flag) {
 		this.flag = flag;
+	}
+
+	public Marcador getMarcador() {
+		return marcador;
+	}
+
+	public void setMarcador(Marcador marcador) {
+		this.marcador = marcador;
 	}
 	
 	
