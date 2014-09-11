@@ -23,7 +23,6 @@ public class ArkanoidGame extends Game {
 		
 	}
 	
-
 	public GameScene buildArkanoidScene() {
 		
 		Paleta raqueta = new Paleta(200, 450, 50, 5, Color.BLACK, 500, 0, this.getDisplayWidth());
@@ -41,7 +40,7 @@ public class ArkanoidGame extends Game {
 
 		int length = 10;
 		int width = 10;
-
+		
 		Color[] colors = { Color.red, Color.black, Color.blue, Color.DARK_GRAY,
 				Color.orange, Color.white };
 
