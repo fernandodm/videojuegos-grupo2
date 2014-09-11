@@ -1,6 +1,4 @@
-package fernando;
-
-import java.awt.Color;
+package Arkanoid;
 
 import com.uqbar.vainilla.GameScene;
 
@@ -38,8 +36,11 @@ public class ArkanoidScene extends GameScene {
 		this.getPelota().setDireccion(new Vector(5, 5));
 		this.getRaqueta().setX(200);
 		this.getRaqueta().setY(450);
-		this.getPelota().setFlag(false);
 		this.getRaqueta().setFlag(false);
+	}
+
+	public void setMarcador(Marcador marcador) {
+		this.addComponent(marcador);
 	}
 
 }
