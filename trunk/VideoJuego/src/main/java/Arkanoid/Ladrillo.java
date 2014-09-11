@@ -10,7 +10,7 @@ public class Ladrillo extends GameComponent<ArkanoidScene>{
 	
 	private Pelota pelota;
 	private Marcador marcador;
-	
+		
 	public Ladrillo(Color color, int ancho, int alto, double x, double y, Pelota pelota, Marcador marcador){
 		super(new Rectangle(color, ancho, alto), x * 50, y * 20);
 		this.pelota = pelota;
@@ -26,11 +26,11 @@ public class Ladrillo extends GameComponent<ArkanoidScene>{
 		if (Colision.colisiona(this, pelota, nuevaPosicion)) {
 			this.getScene().removeComponent(this);
 			Colision.apply(this, pelota,nuevaPosicion);
-			sumarPts(100);
+			sumarPts(50);
 		}
 	}
 
-	private void sumarPts(int i) {
-		this.marcador.setValue(this.marcador.getValue() + 50);	
+	private void sumarPts(int pts) {
+		this.marcador.setValue(this.marcador.getValue() + pts);	
 	}
 }

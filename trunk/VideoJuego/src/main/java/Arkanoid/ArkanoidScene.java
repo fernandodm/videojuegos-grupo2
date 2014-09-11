@@ -26,6 +26,10 @@ public class ArkanoidScene extends GameScene {
 		this.raqueta = raqueta;
 	}
 	
+	public void setMarcador(Marcador marcador) {
+		this.addComponent(marcador);
+	}
+	
 	public void fin() {
 		this.getGame().setCurrentScene(((ArkanoidGame)this.getGame()).buildEndScene());		
 	}
@@ -39,8 +43,6 @@ public class ArkanoidScene extends GameScene {
 		this.getRaqueta().setFlag(false);
 	}
 
-	public void setMarcador(Marcador marcador) {
-		this.addComponent(marcador);
-	}
+	
 
 }
