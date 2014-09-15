@@ -1,6 +1,9 @@
 package Arkanoid;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
@@ -14,6 +17,7 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 	private boolean flag = false;
 	private Marcador marcador;
 
+
 	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial, Paleta raqueta, Marcador marcador) {
 		super(new Circle(Color.BLUE, radio), xInicial, yInicial);
 		this.direccion = direccionInicial.asVersor();
@@ -24,6 +28,7 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 
 	@Override
 	public void update(DeltaState deltaState) {
+		ArrayList<Ladrillo> ladrillos = super.getScene().getLadrillos(); 
 		
 		if(deltaState.isKeyPressed(Key.A) || this.isFlag()){
 			this.setFlag(true);
@@ -34,6 +39,22 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 		
 			this.verificarChoques(nuevaPosicion);
 			this.verificarChoquePaleta(nuevaPosicion);
+			
+			ArrayList<Ladrillo> muertos = new ArrayList<Ladrillo>();
+			for (Ladrillo ladrillo : ladrillos) {
+				if(ladrillo.collision(deltaState, this,nuevaPosicion)){
+					muertos.add(ladrillo);
+				};
+			}
+			
+			for (Ladrillo ladrillo : muertos) {
+				ladrillos.remove(ladrillo);
+			}
+			
+//			if(ladrillos.isEmpty()){
+//				super.getScene().ganaste();
+//			}
+//			
 		
 		}
 		super.update(deltaState);

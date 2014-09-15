@@ -1,5 +1,7 @@
 package Arkanoid;
 
+import java.util.ArrayList;
+
 import com.uqbar.vainilla.GameScene;
 
 public class ArkanoidScene extends GameScene {
@@ -7,6 +9,7 @@ public class ArkanoidScene extends GameScene {
 
 	private Pelota pelota;
 	private Paleta raqueta;
+	private ArrayList<Ladrillo> ladrillos;
 	
 	public Pelota getPelota() {
 		return pelota;
@@ -42,6 +45,18 @@ public class ArkanoidScene extends GameScene {
 		this.getRaqueta().setY(450);
 		this.getRaqueta().setFlag(false);
 	}
+
+	public ArrayList<Ladrillo> getLadrillos() {
+		return ladrillos;
+	}
+
+	public void setLadrillos(ArrayList<Ladrillo> ladrillos) {
+		this.ladrillos = ladrillos;
+	}
+
+//	public void ganaste() {
+//		this.getGame().setCurrentScene(((ArkanoidGame)this.getGame()).buildGanasteScene());
+//	}
 
 	
 
