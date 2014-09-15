@@ -23,6 +23,9 @@ public class Colision {
 		pelota.setY(signoY > 0 ? gameComponent.getY()
 				- pelota.getAppearance().getHeight() - 1 : gameComponent.getY()
 				+ gameComponent.getAppearance().getHeight() + 1);
+		
+		
+		double signoX = Math.signum(pelota.getDireccion().getX());
 
 	}
 

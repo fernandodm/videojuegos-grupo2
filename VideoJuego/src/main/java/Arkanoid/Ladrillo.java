@@ -8,26 +8,21 @@ import com.uqbar.vainilla.appearances.Rectangle;
 
 public class Ladrillo extends GameComponent<ArkanoidScene>{
 	
-	private Pelota pelota;
 	private Marcador marcador;
 		
-	public Ladrillo(Color color, int ancho, int alto, double x, double y, Pelota pelota, Marcador marcador){
+	public Ladrillo(Color color, int ancho, int alto, double x, double y,  Marcador marcador){
 		super(new Rectangle(color, ancho, alto), x * 50, y * 20);
-		this.pelota = pelota;
 		this.marcador = marcador;
 	}
 	
-	@Override
-	public void update(DeltaState deltaState) {
-		Vector nuevaPosicion = pelota
-				.getDireccion()
-				.producto(pelota.getVelocidad()* deltaState.getDelta())
-				.suma(new Vector(pelota.getX(), pelota.getY()));
-		if (Colision.colisiona(this, pelota, nuevaPosicion)) {
+	public boolean collision(DeltaState deltaState, Pelota pelota, Vector nuevaPosicion) {
+		boolean colisiona;
+		if (colisiona=Colision.colisiona(this, pelota, nuevaPosicion)) {
 			this.getScene().removeComponent(this);
 			Colision.apply(this, pelota,nuevaPosicion);
 			sumarPts(50);
 		}
+		return colisiona;
 	}
 
 	private void sumarPts(int pts) {
