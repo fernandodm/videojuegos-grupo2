@@ -43,7 +43,7 @@ public class ArkanoidScene extends GameScene {
 		this.getPelota().setDireccion(new Vector(5, 5));
 		this.getRaqueta().setX(200);
 		this.getRaqueta().setY(450);
-		this.getRaqueta().setFlag(false);
+		this.getRaqueta().setFlag(true);
 	}
 
 	public ArrayList<Ladrillo> getLadrillos() {

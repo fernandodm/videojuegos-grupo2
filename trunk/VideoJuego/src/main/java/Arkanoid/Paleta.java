@@ -16,7 +16,7 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 
 	private double xMin;
 	private double xMax;
-	private boolean flag = false;
+	private boolean flag = true;
 
 	public Paleta(double x, double y, int ancho, int alto, Color color,
 			double velocidad, double xMin, double xMax) {
@@ -27,20 +27,34 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 	}
 
 	public void izquierda(double delta) {
-		this.setX(Math.max(this.getX() - getVelocidad() * delta, getxMin()));
+		double x = Math.max(this.getX() - getVelocidad() * delta, getxMin());
+		this.setX(x);
+		//verifico el movimiento de la pelota cuando
+		//esta pegada en la paleta
+		verificarMovimientoPelota(x);
 	}
 
 	public void derecha(double delta) {
-		this.setX(Math.min(getxMax() - this.getAppearance().getWidth(),
-				this.getX() + getVelocidad() * delta));
+		double x = Math.min(getxMax() - this.getAppearance().getWidth(),
+				             this.getX() + getVelocidad() * delta);
+		this.setX(x);
+		//verifico el movimiento de la pelota cuando
+		//esta pegada en la paleta
+		verificarMovimientoPelota(x);
+		
+	}
+
+	private void verificarMovimientoPelota(double x) {
+		if(this.isFlag())
+			super.getScene().getPelota().setX(x);		
 	}
 
 	@Override
 	public void update(DeltaState deltaState) {
-		if(deltaState.isKeyPressed(Key.A) || this.isFlag()){
-			this.setFlag(true);
+//		if(deltaState.isKeyPressed(Key.A) || this.isFlag()){
+//		if(this.isFlag()){
 			this.update(this, deltaState);
-		}
+//		}
 		super.update(deltaState);
 	}
 
@@ -93,7 +107,7 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 	}
 
 	public boolean isFlag() {
-		return flag;
+		return this.flag;
 	}
 
 	public void setFlag(boolean flag) {
