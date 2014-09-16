@@ -25,9 +25,9 @@ public class ArkanoidGame extends Game {
 	
 	public GameScene buildArkanoidScene() {
 		
-		Paleta raqueta = new Paleta(200, 450, 50, 5, Color.BLACK, 500, 0, this.getDisplayWidth());
+		Paleta raqueta = new Paleta(200, 450, 50, 4, Color.BLACK, 500, 0, this.getDisplayWidth());
 		Marcador marcador = new Marcador(50, this.getDisplayHeight() - 35,Color.GRAY);
-		Pelota pelota = new Pelota(20, 200, 430, new Vector(5, 5), 300, raqueta, marcador);
+		Pelota pelota = new Pelota(20, 200, 430, new Vector(5, 5), 350, raqueta, marcador);
 		ArkanoidScene arkanoidScene = new ArkanoidScene();
 		arkanoidScene.setPelota(pelota);
 		arkanoidScene.setRaqueta(raqueta);
@@ -67,14 +67,6 @@ public class ArkanoidGame extends Game {
 	public String getTitle() {
 		return "Arkanoid";
 	}
-	
-//	public FinalScene buildEndScene() {
-//		return new FinalScene(30,100);
-//	}
-//
-//	public GanasteScene buildGanasteScene() {
-//		return new GanasteScene(30,100);
-//	}
 	
 	public GanasteOPerdisteScene buildScene(String msj){
 		return new GanasteOPerdisteScene(30,100,msj);

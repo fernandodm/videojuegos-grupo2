@@ -20,12 +20,13 @@ public class Colision {
 		// multiplicarlo por -1
 		pelota.setDireccion(new Vector(Math.sin(anguloNuevo), (-1) * signoY	* Math.cos(anguloNuevo)));
 
-		pelota.setY(signoY > 0 ? gameComponent.getY()
+		if(gameComponent.getClass().equals(Paleta.class))
+			pelota.setY(signoY > 0 ? gameComponent.getY()
 				- pelota.getAppearance().getHeight() - 1 : gameComponent.getY()
 				+ gameComponent.getAppearance().getHeight() + 1);
 		
 		
-		double signoX = Math.signum(pelota.getDireccion().getX());
+//		double signoX = Math.signum(pelota.getDireccion().getX());
 
 	}
 
