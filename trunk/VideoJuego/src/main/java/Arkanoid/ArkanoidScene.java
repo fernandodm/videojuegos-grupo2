@@ -34,7 +34,7 @@ public class ArkanoidScene extends GameScene {
 	}
 	
 	public void fin() {
-		this.getGame().setCurrentScene(((ArkanoidGame)this.getGame()).buildEndScene());		
+		this.getGame().setCurrentScene(((ArkanoidGame)this.getGame()).buildScene("Perdiste!!! Presione N para volver a jugar."));		
 	}
 
 	public void reiniciar() {
@@ -55,7 +55,7 @@ public class ArkanoidScene extends GameScene {
 	}
 
 	public void ganaste() {
-		this.getGame().setCurrentScene(((ArkanoidGame)this.getGame()).buildGanasteScene());
+		this.getGame().setCurrentScene(((ArkanoidGame)this.getGame()).buildScene("Ganaste!!! Presione N para volver a jugar."));
 	}
 
 	

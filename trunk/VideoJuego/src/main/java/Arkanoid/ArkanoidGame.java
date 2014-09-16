@@ -40,8 +40,8 @@ public class ArkanoidGame extends Game {
 	public ArrayList<Ladrillo> renderElements(final GameScene scene, final Pelota pelota, Marcador marcador) {
 
 		ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
-		int length = 1;
-		int width = 1;
+		int length = 10;
+		int width = 10;
 		
 		Color[] colors = { Color.red, Color.black, Color.blue, Color.DARK_GRAY,
 				Color.orange };
@@ -67,6 +67,19 @@ public class ArkanoidGame extends Game {
 	public String getTitle() {
 		return "Arkanoid";
 	}
+	
+//	public FinalScene buildEndScene() {
+//		return new FinalScene(30,100);
+//	}
+//
+//	public GanasteScene buildGanasteScene() {
+//		return new GanasteScene(30,100);
+//	}
+	
+	public GanasteOPerdisteScene buildScene(String msj){
+		return new GanasteOPerdisteScene(30,100,msj);
+	}
+	
 
 	public static void main(String[] args) {
 
@@ -74,12 +87,6 @@ public class ArkanoidGame extends Game {
 
 	}
 	
-	public FinalScene buildEndScene() {
-		return new FinalScene(30,100);
-	}
-
-	public GanasteScene buildGanasteScene() {
-		return new GanasteScene(30,100);
-	}
+	
 
 }
