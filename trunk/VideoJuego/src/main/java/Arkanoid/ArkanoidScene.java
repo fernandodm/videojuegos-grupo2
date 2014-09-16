@@ -10,7 +10,7 @@ public class ArkanoidScene extends GameScene {
 	private Pelota pelota;
 	private Paleta raqueta;
 	private ArrayList<Ladrillo> ladrillos;
-	
+
 	public Pelota getPelota() {
 		return pelota;
 	}
@@ -54,9 +54,9 @@ public class ArkanoidScene extends GameScene {
 		this.ladrillos = ladrillos;
 	}
 
-//	public void ganaste() {
-//		this.getGame().setCurrentScene(((ArkanoidGame)this.getGame()).buildGanasteScene());
-//	}
+	public void ganaste() {
+		this.getGame().setCurrentScene(((ArkanoidGame)this.getGame()).buildGanasteScene());
+	}
 
 	
 

@@ -51,10 +51,10 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 				ladrillos.remove(ladrillo);
 			}
 			
-//			if(ladrillos.isEmpty()){
-//				super.getScene().ganaste();
-//			}
-//			
+			if(ladrillos.isEmpty()){
+				super.getScene().ganaste();
+			}
+			
 		
 		}
 		super.update(deltaState);
@@ -84,7 +84,7 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 			if(this.getMarcador().getVidas()==0){
 			super.getScene().fin();
 			}else{
-				this.getMarcador().setVidas(this.getMarcador().getVidas()-1);;
+				this.getMarcador().setVidas(this.getMarcador().getVidas()-1);
 				this.setFlag(false);
 				super.getScene().reiniciar();
 			}

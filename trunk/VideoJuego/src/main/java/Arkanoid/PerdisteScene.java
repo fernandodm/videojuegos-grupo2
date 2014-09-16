@@ -11,7 +11,7 @@ public class PerdisteScene extends GameComponent<FinalScene> {
 
 
 	public PerdisteScene( double x, double y) {
-		super(new Label(new Font("verdana",  Font.BOLD, 18), Color.BLUE, "", "Presione N para volver a empezar"), x, y);
+		super(new Label(new Font("verdana",  Font.BOLD, 18), Color.BLUE, "", "Perdiste!!! Presione N para volver a jugar"), x, y);
 	}
 	
 	@Override

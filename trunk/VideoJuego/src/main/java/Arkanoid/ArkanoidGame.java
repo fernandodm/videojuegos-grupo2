@@ -26,21 +26,22 @@ public class ArkanoidGame extends Game {
 	public GameScene buildArkanoidScene() {
 		
 		Paleta raqueta = new Paleta(200, 450, 50, 5, Color.BLACK, 500, 0, this.getDisplayWidth());
-		Marcador marcador = new Marcador(50, this.getDisplayHeight() - 35,Color.GREEN);
+		Marcador marcador = new Marcador(50, this.getDisplayHeight() - 35,Color.GRAY);
 		Pelota pelota = new Pelota(20, 200, 430, new Vector(5, 5), 300, raqueta, marcador);
 		ArkanoidScene arkanoidScene = new ArkanoidScene();
 		arkanoidScene.setPelota(pelota);
 		arkanoidScene.setRaqueta(raqueta);
 		arkanoidScene.setMarcador(marcador);
-		arkanoidScene.setLadrillos(renderElements(arkanoidScene, pelota, marcador));
+		ArrayList<Ladrillo> ladrillos = renderElements(arkanoidScene, pelota, marcador);
+		arkanoidScene.setLadrillos(ladrillos);
 		return arkanoidScene;
 	}
 
 	public ArrayList<Ladrillo> renderElements(final GameScene scene, final Pelota pelota, Marcador marcador) {
 
 		ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
-		int length = 10;
-		int width = 10;
+		int length = 1;
+		int width = 1;
 		
 		Color[] colors = { Color.red, Color.black, Color.blue, Color.DARK_GRAY,
 				Color.orange };
@@ -74,11 +75,11 @@ public class ArkanoidGame extends Game {
 	}
 	
 	public FinalScene buildEndScene() {
-		return new FinalScene( 100,100);
+		return new FinalScene(30,100);
 	}
 
-//	public GameScene buildGanasteScene() {
-//		return new GanasteScene( 100,100);;
-//	}
+	public GanasteScene buildGanasteScene() {
+		return new GanasteScene(30,100);
+	}
 
 }
