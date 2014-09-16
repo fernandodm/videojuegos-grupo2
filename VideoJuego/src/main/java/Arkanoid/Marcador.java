@@ -10,10 +10,10 @@ import com.uqbar.vainilla.appearances.Label;
 public class Marcador extends GameComponent<ArkanoidScene> {
 
 	private int value;
-	private int vidas = 2;
+	private int vidas = 0;
 	
 	public Marcador(double x, double y, Color color) {		
-		super(new Label(new Font("verdana",  Font.BOLD, 24), color, "0"), x, y);
+		super(new Label(new Font("verdana",  Font.BOLD, 18), color, "0" ), x, y);
 		this.value = 0;
 	}
 
@@ -39,18 +39,12 @@ public class Marcador extends GameComponent<ArkanoidScene> {
 	
 	@Override
 	public void update(DeltaState deltaState) {
-		((Label)this.getAppearance()).setText(Integer.toString(this.getValue())); 
+		((Label)this.getAppearance()).setText("Puntaje: " + this.getValue() +  "  Vidas: " + (this.getVidas() + 1));
 		super.update(deltaState);
 	}
 	
 	public boolean isBetter(Marcador other) {
 		return this.value > other.value;
 	}
-
-
-//	public boolean finJuego(ArkanoidScene scene) {
-//		return this.value >= scene.getMaxScore();
-//	}
-	
 
 }
