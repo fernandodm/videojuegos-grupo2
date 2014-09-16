@@ -32,6 +32,8 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 		
 		if(deltaState.isKeyPressed(Key.A) || this.isFlag()){
 			this.setFlag(true);
+			//para que no se mueva la pelota cuando deja de estar pegada
+			this.raqueta.setFlag(false);
 			//para q se mueva
 			Vector nuevaPosicion = this.direccion.producto(velocidad*deltaState.getDelta()).suma(new Vector(this.getX(), this.getY()));
 			this.setX(nuevaPosicion.getX());
