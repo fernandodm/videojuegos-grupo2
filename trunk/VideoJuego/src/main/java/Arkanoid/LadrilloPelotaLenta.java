@@ -11,8 +11,8 @@ public class LadrilloPelotaLenta extends LadrilloEspecial {
 	}
 
 	@Override
-	public void aplicar(LadrilloEspecial ladrillo) {
-		ladrillo.getPelota().setVelocidad(200);
+	public void aplicar() {
+		this.getPelota().setVelocidad(200);
 		
 	}
 

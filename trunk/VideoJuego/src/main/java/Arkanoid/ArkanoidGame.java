@@ -27,7 +27,7 @@ public class ArkanoidGame extends Game {
 		
 		Paleta raqueta = new Paleta(200, 450, 50, 4, Color.BLACK, 500, 0, this.getDisplayWidth());
 		Marcador marcador = new Marcador(50, this.getDisplayHeight() - 35,Color.GRAY);
-		Pelota pelota = new Pelota(20, 200, 430, new Vector(5, 5), 500, raqueta, marcador);
+		Pelota pelota = new Pelota(20, 200, 430, new Vector(5, 5), 400, raqueta, marcador);
 		ArkanoidScene arkanoidScene = new ArkanoidScene();
 		arkanoidScene.setPelota(pelota);
 		arkanoidScene.setRaqueta(raqueta);
@@ -48,11 +48,13 @@ public class ArkanoidGame extends Game {
 		for (int y = 0; y < width; y++) {
 			for (int x = 0; x < length; x++) {
 				Color color = colors[(int) (Math.random() * colors.length)];
-				Ladrillo ladrillo = new Ladrillo(color, 48, 18, x, y, marcador);
+				Ladrillo ladrillo = new LadrilloDisparo(color, 48, 18, x, y, marcador, raqueta, pelota);
 				scene.addComponent(ladrillo);
 				ladrillos.add(ladrillo);
 			}
 		}
+		
+		
 //		//MODO DE EJEMPLO HAY QUE ARREGLARLO FEOOOO
 //		LadrilloPaletaChica ladrilloPalChica = new LadrilloPaletaChica(Color.BLACK, 48, 18, 2, 4, marcador, raqueta, pelota);
 //		LadrilloPelotaRapida ladrillPelRapida = new LadrilloPelotaRapida(Color.RED, 48, 18, 5, 3, marcador, raqueta, pelota);
