@@ -13,11 +13,11 @@ public class LadrilloPaletaChica extends LadrilloEspecial {
 	}
 
 	@Override
-	public void aplicar(LadrilloEspecial ladrillo) {
-		Appearance app = ladrillo.getPaleta().getAppearance();
+	public void aplicar() {
+		Appearance app = this.getPaleta().getAppearance();
 		int largo = (int) app.getWidth() - 20;
 		int alto = (int) app.getHeight();
-		ladrillo.getPaleta().setAppearance(new Rectangle(Color.BLACK, largo, alto));
+		this.getPaleta().setAppearance(new Rectangle(Color.BLACK, largo, alto));
 
 	}
 

@@ -17,7 +17,7 @@ public abstract class LadrilloEspecial extends Ladrillo {
 		this.setPelota(pelota);
 	}
 
-	public abstract void aplicar(LadrilloEspecial ladrillo);
+	public abstract void aplicar();
 	
 	@Override
 	public void update(DeltaState deltaState) {
@@ -26,11 +26,9 @@ public abstract class LadrilloEspecial extends Ladrillo {
 			Vector nuevaPosicion = new Vector(this.getX(), this.getY() - 30);
 			if(Colision.colisiona(paleta, this, nuevaPosicion)){
 				this.getScene().removeComponent(this);
-				this.aplicar(this);
+				this.aplicar();
 			}
 		}
-		
-		
 	}
 		
 	public boolean collision(DeltaState deltaState, Pelota pelota, Vector nuevaPosicion) {

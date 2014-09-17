@@ -54,19 +54,23 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 			for (Ladrillo ladrillo : muertos) {
 				ladrillos.remove(ladrillo);
 			}
-			
 			if(ladrillos.isEmpty()){
 				super.getScene().ganaste();
 			}
-			
-		
 		}
 		super.update(deltaState);
 	}
 	
 	private void verificarChoquePaleta(Vector nuevaPosicion) {
-		if(Colision.mustApply(this.raqueta, this, nuevaPosicion))
+		if(this.raqueta.isPegajosa() && Colision.mustApply(this.raqueta, this, nuevaPosicion)){
+			this.setFlag(false);
+			this.raqueta.setFlag(true);
+		}
+		if(Colision.mustApply(this.raqueta, this, nuevaPosicion)){
 			Colision.apply(this.raqueta,this, nuevaPosicion);
+			this.raqueta.setPegajosa(false);
+		}
+		
 	}
 
 	private void verificarChoques(Vector nuevaPosicion) {

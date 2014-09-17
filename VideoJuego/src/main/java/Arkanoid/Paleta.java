@@ -1,9 +1,11 @@
 package Arkanoid;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
+import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.events.constants.Key;
 
@@ -17,6 +19,8 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 	private double xMin;
 	private double xMax;
 	private boolean flag = true;
+	private boolean pegajosa = false;
+	private boolean pistolera = false;
 
 	public Paleta(double x, double y, int ancho, int alto, Color color,
 			double velocidad, double xMin, double xMax) {
@@ -45,8 +49,9 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 	}
 
 	private void verificarMovimientoPelota(double x) {
-		if(this.isFlag())
-			super.getScene().getPelota().setX(x);		
+		if(this.isFlag()){
+			super.getScene().getPelota().setX(x);
+		}
 	}
 
 	@Override
@@ -60,6 +65,12 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 			raqueta.derecha(deltaState.getDelta());
 		} else if (deltaState.isKeyBeingHold(leftKey)) {
 			raqueta.izquierda(deltaState.getDelta());
+		}
+		if(deltaState.isKeyPressed(Key.SPACE) && this.isPistolera()){
+			ArrayList<Ladrillo> ladrillos = super.getScene().getLadrillos();
+			Bala bala = new Bala(this.getX(), this.getY(), ladrillos);
+			super.getGame().getCurrentScene().addComponent(bala);
+			
 		}
 	}
 
@@ -110,5 +121,22 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 	public void setFlag(boolean flag) {
 		this.flag = flag;
 	}
+
+	public boolean isPegajosa() {
+		return pegajosa;
+	}
+
+	public void setPegajosa(boolean pegajosa) {
+		this.pegajosa = pegajosa;
+	}
+
+	public boolean isPistolera() {
+		return pistolera;
+	}
+
+	public void setPistolera(boolean pistolera) {
+		this.pistolera = pistolera;
+	}
+
 
 }
