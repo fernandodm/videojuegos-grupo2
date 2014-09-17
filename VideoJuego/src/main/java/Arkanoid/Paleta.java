@@ -51,10 +51,7 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 
 	@Override
 	public void update(DeltaState deltaState) {
-//		if(deltaState.isKeyPressed(Key.A) || this.isFlag()){
-//		if(this.isFlag()){
-			this.update(this, deltaState);
-//		}
+		this.update(this, deltaState);
 		super.update(deltaState);
 	}
 
