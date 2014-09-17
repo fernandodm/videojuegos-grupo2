@@ -2,8 +2,6 @@ package Arkanoid;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
@@ -24,6 +22,10 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 		this.velocidad = velocidadInicial;
 		this.raqueta = raqueta;
 		this.setMarcador(marcador);
+	}
+
+	public void setVelocidad(double velocidad) {
+		this.velocidad = velocidad;
 	}
 
 	@Override
@@ -91,7 +93,8 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 				super.getScene().reiniciar();
 			}
 		}
-		
+		//Si el puntaje llega a 2000 suma una vida
+		//this.sumarVida();
 	}
 
 	public void setDireccion(Vector vector2d) {

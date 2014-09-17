@@ -20,12 +20,18 @@ public class Ladrillo extends GameComponent<ArkanoidScene>{
 		if (colisiona=Colision.colisiona(this, pelota, nuevaPosicion)) {
 			this.getScene().removeComponent(this);
 			Colision.apply(this, pelota,nuevaPosicion);
-			sumarPts(50);
+			this.sumarPts(50);
+			this.sumarVida();
 		}
 		return colisiona;
 	}
 
-	private void sumarPts(int pts) {
+	public void sumarVida() {
+		if(this.marcador.getValue() == 2000)
+			this.marcador.setVidas(this.marcador.getVidas() + 1);		
+	}
+	
+	public void sumarPts(int pts) {
 		this.marcador.setValue(this.marcador.getValue() + pts);	
 	}
 }

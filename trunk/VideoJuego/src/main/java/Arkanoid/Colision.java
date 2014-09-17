@@ -51,9 +51,9 @@ public class Colision {
 		return colisiona(gameComponent, pelota, nuevaPosicion);
 	}
 
-	public static boolean colisiona(GameComponent<?> gameComponent, Pelota pelota, Vector nuevaPosicion) {
+	public static boolean colisiona(GameComponent<?> gameComponent, GameComponent<?> gameComponent2, Vector nuevaPosicion) {
 		return CollisionDetector.INSTANCE.collidesCircleAgainstRect(
-			   nuevaPosicion.getX(), nuevaPosicion.getY(), pelota
+			   nuevaPosicion.getX(), nuevaPosicion.getY(), gameComponent2
 			   .getAppearance().getWidth() / 2, gameComponent.getX(),
 				gameComponent.getY(), gameComponent.getAppearance().getWidth(), gameComponent
 			   .getAppearance().getHeight());
