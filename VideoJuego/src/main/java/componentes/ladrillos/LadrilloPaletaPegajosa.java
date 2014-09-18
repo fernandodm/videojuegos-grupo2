@@ -1,15 +1,16 @@
-package Arkanoid;
+package componentes.ladrillos;
 
 import java.awt.Color;
 
-import com.uqbar.vainilla.DeltaState;
+import componentes.Marcador;
+import componentes.Pelota;
+import componentes.Raqueta;
 
 public class LadrilloPaletaPegajosa extends LadrilloEspecial {
 
 	public LadrilloPaletaPegajosa(Color color, int ancho, int alto, double x,
-			double y, Marcador marcador, Paleta paleta, Pelota pelota) {
-		super(color, ancho, alto, x, y, marcador, paleta, pelota);
-		// TODO Auto-generated constructor stub
+			double y, Marcador marcador, Raqueta raqueta, Pelota pelota) {
+		super(color, ancho, alto, x, y, marcador, raqueta, pelota);
 	}
 	
 	@Override

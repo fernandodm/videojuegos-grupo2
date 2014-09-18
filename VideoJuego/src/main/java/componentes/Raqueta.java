@@ -1,15 +1,17 @@
-package Arkanoid;
+package componentes;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
-import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.events.constants.Key;
 
-public class Paleta extends GameComponent<ArkanoidScene> {
+import componentes.ladrillos.Ladrillo;
+import escenas.ArkanoidScene;
+
+public class Raqueta extends GameComponent<ArkanoidScene> {
 
 	private Key leftKey = Key.LEFT;
 	private Key rigthKey = Key.RIGHT;
@@ -22,7 +24,7 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 	private boolean pegajosa = false;
 	private boolean pistolera = false;
 
-	public Paleta(double x, double y, int ancho, int alto, Color color,
+	public Raqueta(double x, double y, int ancho, int alto, Color color,
 			double velocidad, double xMin, double xMax) {
 		super(new Rectangle(color, ancho, alto), x, y);
 		this.setVelocidad(velocidad);
@@ -60,7 +62,7 @@ public class Paleta extends GameComponent<ArkanoidScene> {
 		super.update(deltaState);
 	}
 
-	public void update(Paleta raqueta, DeltaState deltaState) {
+	public void update(Raqueta raqueta, DeltaState deltaState) {
 		if (deltaState.isKeyBeingHold(rigthKey)) {
 			raqueta.derecha(deltaState.getDelta());
 		} else if (deltaState.isKeyBeingHold(leftKey)) {

@@ -1,19 +1,26 @@
-package Arkanoid;
+package componentes.ladrillos;
 
 import java.awt.Color;
 
+import Arkanoid.Colision;
+import Arkanoid.Vector;
+
 import com.uqbar.vainilla.DeltaState;
+
+import componentes.Marcador;
+import componentes.Pelota;
+import componentes.Raqueta;
 
 public abstract class LadrilloEspecial extends Ladrillo {
 
 	private boolean colisiona =false;
-	private Paleta paleta;
+	private Raqueta raqueta;
 	private Pelota pelota;
 		
 	public LadrilloEspecial(Color color, int ancho, int alto, double x,
-			double y, Marcador marcador, Paleta paleta, Pelota pelota) {
+			double y, Marcador marcador, Raqueta raqueta, Pelota pelota) {
 		super(color, ancho, alto, x, y, marcador);
-		this.paleta = paleta;
+		this.raqueta = raqueta;
 		this.setPelota(pelota);
 	}
 
@@ -24,7 +31,7 @@ public abstract class LadrilloEspecial extends Ladrillo {
 		if(colisiona){
 			this.setY(this.getY()+0.3);
 			Vector nuevaPosicion = new Vector(this.getX(), this.getY() - 30);
-			if(Colision.colisiona(paleta, this, nuevaPosicion)){
+			if(Colision.colisiona(raqueta, this, nuevaPosicion)){
 				this.getScene().removeComponent(this);
 				this.aplicar();
 			}
@@ -48,12 +55,12 @@ public abstract class LadrilloEspecial extends Ladrillo {
 		this.pelota = pelota;
 	}
 	
-	public Paleta getPaleta() {
-		return paleta;
+	public Raqueta getPaleta() {
+		return raqueta;
 	}
 
-	public void setPaleta(Paleta paleta) {
-		this.paleta = paleta;
+	public void setPaleta(Raqueta paleta) {
+		this.raqueta = paleta;
 	}
 	
 }

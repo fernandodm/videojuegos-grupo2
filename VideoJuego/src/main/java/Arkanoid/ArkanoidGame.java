@@ -8,6 +8,14 @@ import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
 import com.uqbar.vainilla.GameScene;
 
+import componentes.Marcador;
+import componentes.Pelota;
+import componentes.Raqueta;
+import componentes.ladrillos.Ladrillo;
+import componentes.ladrillos.LadrilloDisparo;
+import escenas.ArkanoidScene;
+import escenas.GanasteOPerdisteScene;
+
 public class ArkanoidGame extends Game {
 	
 	@Override
@@ -25,7 +33,7 @@ public class ArkanoidGame extends Game {
 	
 	public GameScene buildArkanoidScene() {
 		
-		Paleta raqueta = new Paleta(200, 450, 50, 4, Color.BLACK, 500, 0, this.getDisplayWidth());
+		Raqueta raqueta = new Raqueta(200, 450, 50, 4, Color.BLACK, 500, 0, this.getDisplayWidth());
 		Marcador marcador = new Marcador(50, this.getDisplayHeight() - 35,Color.GRAY);
 		Pelota pelota = new Pelota(20, 200, 430, new Vector(5, 5), 400, raqueta, marcador);
 		ArkanoidScene arkanoidScene = new ArkanoidScene();
@@ -37,7 +45,7 @@ public class ArkanoidGame extends Game {
 		return arkanoidScene;
 	}
 
-	public ArrayList<Ladrillo> renderElements(final GameScene scene, final Pelota pelota, Marcador marcador, Paleta raqueta) {
+	public ArrayList<Ladrillo> renderElements(final GameScene scene, final Pelota pelota, Marcador marcador, Raqueta raqueta) {
 
 		ArrayList<Ladrillo> ladrillos = new ArrayList<Ladrillo>();
 		int length = 10;

@@ -1,4 +1,4 @@
-package Arkanoid;
+package escenas;
 
 import com.uqbar.vainilla.GameScene;
 

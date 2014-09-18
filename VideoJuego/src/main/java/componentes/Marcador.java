@@ -1,4 +1,4 @@
-package Arkanoid;
+package componentes;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -6,6 +6,8 @@ import java.awt.Font;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Label;
+
+import escenas.ArkanoidScene;
 
 public class Marcador extends GameComponent<ArkanoidScene> {
 
