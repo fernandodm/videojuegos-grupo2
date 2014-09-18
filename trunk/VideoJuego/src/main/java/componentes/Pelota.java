@@ -1,22 +1,29 @@
-package Arkanoid;
+package componentes;
 
 import java.awt.Color;
 import java.util.ArrayList;
+
+import Arkanoid.Colision;
+import Arkanoid.Vector;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.events.constants.Key;
 
+import componentes.ladrillos.Ladrillo;
+import escenas.ArkanoidScene;
+
 public class Pelota extends GameComponent<ArkanoidScene> {
 	
 	private Vector direccion;
 	private double velocidad;
-	private Paleta raqueta;
+	private Raqueta raqueta;
 	private boolean flag = false;
 	private Marcador marcador;
 
 
-	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial, Paleta raqueta, Marcador marcador) {
+	public Pelota(int radio, double xInicial, double yInicial, Vector direccionInicial, double velocidadInicial, Raqueta raqueta, Marcador marcador) {
 		super(new Circle(Color.BLUE, radio), xInicial, yInicial);
 		this.direccion = direccionInicial.asVersor();
 		this.velocidad = velocidadInicial;

@@ -1,10 +1,17 @@
-package Arkanoid;
+package componentes.ladrillos;
 
 import java.awt.Color;
+
+import Arkanoid.Colision;
+import Arkanoid.Vector;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
+
+import componentes.Marcador;
+import componentes.Pelota;
+import escenas.ArkanoidScene;
 
 public class Ladrillo extends GameComponent<ArkanoidScene>{
 	

@@ -2,6 +2,8 @@ package Arkanoid;
 
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.colissions.CollisionDetector;
+import componentes.Pelota;
+import componentes.Raqueta;
 
 public class Colision {
 	
@@ -20,7 +22,7 @@ public class Colision {
 		// multiplicarlo por -1
 		pelota.setDireccion(new Vector(Math.sin(anguloNuevo), (-1) * signoY	* Math.cos(anguloNuevo)));
 
-		if(gameComponent.getClass().equals(Paleta.class))
+		if(gameComponent.getClass().equals(Raqueta.class))
 			pelota.setY(signoY > 0 ? gameComponent.getY()
 				- pelota.getAppearance().getHeight() - 1 : gameComponent.getY()
 				+ gameComponent.getAppearance().getHeight() + 1);

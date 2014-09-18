@@ -1,11 +1,17 @@
-package Arkanoid;
+package componentes;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
+import Arkanoid.Colision;
+import Arkanoid.Vector;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
+
+import componentes.ladrillos.Ladrillo;
+import escenas.ArkanoidScene;
 
 public class Bala extends GameComponent<ArkanoidScene> {
 	ArrayList<Ladrillo> ladrillos;

@@ -1,7 +1,9 @@
-package Arkanoid;
+package escenas;
 
 import java.awt.Color;
 import java.awt.Font;
+
+import Arkanoid.ArkanoidGame;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;

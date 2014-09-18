@@ -1,14 +1,22 @@
-package Arkanoid;
+package escenas;
 
 import java.util.ArrayList;
 
+import Arkanoid.ArkanoidGame;
+import Arkanoid.Vector;
+
 import com.uqbar.vainilla.GameScene;
+
+import componentes.Marcador;
+import componentes.Pelota;
+import componentes.Raqueta;
+import componentes.ladrillos.Ladrillo;
 
 public class ArkanoidScene extends GameScene {
 
 
 	private Pelota pelota;
-	private Paleta raqueta;
+	private Raqueta raqueta;
 	private ArrayList<Ladrillo> ladrillos;
 
 	public Pelota getPelota() {
@@ -20,11 +28,11 @@ public class ArkanoidScene extends GameScene {
 		this.pelota = pelota;
 	}
 	
-	public Paleta getRaqueta() {
+	public Raqueta getRaqueta() {
 		return raqueta;
 	}
 
-	public void setRaqueta(Paleta raqueta) {
+	public void setRaqueta(Raqueta raqueta) {
 		this.addComponent(raqueta);
 		this.raqueta = raqueta;
 	}
