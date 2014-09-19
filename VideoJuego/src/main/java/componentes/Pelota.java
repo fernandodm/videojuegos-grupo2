@@ -2,15 +2,12 @@ package componentes;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import Arkanoid.Colision;
 import Arkanoid.Vector;
-
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
 import com.uqbar.vainilla.events.constants.Key;
-
 import componentes.ladrillos.Ladrillo;
 import escenas.ArkanoidScene;
 
@@ -38,7 +35,7 @@ public class Pelota extends GameComponent<ArkanoidScene> {
 	@Override
 	public void update(DeltaState deltaState) {
 		ArrayList<Ladrillo> ladrillos = super.getScene().getLadrillos(); 
-		
+	
 		if(deltaState.isKeyPressed(Key.A) || this.isFlag()){
 			this.setFlag(true);
 			//para que no se mueva la pelota cuando deja de estar pegada

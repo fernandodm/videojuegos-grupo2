@@ -3,16 +3,13 @@ package Arkanoid;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
-
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
 import com.uqbar.vainilla.GameScene;
-
 import componentes.Marcador;
 import componentes.Pelota;
 import componentes.Raqueta;
 import componentes.ladrillos.Ladrillo;
-import componentes.ladrillos.LadrilloDisparo;
 import escenas.ArkanoidScene;
 import escenas.GanasteOPerdisteScene;
 
@@ -56,7 +53,7 @@ public class ArkanoidGame extends Game {
 		for (int y = 0; y < width; y++) {
 			for (int x = 0; x < length; x++) {
 				Color color = colors[(int) (Math.random() * colors.length)];
-				Ladrillo ladrillo = new LadrilloDisparo(color, 48, 18, x, y, marcador, raqueta, pelota);
+				Ladrillo ladrillo = new Ladrillo(color, 48, 18, x, y, marcador);
 				scene.addComponent(ladrillo);
 				ladrillos.add(ladrillo);
 			}
