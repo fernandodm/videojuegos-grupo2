@@ -3,13 +3,21 @@ package Arkanoid;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
+
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
 import com.uqbar.vainilla.GameScene;
+
 import componentes.Marcador;
 import componentes.Pelota;
 import componentes.Raqueta;
 import componentes.ladrillos.Ladrillo;
+import componentes.ladrillos.LadrilloDisparo;
+import componentes.ladrillos.LadrilloPaletaChica;
+import componentes.ladrillos.LadrilloPaletaGrande;
+import componentes.ladrillos.LadrilloPaletaPegajosa;
+import componentes.ladrillos.LadrilloPelotaLenta;
+import componentes.ladrillos.LadrilloPelotaRapida;
 import escenas.ArkanoidScene;
 import escenas.GanasteOPerdisteScene;
 
@@ -49,42 +57,53 @@ public class ArkanoidGame extends Game {
 		int width = 10;
 		Color[] colors = { Color.red, Color.black, Color.blue, Color.DARK_GRAY,
 				Color.orange };
+		
+        int cantLadrillosEsp = 20;
 
-		for (int y = 0; y < width; y++) {
-			for (int x = 0; x < length; x++) {
-				Color color = colors[(int) (Math.random() * colors.length)];
-				Ladrillo ladrillo = new Ladrillo(color, 48, 18, x, y, marcador);
-				scene.addComponent(ladrillo);
-				ladrillos.add(ladrillo);
-			}
-		}
-		
-		
-//		//MODO DE EJEMPLO HAY QUE ARREGLARLO FEOOOO
-//		LadrilloPaletaChica ladrilloPalChica = new LadrilloPaletaChica(Color.BLACK, 48, 18, 2, 4, marcador, raqueta, pelota);
-//		LadrilloPelotaRapida ladrillPelRapida = new LadrilloPelotaRapida(Color.RED, 48, 18, 5, 3, marcador, raqueta, pelota);
-//		LadrilloPaletaGrande ladrilloPalGrande = new LadrilloPaletaGrande(Color.BLUE, 48, 18, 8, 1, marcador, raqueta, pelota);
-//		LadrilloPelotaLenta ladrilloPelLenta = new LadrilloPelotaLenta(Color.DARK_GRAY, 48, 18, 9, 9, marcador, raqueta, pelota);
-//		LadrilloPaletaChica ladrilloPalChica1 = new LadrilloPaletaChica(Color.BLACK, 48, 18, 1, 1, marcador, raqueta, pelota);
-//		LadrilloPelotaRapida ladrillPelRapida2 = new LadrilloPelotaRapida(Color.RED, 48, 18, 7, 3, marcador, raqueta, pelota);
-//		LadrilloPaletaGrande ladrilloPalGrande3 = new LadrilloPaletaGrande(Color.BLUE, 48, 18, 3, 2, marcador, raqueta, pelota);
-//		LadrilloPelotaLenta ladrilloPelLenta4 = new LadrilloPelotaLenta(Color.DARK_GRAY, 48, 18, 2, 2, marcador, raqueta, pelota);
-//		
-//		ArrayList<LadrilloEspecial> ladrillosEpeciales = new ArrayList<LadrilloEspecial>();
-//		ladrillosEpeciales.add(ladrilloPalChica);
-//		ladrillosEpeciales.add(ladrillPelRapida);
-//		ladrillosEpeciales.add(ladrilloPalGrande);
-//		ladrillosEpeciales.add(ladrilloPelLenta);
-//		ladrillosEpeciales.add(ladrilloPalChica1);
-//		ladrillosEpeciales.add(ladrillPelRapida2);
-//		ladrillosEpeciales.add(ladrilloPalGrande3);
-//		ladrillosEpeciales.add(ladrilloPelLenta4);
-		
-		
-		
-		return ladrillos;
-
-	}
+        for (int y = 0; y < width; y++) {
+            for (int x = 0; x < length; x++) {
+                Color color = colors[(int) (Math.random() * colors.length)];
+                Ladrillo ladrillo = new Ladrillo(color, 48, 18, x, y, marcador);
+               
+                	if( (cantLadrillosEsp > 0 && ((int) (Math.random() * 100)) > 60)){
+                		ladrillo = this.crearLadrilloEspecial(48, 18, x, y, marcador, raqueta, pelota);
+                		cantLadrillosEsp--;   
+                	}
+               
+                scene.addComponent(ladrillo);
+                ladrillos.add(ladrillo);
+            }
+        }  
+        return ladrillos;
+    }
+	
+	
+	   public Ladrillo crearLadrilloEspecial(int ancho, int alto, double x,
+	            double y, Marcador marcador, Raqueta raqueta, Pelota pelota){
+	       
+	        int[] cant = {1,2,3,4,5,6};
+	        int nRandom = cant[ ((int) (Math.random() * cant.length)) ];
+	       
+	        if(nRandom == 1){
+	            return new LadrilloPaletaChica(Color.PINK, 48, 18, x, y, marcador, raqueta, pelota);   
+	        }
+	        if(nRandom == 2){
+	            return new LadrilloPelotaRapida(Color.PINK, 48, 18, x, y, marcador, raqueta, pelota);
+	        }
+	        if(nRandom == 3){
+	            return new LadrilloPaletaGrande(Color.PINK, 48, 18, x, y, marcador, raqueta, pelota);
+	        }
+	        if(nRandom == 4){
+	            return new LadrilloPelotaLenta(Color.PINK, 48, 18, x, y, marcador, raqueta, pelota);
+	        }
+	        if(nRandom == 5){
+	            return new LadrilloPelotaRapida(Color.PINK, 48, 18, x, y, marcador, raqueta, pelota);
+	        }
+	        if(nRandom == 6){
+	            return new LadrilloDisparo(Color.PINK, 48, 18, x, y, marcador, raqueta, pelota);
+	        }
+	        return new LadrilloPaletaPegajosa(Color.PINK, 48, 18, x, y, marcador, raqueta, pelota);
+	    }
 
 	@Override
 	public Dimension getDisplaySize() {
