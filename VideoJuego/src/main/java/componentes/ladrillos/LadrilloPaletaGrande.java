@@ -11,9 +11,13 @@ import componentes.Raqueta;
 
 public class LadrilloPaletaGrande extends LadrilloEspecial {
 
+	private int tamanhoInicialPelota;
+
 	public LadrilloPaletaGrande(Color color, int ancho, int alto, double x,
 			double y, Marcador marcador, Raqueta raqueta, Pelota pelota) {
 		super(color, ancho, alto, x, y, marcador, raqueta, pelota);
+		Appearance app = this.getPaleta().getAppearance();
+		tamanhoInicialPelota=(int) app.getWidth();
 	}
 
 	@Override
@@ -22,6 +26,21 @@ public class LadrilloPaletaGrande extends LadrilloEspecial {
 		int largo = (int) app.getWidth() + 35;
 		int alto = (int) app.getHeight();
 		this.getPaleta().setAppearance(new Rectangle(Color.BLACK, largo, alto));
+
+	}
+
+	@Override
+	public void estadoInicial() {
+		Appearance app = this.getPaleta().getAppearance();
+		int largo = (int) app.getWidth() - 35;
+		int alto = (int) app.getHeight();
+		this.getPaleta().setAppearance(new Rectangle(Color.BLACK, largo, alto));
+	}
+	
+	@Override
+	public boolean estaAplicadoAcutalmente() {
+		Appearance app = this.getPaleta().getAppearance();
+		return tamanhoInicialPelota < (int) app.getWidth();
 	}
 
 }
