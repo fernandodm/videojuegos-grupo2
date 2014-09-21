@@ -18,4 +18,16 @@ public class LadrilloPaletaPegajosa extends LadrilloEspecial {
 		this.getPaleta().setPegajosa(true);
 	}
 
+	@Override
+	public void estadoInicial() {
+		this.getPaleta().setPegajosa(false);
+	}
+
+	@Override
+	public boolean estaAplicadoAcutalmente() {
+		return this.getPaleta().isPegajosa();
+	}
+	
+	
+
 }

@@ -8,9 +8,12 @@ import componentes.Raqueta;
 
 public class LadrilloPelotaRapida extends LadrilloEspecial {
 
+	private double velocidadInicialPelota;
+
 	public LadrilloPelotaRapida(Color color, int ancho, int alto, double x,
 			double y, Marcador marcador, Raqueta raqueta, Pelota pelota) {
 		super(color, ancho, alto, x, y, marcador, raqueta, pelota);
+		velocidadInicialPelota=this.getPelota().getVelocidad();
 	}
 
 	@Override
@@ -18,5 +21,16 @@ public class LadrilloPelotaRapida extends LadrilloEspecial {
 		this.getPelota().setVelocidad(500);
 
 	}
+
+	@Override
+	public void estadoInicial() {
+		this.getPelota().setVelocidad(velocidadInicialPelota);
+	}
+
+	@Override
+	public boolean estaAplicadoAcutalmente() {
+		return velocidadInicialPelota < this.getPelota().getVelocidad();
+	}
+	
 
 }

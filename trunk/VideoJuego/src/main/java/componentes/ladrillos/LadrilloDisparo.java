@@ -18,4 +18,15 @@ public class LadrilloDisparo extends LadrilloEspecial {
 		this.getPaleta().setPistolera(true);
 	}
 
+	@Override
+	public void estadoInicial() {
+		this.getPaleta().setPistolera(false);
+	}
+
+	@Override
+	public boolean estaAplicadoAcutalmente() {
+		// TODO Auto-generated method stub
+		return this.getPaleta().isPistolera();
+	}
+
 }
