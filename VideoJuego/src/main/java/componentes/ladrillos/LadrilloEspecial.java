@@ -35,7 +35,6 @@ public abstract class LadrilloEspecial extends Ladrillo {
 
 	public void aplicarConTimer() {
 		if (!estaAplicadoAcutalmente()) {
-			System.out.println(getClass().getName());
 			this.aplicar();
 			this.setTimer(new Timer(5, new Task() {
 
