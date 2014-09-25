@@ -19,7 +19,7 @@ public class SoccerGame extends Game {
 		SoccerScene scene = new SoccerScene("sonido1.wav");
 		
 		Cancha cancha = new Cancha("cancha.png", 0, 0);
-		Jugador jugador = new Jugador("jugador1.png","jugadores.png", 100, 425, 425);
+		Jugador jugador = new Jugador("jugadores.png", 100, 425, 425);
 		
 		scene.setCancha(cancha);
 		scene.setJugador(jugador);
