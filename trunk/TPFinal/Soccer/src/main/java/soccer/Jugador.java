@@ -17,74 +17,64 @@ public class Jugador extends GameComponent<SoccerScene>{
 	private Key downKey = Key.DOWN;
 
 		
-	private Sprite image2;
-	private Sprite image1;
+	private Sprite image;
 	private double velocity;
 	Hashtable<Integer,List<Sprite>> images=new Hashtable<Integer, List<Sprite>>();
+	Hashtable<Integer, Integer> estados=new Hashtable<Integer, Integer>();
 	final static int UP=1;
 	final static int DOWN=2;
 	final static int LEFT=3;
 	final static int RIGHT=4;
 	
-	public Jugador(String imagePath1, String imagePath2, double vel, double x, double y) {
+	public Jugador(String imagePath, double vel, double x, double y) {
 		
-		super(Sprite.fromImage(imagePath1), x, y);
-
-		this.image2 = Sprite.fromImage(imagePath2);
-		this.image1 = this.image2.crop(32, 25);
-			
-		List<Sprite> imagesCorriendoArriba = new LinkedList<Sprite>();
-		for (int i = 0; i < 8; i++) {
-			imagesCorriendoArriba.add(this.image2.crop(32*i,0,32, 25));
-		}
-		images.put(Jugador.UP, imagesCorriendoArriba);
+		super(Sprite.fromImage(imagePath).crop(0,0,32,25), x, y);
 		
-		List<Sprite> imagesCorriendoAbajo = new LinkedList<Sprite>();
-		for (int i = 13; i < 19; i++) {
-			imagesCorriendoAbajo.add(this.image2.crop(32*i,32,32, 25));
-		}
-		images.put(Jugador.DOWN, imagesCorriendoAbajo);
+		estados.put(Jugador.UP, 0);
+		estados.put(Jugador.DOWN, 0);
+		estados.put(Jugador.LEFT, 0);
+		estados.put(Jugador.RIGHT, 0);
 		
-		List<Sprite> imagesCorriendoIzquierda = new LinkedList<Sprite>();
-		for (int i = 9; i < 16; i++) {
-			imagesCorriendoIzquierda.add(this.image2.crop(32*i,64,32, 25));
-		}
-		images.put(Jugador.LEFT, imagesCorriendoIzquierda);
+		this.image = Sprite.fromImage(imagePath);
 		
-		List<Sprite> imagesCorriendoDerecha = new LinkedList<Sprite>();
-		for (int i = 16; i < 19; i++) {
-			imagesCorriendoDerecha.add(this.image2.crop(32*i,0,32, 25));
-		}
-		images.put(Jugador.RIGHT, imagesCorriendoDerecha);
+		agregarSprite(Jugador.UP,1,8,32,0);
+		agregarSprite(Jugador.DOWN,13,19,32,32);
+		agregarSprite(Jugador.LEFT,9,16,32,64);
+		agregarSprite(Jugador.RIGHT,16,19,32,0);
 		
 		velocity = vel;
 		
 	}
 	
-
-	int estadoUp=0;
-	int estadoDown=0;
-	int estadoLeft=0;
-	int estadoRight=0;
+	public void agregarSprite(int direccion,int principio,int fin,int x,int y){
+		
+		List<Sprite> imagesCorriendo = new LinkedList<Sprite>();
+		for (int i = principio; i < fin; i++) {
+			imagesCorriendo.add(this.image.crop(x*i, y, 32, 25));
+		}
+		images.put(direccion, imagesCorriendo);
+		
+	}
+	
 	@Override
 	public void update(DeltaState deltaState) {
 		
 		if (deltaState.isKeyBeingHold(upKey)) {
 			this.up(deltaState);
-			this.ejecutarSpriteUp(deltaState, Jugador.UP);
+			this.ejecutarSprite(deltaState, Jugador.UP);
 		} 
 		if (deltaState.isKeyBeingHold(downKey)) {
 			this.down(deltaState);
-			this.ejecutarSpriteDown(deltaState, Jugador.DOWN);
+			this.ejecutarSprite(deltaState, Jugador.DOWN);
 		}
 		
 		if (deltaState.isKeyBeingHold(leftKey)) {
 			this.left(deltaState);
-			this.ejecutarSpriteLeft(deltaState, Jugador.LEFT);
+			this.ejecutarSprite(deltaState, Jugador.LEFT);
 		} 
 		if (deltaState.isKeyBeingHold(rigthKey)) {
 			this.right(deltaState);
-			this.ejecutarSpriteRight(deltaState, Jugador.RIGHT);
+			this.ejecutarSprite(deltaState, Jugador.RIGHT);
 		}
 
 	}
@@ -99,15 +89,17 @@ public class Jugador extends GameComponent<SoccerScene>{
 				* deltaState.getDelta());
 		
 	}
-/////////////////FEOOOOOOOOOOOOOOOO///////////////////////////
-	public void ejecutarSpriteUp(DeltaState deltaState, int direccion){
+	
+	public void ejecutarSprite(DeltaState deltaState, int direccion){
 		
-		this.setAppearance(images.get(direccion).get(estadoUp));
-		estadoUp++;
-		estadoUp=(estadoUp +1)%images.get(direccion).size();
-		Thread t = new Thread();
+		int estado = estados.get(direccion);
+		
+		this.setAppearance(images.get(direccion).get(estado));
+		estados.replace(direccion, estado + 1);
+		estados.replace(direccion,(estado +1)%images.get(direccion).size());
+		
 		try {
-			t.sleep(85);
+			Thread.sleep(85);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,51 +107,6 @@ public class Jugador extends GameComponent<SoccerScene>{
 		
 	}
 	
-	public void ejecutarSpriteDown(DeltaState deltaState, int direccion){
-		
-		this.setAppearance(images.get(direccion).get(estadoDown));
-		estadoDown++;
-		estadoDown=(estadoDown +1)%images.get(direccion).size();
-		Thread t = new Thread();
-		try {
-			t.sleep(85);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
-	public void ejecutarSpriteLeft(DeltaState deltaState, int direccion){
-	
-	this.setAppearance(images.get(direccion).get(estadoLeft));
-	estadoLeft++;
-	estadoLeft=(estadoLeft +1)%images.get(direccion).size();
-	Thread t = new Thread();
-	try {
-		t.sleep(85);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-}
-
-	public void ejecutarSpriteRight(DeltaState deltaState, int direccion){
-	
-	this.setAppearance(images.get(direccion).get(estadoRight));
-	estadoRight++;
-	estadoRight=(estadoRight +1)%images.get(direccion).size();
-	Thread t = new Thread();
-	try {
-		t.sleep(85);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-}
-////////////////////////////	//////////////////////////////////////
 	private void up(DeltaState deltaState) {
 		this.setY(this.getY() - velocity
 				* deltaState.getDelta());
