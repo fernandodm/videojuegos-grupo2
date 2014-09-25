@@ -1,27 +1,21 @@
 package soccer;
 
-import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
-import com.uqbar.vainilla.appearances.Sprite;
-import com.uqbar.vainilla.events.constants.Key;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
-import com.uqbar.vainilla.sound.SoundPlayer;
 
 public class SoccerScene extends GameScene {
 
 	private Cancha cancha;
-	private Jugador jugador;
+	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	
 	
 	public Cancha getCancha() {
 		return cancha;
 	}
-
-
 
 	public void setCancha(Cancha cancha) {
 		this.addComponent(cancha);
@@ -30,13 +24,13 @@ public class SoccerScene extends GameScene {
 
 
 
-	public Jugador getJugador() {
-		return jugador;
+	public List<Jugador> getJugadores() {
+		return jugadores;
 	}
 
-	public void setJugador(Jugador jugador) {
+	public void addJugador(Jugador jugador) {
 		this.addComponent(jugador);
-		this.jugador = jugador;
+		this.jugadores.add(jugador);
 	}
 	
 	
@@ -44,4 +38,5 @@ public class SoccerScene extends GameScene {
 		Sound s = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream(soundFile));
 		s.play();
 	}
+	
 }
