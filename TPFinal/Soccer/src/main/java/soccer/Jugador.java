@@ -16,6 +16,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 	private Key upKey = Key.UP;
 	private Key downKey = Key.DOWN;
 
+	private boolean estaSeleccionado = false;
 		
 	private Sprite image;
 	private double velocity;
@@ -26,7 +27,17 @@ public class Jugador extends GameComponent<SoccerScene>{
 	final static int LEFT=3;
 	final static int RIGHT=4;
 	
-	public Jugador(String imagePath, double vel, double x, double y) {
+	private LabelSeleccionado labelSeleccionado;
+	
+	public LabelSeleccionado getLabelSeleccionado() {
+		return labelSeleccionado;
+	}
+
+	public void setLabelSeleccionado(LabelSeleccionado labelSeleccionado) {
+		this.labelSeleccionado = labelSeleccionado;
+	}
+
+	public Jugador(String imagePath, double vel, double x, double y, LabelSeleccionado label) {
 		
 		super(Sprite.fromImage(imagePath).crop(0,0,32,25), x, y);
 		
@@ -42,8 +53,8 @@ public class Jugador extends GameComponent<SoccerScene>{
 		agregarSprite(Jugador.LEFT,9,16,32,64);
 		agregarSprite(Jugador.RIGHT,16,19,32,0);
 		
+		labelSeleccionado = label;
 		velocity = vel;
-		
 	}
 	
 	public void agregarSprite(int direccion,int principio,int fin,int x,int y){
@@ -59,35 +70,25 @@ public class Jugador extends GameComponent<SoccerScene>{
 	@Override
 	public void update(DeltaState deltaState) {
 		
-		if (deltaState.isKeyBeingHold(upKey)) {
-			this.up(deltaState);
-			this.ejecutarSprite(deltaState, Jugador.UP);
-		} 
-		if (deltaState.isKeyBeingHold(downKey)) {
-			this.down(deltaState);
-			this.ejecutarSprite(deltaState, Jugador.DOWN);
-		}
+		if(isEstaSeleccionado()){
+			if (deltaState.isKeyBeingHold(upKey)) {
+				this.up(deltaState);
+				this.ejecutarSprite(deltaState, Jugador.UP);
+			} 
+			if (deltaState.isKeyBeingHold(downKey)) {
+				this.down(deltaState);
+				this.ejecutarSprite(deltaState, Jugador.DOWN);
+			}
 		
-		if (deltaState.isKeyBeingHold(leftKey)) {
-			this.left(deltaState);
-			this.ejecutarSprite(deltaState, Jugador.LEFT);
-		} 
-		if (deltaState.isKeyBeingHold(rigthKey)) {
-			this.right(deltaState);
-			this.ejecutarSprite(deltaState, Jugador.RIGHT);
+			if (deltaState.isKeyBeingHold(leftKey)) {
+				this.left(deltaState);
+				this.ejecutarSprite(deltaState, Jugador.LEFT);
+			} 
+			if (deltaState.isKeyBeingHold(rigthKey)) {
+				this.right(deltaState);
+				this.ejecutarSprite(deltaState, Jugador.RIGHT);
+			}
 		}
-
-	}
-	
-	private void right(DeltaState deltaState) {
-		this.setX(this.getX() + velocity
-				* deltaState.getDelta());		
-	}
-
-	private void left(DeltaState deltaState) {
-		this.setX(this.getX() - velocity
-				* deltaState.getDelta());
-		
 	}
 	
 	public void ejecutarSprite(DeltaState deltaState, int direccion){
@@ -107,14 +108,37 @@ public class Jugador extends GameComponent<SoccerScene>{
 		
 	}
 	
+	private void right(DeltaState deltaState) {
+		double x = this.getX() + velocity * deltaState.getDelta(); 
+		this.setX(x);
+		this.labelSeleccionado.setX(x + 8);
+	}
+
+	private void left(DeltaState deltaState) {
+		double x = this.getX() - velocity * deltaState.getDelta();
+		this.setX(x);
+		this.labelSeleccionado.setX(x + 8);
+	}
+	
+	
 	private void up(DeltaState deltaState) {
-		this.setY(this.getY() - velocity
-				* deltaState.getDelta());
+		double y = this.getY() - velocity * deltaState.getDelta();
+		this.setY(y);
+		this.labelSeleccionado.setY(y + 28);
 	}
 	
 	private void down(DeltaState deltaState) {
-		this.setY(this.getY() + velocity
-				* deltaState.getDelta());
+		double y = this.getY() + velocity * deltaState.getDelta();
+		this.setY(y);
+		this.labelSeleccionado.setY(y - 13);
+	}
+
+	public boolean isEstaSeleccionado() {
+		return estaSeleccionado;
+	}
+
+	public void setEstaSeleccionado(boolean estaSeleccionado) {
+		this.estaSeleccionado = estaSeleccionado;
 	}
 
 }
