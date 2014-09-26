@@ -9,15 +9,15 @@ import com.uqbar.vainilla.sound.SoundBuilder;
 
 public class SoccerScene extends GameScene {
 
-	private Cancha cancha;
+	private CanchaScene cancha;
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	
 	
-	public Cancha getCancha() {
+	public CanchaScene getCancha() {
 		return cancha;
 	}
 
-	public void setCancha(Cancha cancha) {
+	public void setCancha(CanchaScene cancha) {
 		this.addComponent(cancha);
 		this.cancha = cancha;
 	}
