@@ -5,10 +5,10 @@ import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.events.constants.Key;
 
-public class Cancha extends GameComponent<SoccerScene>{
+public class CanchaScene extends GameComponent<SoccerScene>{
 
 	
-	public Cancha(String imagePath1, double x, double y){
+	public CanchaScene(String imagePath1, double x, double y){
 		super(Sprite.fromImage(imagePath1),x,y);
 	}
 	@Override
