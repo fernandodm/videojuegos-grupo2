@@ -26,6 +26,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 	final static int DOWN=2;
 	final static int LEFT=3;
 	final static int RIGHT=4;
+	private int time=0;
 	
 	private LabelSeleccionado labelSeleccionado;
 	
@@ -37,10 +38,11 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado = labelSeleccionado;
 	}
 
+	
+	
 	public Jugador(String imagePath, double vel, double x, double y, LabelSeleccionado label) {
 		
 		super(Sprite.fromImage(imagePath).crop(0,0,32,25), x, y);
-		
 		estados.put(Jugador.UP, 0);
 		estados.put(Jugador.DOWN, 0);
 		estados.put(Jugador.LEFT, 0);
@@ -98,22 +100,26 @@ public class Jugador extends GameComponent<SoccerScene>{
 				this.ejecutarSprite(deltaState, Jugador.RIGHT);
 			}
 		}
+		
+		
 	}
 	
 	public void ejecutarSprite(DeltaState deltaState, int direccion){
-		
-		int estado = estados.get(direccion);
-		
-		this.setAppearance(images.get(direccion).get(estado));
-		estados.replace(direccion, estado + 1);
-		estados.replace(direccion,(estado +1)%images.get(direccion).size());
-		
-		try {
-			Thread.sleep(85);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(time == 95){
+			int estado = estados.get(direccion);
+			
+			this.setAppearance(images.get(direccion).get(estado));
+			estados.replace(direccion, estado + 1);
+			estados.replace(direccion,(estado +1)%images.get(direccion).size());
+			time=0;
 		}
+		time++;
+//		try {
+//			Thread.sleep(85);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 	
