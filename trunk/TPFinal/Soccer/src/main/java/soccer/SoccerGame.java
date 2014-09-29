@@ -17,9 +17,10 @@ public class SoccerGame extends Game {
 	protected void setUpScenes(){
 		
 		SoccerScene scene = new SoccerScene("sonido1.wav");
-		
+				
 		Cancha cancha = new Cancha("cancha.png", 0, 0);
 		Arco arco = new Arco("arco.png");
+		Pelota pelota = new Pelota("pelota.png", new Vector(0, -5), 10);
 		
 		LabelSeleccionado label = new LabelSeleccionado(434, 828);
 		
@@ -27,12 +28,15 @@ public class SoccerGame extends Game {
 		Jugador jugador2 = new Jugador("jugadores.png", 100, 625, 900, label);
 		Jugador jugador3 = new Jugador("jugadores.png", 100, 800, 800, label);
 		jugador.setEstaSeleccionado(true);
+		
 		scene.setCancha(cancha);
+		scene.setPelota(pelota);
 		scene.addJugador(jugador);
 		scene.addJugador(jugador2);
 		scene.addJugador(jugador3);
 		scene.addComponent(label);
 		scene.setArco(arco);
+		
 		this.setCurrentScene(scene);
 
 	}
