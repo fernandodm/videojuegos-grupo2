@@ -147,7 +147,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.setY(y);
 		this.labelSeleccionado.setY(y - 13);
 	}
-
+	
 	public boolean isEstaSeleccionado() {
 		return estaSeleccionado;
 	}

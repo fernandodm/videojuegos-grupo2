@@ -12,8 +12,18 @@ public class SoccerScene extends GameScene {
 	private Cancha cancha;
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	private Arco arco;
+	private Pelota pelota;
 	
 	
+	public Pelota getPelota() {
+		return pelota;
+	}
+
+	public void setPelota(Pelota pelota) {
+		this.pelota = pelota;
+		this.addComponent(pelota);
+	}
+
 	public Arco getArco() {
 		return arco;
 	}
