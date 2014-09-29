@@ -6,10 +6,10 @@ import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.events.constants.Key;
 
 public class Cancha extends GameComponent<SoccerScene>{
-
 	
-	public Cancha(String imagePath1, double x, double y){
-		super(Sprite.fromImage(imagePath1),x,y);
+	public Cancha(String cancha, double x, double y){
+		super(Sprite.fromImage(cancha),x,y);
+		
 	}
 	@Override
 	public void update(DeltaState deltaState) {
