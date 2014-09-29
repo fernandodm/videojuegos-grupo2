@@ -63,6 +63,15 @@ public class Jugador extends GameComponent<SoccerScene>{
 		for (int i = principio; i < fin; i++) {
 			imagesCorriendo.add(this.image.crop(x*i, y, 32, 25));
 		}
+		//este if esta xq el sprite para correr a la derecha
+		//sigue en la segunda fila
+		if(direccion == Jugador.RIGHT){
+			for (int i = 1; i < 4; i++) {
+				imagesCorriendo.add(this.image.crop(32*i, 32, 32, 25));
+			}
+		}
+			
+			
 		images.put(direccion, imagesCorriendo);
 		
 	}
