@@ -19,6 +19,7 @@ public class Cancha extends GameComponent<SoccerScene>{
 			for(Jugador jugador: super.getScene().getJugadores()){
 				if(jugador.isEstaSeleccionado()){
 					jugador.setEstaSeleccionado(false);
+					jugador.setAppearance(jugador.images.get(1).get(3));
 					jug = jugador;
 					break;
 				}
