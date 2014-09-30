@@ -46,7 +46,7 @@ public class Colision {
 		}
 	}
 
-	public static boolean mustApply(GameComponent<?> gameComponent, Pelota pelota, Vector nuevaPosicion) {
+	public static boolean mustApply(GameComponent<?> gameComponent, GameComponent<?> pelota, Vector nuevaPosicion) {
 
 		return colisiona(gameComponent, pelota, nuevaPosicion);
 	}
