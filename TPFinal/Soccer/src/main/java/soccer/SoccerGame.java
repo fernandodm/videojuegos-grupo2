@@ -24,17 +24,18 @@ public class SoccerGame extends Game {
 		
 		LabelSeleccionado label = new LabelSeleccionado(434, 828);
 		
-		Jugador jugador = new Jugador("jugadores.png", 100, 125, 100, label);
-		Jugador jugador2 = new Jugador("jugadores.png", 100, 150, 100, label);
-		Jugador jugador3 = new Jugador("jugadores.png", 100, 175, 100, label);
+		Jugador jugador = new Jugador("jugadores.png", 100, 400, 300, label);
+		Jugador jugador2 = new Jugador("jugadores.png", 100, 600, 350, label);
+		Jugador jugador3 = new Jugador("jugadores.png", 100, 800, 300, label);
 		jugador.setEstaSeleccionado(true);
 		
 		scene.setCancha(cancha);
+		scene.addComponent(label);
 		scene.setPelota(pelota);
 		scene.addJugador(jugador);
 		scene.addJugador(jugador2);
 		scene.addJugador(jugador3);
-		scene.addComponent(label);
+		
 		scene.setArco(arco);
 		
 		this.setCurrentScene(scene);

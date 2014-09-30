@@ -2,8 +2,6 @@ package soccer;
 
 import java.util.List;
 
-
-
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
@@ -16,7 +14,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 	
 	public Pelota(String pelotaPath, Vector vector, double velocidad){
 		
-		super(Sprite.fromImage(pelotaPath).scaleTo(16,16), 50,50);
+		super(Sprite.fromImage(pelotaPath).scaleTo(16,16), 600,200);
 		this.direccion = vector.asVersor();
 		this.velocidad = velocidad;	
 	
@@ -41,44 +39,34 @@ public class Pelota extends GameComponent<SoccerScene>{
 	@Override
 	public void update(DeltaState deltaState) {
 		List<Jugador> jugadores = super.getScene().getJugadores(); 
-//	
-//		Vector nuevaPosicion = this.direccion.producto(velocidad*deltaState.getDelta()).suma(new Vector(this.getX(), this.getY()));
-//		this.setX(nuevaPosicion.getX());
-//		this.setY(nuevaPosicion.getY());
 	
 		for (Jugador jugador : jugadores) {
 			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());
-				if(Colision.mustApply(jugador, this, nuevaPosicion)){
+				if(Colision.mustApply(this, jugador, nuevaPosicion) && jugador.isEstaSeleccionado()){
 					ejecutarMovimiento(deltaState, jugador.getX(), jugador.getY());
-//					Colision.apply(jugador, this, nuevaPosicion);
 				}
 			}
 
 		super.update(deltaState);
 	}
 
-//	las X e Y estan demas
-	private void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
+	public void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
 		if(deltaState.isKeyBeingHold(Key.UP)){
-			this.setY(y-15);
+			this.setY(y-14);
 			this.setX(x);
-			((Sprite) this.getAppearance()).flipVertically();
 		}
 		if(deltaState.isKeyBeingHold(Key.DOWN)){
-			this.setY(y+28);
+			this.setY(y+26);
 			this.setX(x);
 		}
 		if(deltaState.isKeyBeingHold(Key.LEFT)){
-			this.setX(x-17);
-			this.setY(y);
+			this.setX(x-15);
+			this.setY(y+4);
 		}
 		if(deltaState.isKeyBeingHold(Key.RIGHT)){
 			this.setX(x+25);
-			this.setY(y + 5);
+			this.setY(y+9);
 		}
 		
 	}
-
-	
-
 }
