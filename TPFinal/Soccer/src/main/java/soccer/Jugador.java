@@ -109,8 +109,10 @@ public class Jugador extends GameComponent<SoccerScene>{
 			int estado = estados.get(direccion);
 			
 			this.setAppearance(images.get(direccion).get(estado));
-			estados.replace(direccion, estado + 1);
-			estados.replace(direccion,(estado +1)%images.get(direccion).size());
+//			estados.replace(direccion, estado + 1);
+//			estados.replace(direccion,(estado +1)%images.get(direccion).size());
+			estados.put(direccion, estado + 1);
+			estados.put(direccion,(estado +1)%images.get(direccion).size());
 			time=0;
 		}
 		time++;

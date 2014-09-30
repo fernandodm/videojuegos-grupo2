@@ -24,9 +24,9 @@ public class SoccerGame extends Game {
 		
 		LabelSeleccionado label = new LabelSeleccionado(434, 828);
 		
-		Jugador jugador = new Jugador("jugadores.png", 100, 425, 800, label);
-		Jugador jugador2 = new Jugador("jugadores.png", 100, 625, 900, label);
-		Jugador jugador3 = new Jugador("jugadores.png", 100, 800, 800, label);
+		Jugador jugador = new Jugador("jugadores.png", 100, 125, 100, label);
+		Jugador jugador2 = new Jugador("jugadores.png", 100, 150, 100, label);
+		Jugador jugador3 = new Jugador("jugadores.png", 100, 175, 100, label);
 		jugador.setEstaSeleccionado(true);
 		
 		scene.setCancha(cancha);
@@ -45,7 +45,7 @@ public class SoccerGame extends Game {
 
 	@Override
 	public Dimension getDisplaySize() {
-		return new Dimension(950, 950);
+		return new Dimension(1280, 600);
 	}
 
 	@Override
