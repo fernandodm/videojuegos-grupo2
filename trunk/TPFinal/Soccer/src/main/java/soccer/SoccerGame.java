@@ -20,13 +20,13 @@ public class SoccerGame extends Game {
 				
 		Cancha cancha = new Cancha("cancha.png", 0, 0);
 		Arco arco = new Arco("arco.png");
-		Pelota pelota = new Pelota("pelota.png", new Vector(0, -5), 10);
+		Pelota pelota = new Pelota("pelota1.png", new Vector(0, -5), 10);
 		
 		LabelSeleccionado label = new LabelSeleccionado(434, 828);
 		
-		Jugador jugador = new Jugador("jugadores.png", 100, 400, 300, label);
-		Jugador jugador2 = new Jugador("jugadores.png", 100, 600, 350, label);
-		Jugador jugador3 = new Jugador("jugadores.png", 100, 800, 300, label);
+		Jugador jugador = new Jugador("jugadores.png", 200, 640, 300, label);
+		Jugador jugador2 = new Jugador("jugadores.png", 200, 600, 350, label);
+		Jugador jugador3 = new Jugador("jugadores.png", 200, 800, 300, label);
 		jugador.setEstaSeleccionado(true);
 		
 		scene.setCancha(cancha);
