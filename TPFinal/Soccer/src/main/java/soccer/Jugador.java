@@ -140,13 +140,28 @@ public class Jugador extends GameComponent<SoccerScene>{
 	
 	private void up(DeltaState deltaState) {
 		double y = this.getY() - velocity * deltaState.getDelta();
-		this.setY(y);
-		this.labelSeleccionado.setY(y + 28);
+		if(this.getScene().getCancha().getY() == 0){
+			this.setY(y);
+//			System.out.println(this.getY());
+		}
+		if(this.getY() > 300){
+			this.setY(y);
+//			System.out.println(this.getY());
+		}
+	
+		this.labelSeleccionado.setY(y + 13);
 	}
 	
 	private void down(DeltaState deltaState) {
 		double y = this.getY() + velocity * deltaState.getDelta();
-		this.setY(y);
+		if(this.getScene().getCancha().getY() == -930){
+			this.setY(y);
+//			System.out.println(this.getY());
+		}
+		if(this.getY() < 300){
+			this.setY(y);
+//			System.out.println(this.getY());
+		}
 		this.labelSeleccionado.setY(y - 13);
 	}
 	
