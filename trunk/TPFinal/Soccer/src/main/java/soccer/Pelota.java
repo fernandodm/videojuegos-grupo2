@@ -55,16 +55,19 @@ public class Pelota extends GameComponent<SoccerScene>{
 		for (Jugador jugador : jugadores) {
 			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());
 				if(Colision.mustApply(this, jugador, nuevaPosicion) && jugador.isEstaSeleccionado()){
-					ejecutarMovimiento(deltaState, jugador.getX(), jugador.getY());
-					
+					ejecutarMovimiento(deltaState, jugador.getX(), jugador.getY(),true);
+					jugador.flag = true;
+				}else{
+					jugador.flag = false;
 				}
 			}
+		
 
 		super.update(deltaState);
 	}
 
-	public void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
-		if(deltaState.isKeyBeingHold(Key.UP)){
+	public void ejecutarMovimiento(DeltaState deltaState, double x, double y, boolean b) {
+		if(deltaState.isKeyBeingHold(Key.UP) && b){
 			this.setY(y-14);
 			this.setX(x);
 			this.ejecutarSpritePelota();
@@ -73,10 +76,11 @@ public class Pelota extends GameComponent<SoccerScene>{
 			this.getScene().getCancha().setY(this.getScene().getCancha().getY() + 4/3);
 			}
 		}
-		if(deltaState.isKeyBeingHold(Key.DOWN)){
+		if(deltaState.isKeyBeingHold(Key.DOWN) && b){
 			this.setY(y+26);
 			this.setX(x);
 			this.ejecutarSpritePelota();
+			
 			if(this.getScene().getCancha().getY() > -930){
 			this.getScene().getCancha().setY(this.getScene().getCancha().getY() - 4/3);
 			}
