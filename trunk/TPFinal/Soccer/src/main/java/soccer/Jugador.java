@@ -77,7 +77,6 @@ public class Jugador extends GameComponent<SoccerScene>{
 				imagesCorriendo.add(this.image.crop(32*i, 32, 32, 25));
 			}
 		}
-			
 		images.put(direccion, imagesCorriendo);
 	}
 	
@@ -85,7 +84,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 	public void update(DeltaState deltaState) {
 		
 		if(isEstaSeleccionado()){
-		int direccion = obtenerDireccion(deltaState);
+			int direccion = obtenerDireccion(deltaState);
 			switch (direccion) {
 			case UP:
 				this.up(deltaState);
@@ -121,6 +120,8 @@ public class Jugador extends GameComponent<SoccerScene>{
 				break;
 			}			
 		}
+		
+		
 	}
 	
 	private int obtenerDireccion(DeltaState deltaState) {
