@@ -72,18 +72,19 @@ public class Pelota extends GameComponent<SoccerScene>{
 			this.setX(x);
 			this.ejecutarSpritePelota();
 			
-			if(this.getScene().getCancha().getY() !=0){
-			this.getScene().getCancha().setY(this.getScene().getCancha().getY() + 4/3);
-			}
+//			if(this.getScene().getCancha().getY() !=0){
+//			this.getScene().getCancha().setY(this.getScene().getCancha().getY() + 4/3);
+//			}
 		}
 		if(deltaState.isKeyBeingHold(Key.S) && b){
 			this.setY(y+26);
 			this.setX(x);
 			this.ejecutarSpritePelota();
+			System.out.println(this.getY());
 			
-			if(this.getScene().getCancha().getY() > -930){
-			this.getScene().getCancha().setY(this.getScene().getCancha().getY() - 4/3);
-			}
+//			if(this.getScene().getCancha().getY() > -930){
+//			this.getScene().getCancha().setY(this.getScene().getCancha().getY() - 4/3);
+//			}
 		}
 		if(deltaState.isKeyBeingHold(Key.A)){
 			this.setX(x-15);
