@@ -14,14 +14,19 @@ public class Cancha extends GameComponent<SoccerScene>{
 	@Override
 	public void update(DeltaState deltaState) {
 		Jugador jug = null;
-		if(deltaState.isKeyPressed(Key.C)){
+		boolean ahiSeleccionado = false; 
+		for(Jugador jugador: super.getScene().getJugadores()){
+			ahiSeleccionado = jugador.flag || ahiSeleccionado;
+		}
+		
+		if(deltaState.isKeyPressed(Key.C) && !ahiSeleccionado){
 			/*Busco al jugador selecionado para deseleccionarlo*/
 			for(Jugador jugador: super.getScene().getJugadores()){
 				if(jugador.isEstaSeleccionado()){
 					jugador.setEstaSeleccionado(false);
 					jugador.setAppearance(jugador.images.get(1).get(3));
 					jug = jugador;
-					break;
+//					break;
 				}
 			}
 			/*Ahora selecciono al jugador mas cercano
