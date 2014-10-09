@@ -11,10 +11,10 @@ import com.uqbar.vainilla.events.constants.Key;
 
 public class Jugador extends GameComponent<SoccerScene>{
 	
-	private Key leftKey = Key.LEFT;
-	private Key rigthKey = Key.RIGHT;
-	private Key upKey = Key.UP;
-	private Key downKey = Key.DOWN;
+	private Key leftKey = Key.A;
+	private Key rigthKey = Key.D;
+	private Key upKey = Key.W;
+	private Key downKey = Key.S;
 
 	private boolean estaSeleccionado = false;
 		
@@ -26,6 +26,10 @@ public class Jugador extends GameComponent<SoccerScene>{
 	final static int DOWN=2;
 	final static int LEFT=3;
 	final static int RIGHT=4;
+	final static int UPRIGHT=5;
+	final static int DOWNRIGHT=6;
+	final static int UPLEFT=7;
+	final static int DOWNLEFT=8;
 	private int time=0;
 	
 	private LabelSeleccionado labelSeleccionado;
@@ -74,57 +78,166 @@ public class Jugador extends GameComponent<SoccerScene>{
 			}
 		}
 			
-			
 		images.put(direccion, imagesCorriendo);
-		
 	}
 	
 	@Override
 	public void update(DeltaState deltaState) {
 		
 		if(isEstaSeleccionado()){
-			if (deltaState.isKeyBeingHold(upKey)) {
+		int direccion = obtenerDireccion(deltaState);
+			switch (direccion) {
+			case UP:
 				this.up(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.UP);
-			} 
-			if (deltaState.isKeyBeingHold(downKey)) {
+				this.ejecutarSprite(deltaState, Jugador.UP,0);
+				break;
+			case DOWN:
 				this.down(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.DOWN);
-			}
-		
-			if (deltaState.isKeyBeingHold(leftKey)) {
+				this.ejecutarSprite(deltaState, Jugador.DOWN,0);
+				break;
+			case LEFT:
 				this.left(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.LEFT);
-			} 
-			if (deltaState.isKeyBeingHold(rigthKey)) {
+				this.ejecutarSprite(deltaState, Jugador.LEFT,0);
+				break;
+			case RIGHT:
 				this.right(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.RIGHT);
-			}
-			
+				this.ejecutarSprite(deltaState, Jugador.RIGHT,0);
+				break;
+			case UPRIGHT:
+				this.upRight(deltaState);
+				this.ejecutarSprite(deltaState, Jugador.UP,0.6);
+				break;
+			case UPLEFT:
+				this.upLeft(deltaState);
+				this.ejecutarSprite(deltaState, Jugador.UP,-0.6);
+				break;
+			case DOWNRIGHT:
+				this.downRight(deltaState);
+				this.ejecutarSprite(deltaState, Jugador.UP,2);
+				break;
+			case DOWNLEFT:
+				this.downLeft(deltaState);
+				this.ejecutarSprite(deltaState, Jugador.UP,-2);
+				break;
+			}			
 		}
-		
-		
 	}
 	
-	public void ejecutarSprite(DeltaState deltaState, int direccion){
+	private int obtenerDireccion(DeltaState deltaState) {
+		if (deltaState.isKeyBeingHold(upKey) && deltaState.isKeyBeingHold(rigthKey)) {
+			return UPRIGHT;
+		} 
+		if (deltaState.isKeyBeingHold(upKey) && deltaState.isKeyBeingHold(leftKey)) {
+			return UPLEFT;
+		} 
+		if (deltaState.isKeyBeingHold(downKey) && deltaState.isKeyBeingHold(rigthKey)) {
+			return DOWNRIGHT;
+		} 
+		if (deltaState.isKeyBeingHold(downKey) && deltaState.isKeyBeingHold(leftKey)) {
+			return DOWNLEFT;
+		} 
+		if (deltaState.isKeyBeingHold(upKey)) {
+			return UP;
+		} 
+			
+		if (deltaState.isKeyBeingHold(downKey)) {
+			return DOWN;
+		}
+	
+		if (deltaState.isKeyBeingHold(leftKey)) {
+			return LEFT;
+		} 
+		if (deltaState.isKeyBeingHold(rigthKey)) {
+			return RIGHT;
+		}
+		return 0;
+	}
+
+	public void ejecutarSprite(DeltaState deltaState, int direccion,double rotacion){
 		if(time == 95){
 			int estado = estados.get(direccion);
 			
-			this.setAppearance(images.get(direccion).get(estado));
+			this.setAppearance(images.get(direccion).get(estado).rotate(rotacion));
 //			estados.replace(direccion, estado + 1);
 //			estados.replace(direccion,(estado +1)%images.get(direccion).size());
 			estados.put(direccion, estado + 1);
 			estados.put(direccion,(estado +1)%images.get(direccion).size());
 			time=0;
 		}
-		time++;
-//		try {
-//			Thread.sleep(85);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		time++;		
+	}
+	
+	private void downLeft(DeltaState deltaState) {
+		double x = this.getX() - velocity * deltaState.getDelta();
+		double y = this.getY() + velocity * deltaState.getDelta();
+		if(this.getScene().getCancha().getY() == -930 ){
+			this.setY(y);
+			this.setX(x);
+//			System.out.println(this.getY());
+		}else{
+//			this.setY(y);
+				if(this.flag){
+					this.desplazarComponentes(-1);
+					this.setY(y);
+					this.setX(x);
+				}else{
+					this.setY(y);
+					this.setX(x);
+				}
+		}
+		this.labelSeleccionado.setX(x + 10);
+		this.labelSeleccionado.setY(y + 30);
 		
+	}
+
+	private void downRight(DeltaState deltaState) {
+		double x = this.getX() + velocity * deltaState.getDelta();
+		double y = this.getY() + velocity * deltaState.getDelta();
+		
+		if(this.getScene().getCancha().getY() == -930 ){
+			this.setY(y);
+			this.setX(x);
+//			System.out.println(this.getY());
+		}else{
+//			this.setY(y);
+				if(this.flag){
+					this.desplazarComponentes(-1);
+					this.setY(y);
+					this.setX(x);
+				}else{
+					this.setY(y);
+					this.setX(x);
+				}
+		}
+		this.labelSeleccionado.setX(x + 10);
+		this.labelSeleccionado.setY(y + 30);
+		
+	}
+
+	private void upLeft(DeltaState deltaState) {
+		double x = this.getX() - velocity * deltaState.getDelta();
+		double y = this.getY() - velocity * deltaState.getDelta();
+		if(this.getScene().getCancha().getY() == 0){
+			this.setY(y);
+			this.setX(x);
+//			System.out.println(this.getY());
+		}else{
+//			this.setY(y);
+				if(this.flag){
+					this.desplazarComponentes(1);
+					this.setY(y);
+					this.setX(x);
+				}else{
+					this.setY(y);
+					this.setX(x);
+				}
+		}
+//		if(this.getY() > 300){
+//			this.setY(y);
+////			System.out.println(this.getY());
+//		}
+		this.labelSeleccionado.setX(x + 10);
+		this.labelSeleccionado.setY(y + 30);
 	}
 	
 	private void right(DeltaState deltaState) {
@@ -137,6 +250,32 @@ public class Jugador extends GameComponent<SoccerScene>{
 		double x = this.getX() - velocity * deltaState.getDelta();
 		this.setX(x);
 		this.labelSeleccionado.setX(x + 8);
+	}
+	
+	private void upRight(DeltaState deltaState) {
+		double y = this.getY() - velocity* deltaState.getDelta();
+		double x = this.getX() + velocity * deltaState.getDelta();
+		if(this.getScene().getCancha().getY() == 0){
+			this.setY(y);
+			this.setX(x);
+//			System.out.println(this.getY());
+		}else{
+//			this.setY(y);
+				if(this.flag){
+					this.desplazarComponentes(1);
+					this.setY(y);
+					this.setX(x);
+				}else{
+					this.setY(y);
+					this.setX(x);
+				}
+		}
+//		if(this.getY() > 300){
+//			this.setY(y);
+////			System.out.println(this.getY());
+//		}
+		this.labelSeleccionado.setY(y + 26);
+		this.labelSeleccionado.setX(this.getX() + 6);
 	}
 	
 	

@@ -67,7 +67,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 	}
 
 	public void ejecutarMovimiento(DeltaState deltaState, double x, double y, boolean b) {
-		if(deltaState.isKeyBeingHold(Key.UP) && b){
+		if(deltaState.isKeyBeingHold(Key.W) && b){
 			this.setY(y-14);
 			this.setX(x);
 			this.ejecutarSpritePelota();
@@ -76,7 +76,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 			this.getScene().getCancha().setY(this.getScene().getCancha().getY() + 4/3);
 			}
 		}
-		if(deltaState.isKeyBeingHold(Key.DOWN) && b){
+		if(deltaState.isKeyBeingHold(Key.S) && b){
 			this.setY(y+26);
 			this.setX(x);
 			this.ejecutarSpritePelota();
@@ -85,17 +85,16 @@ public class Pelota extends GameComponent<SoccerScene>{
 			this.getScene().getCancha().setY(this.getScene().getCancha().getY() - 4/3);
 			}
 		}
-		if(deltaState.isKeyBeingHold(Key.LEFT)){
+		if(deltaState.isKeyBeingHold(Key.A)){
 			this.setX(x-15);
 			this.setY(y+4);
 			this.ejecutarSpritePelota();
 		}
-		if(deltaState.isKeyBeingHold(Key.RIGHT)){
+		if(deltaState.isKeyBeingHold(Key.D)){
 			this.setX(x+25);
 			this.setY(y+9);
 			this.ejecutarSpritePelota();
-		}
-		
+		}		
 	}
 
 	private void ejecutarSpritePelota() {

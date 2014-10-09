@@ -20,14 +20,10 @@ public class Colision {
 		// multiplicarlo por -1
 		pelota.setDireccion(new Vector(Math.sin(anguloNuevo), (-1) * signoY	* Math.cos(anguloNuevo)));
 
-//		if(gameComponent.getClass().equals(Raqueta.class))
 			pelota.setY(signoY > 0 ? gameComponent.getY()
 				- pelota.getAppearance().getHeight() - 1 : gameComponent.getY()
 				+ gameComponent.getAppearance().getHeight() + 1);
 		
-		
-//		double signoX = Math.signum(pelota.getDireccion().getX());
-
 	}
 
 	private static double getPuntoColision(GameComponent<?> gameComponent, Pelota pelota,
@@ -58,25 +54,4 @@ public class Colision {
 				gameComponent.getY(), gameComponent.getAppearance().getWidth(), gameComponent
 			   .getAppearance().getHeight());
 	}
-
-//	public static void apply(Ladrillo gameComponent,
-//			GameComponent<ArkanoidScene> gameComponent2, Vector nuevaPosicion) {
-//		
-//		double puntoDeColision = getPuntoColision(gameComponent, pelota,
-//				nuevaPosicion);
-//
-//		double signoY = Math.signum(pelota.getDireccion().getY());
-//
-//		double anguloNuevo = ((anguloMayor - anguloMenor) / gameComponent.getAppearance().getWidth()) * puntoDeColision + anguloMenor;
-//		// aprovecho e invierto el signo que traia Y con el truquito de
-//		// multiplicarlo por -1
-//		pelota.setDireccion(new Vector(Math.sin(anguloNuevo), (-1) * signoY	* Math.cos(anguloNuevo)));
-//
-//		if(gameComponent.getClass().equals(Paleta.class))
-//			pelota.setY(signoY > 0 ? gameComponent.getY()
-//				- pelota.getAppearance().getHeight() - 1 : gameComponent.getY()
-//				+ gameComponent.getAppearance().getHeight() + 1);
-//		
-//	}
-
 }
