@@ -2,23 +2,15 @@ package soccer;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
-import com.uqbar.vainilla.appearances.Appearance;
-import com.uqbar.vainilla.appearances.SimpleAppearance;
 import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.events.constants.Key;
 
 public class Cancha extends GameComponent<SoccerScene>{
 	
-//	private Appearance image;
-	private Pelota pelota;
-	
 	public Cancha(String cancha, double x, double y){
 		super(Sprite.fromImage(cancha),x,y);
-		
-//		thithis.getScene().getCancha().getAppearance();
-//		this.pelota = this.getScene().getPelota();
-
 	}
+	
 	@Override
 	public void update(DeltaState deltaState) {
 		Jugador jug = null;
@@ -36,8 +28,7 @@ public class Cancha extends GameComponent<SoccerScene>{
 			 * cuando este la pelota habra que hacerlo con ella*/
 			seleccionarJugadorMasCercano(jug);
 		}
-//		((SimpleAppearance<Sprite>) this.image).setY(this.getY() + 2);
-//		this.setAppearance(this.getAppearance());		
+	
 	}
 	public void seleccionarJugadorMasCercano(Jugador seleccionado) {
 		Jugador jugadorCerca = null;
