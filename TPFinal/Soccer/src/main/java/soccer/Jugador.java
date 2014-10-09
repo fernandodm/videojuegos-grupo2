@@ -158,7 +158,8 @@ public class Jugador extends GameComponent<SoccerScene>{
 //			this.setY(y);
 ////			System.out.println(this.getY());
 //		}
-		this.labelSeleccionado.setY(y + 13);
+		this.labelSeleccionado.setY(y + 26);
+		this.labelSeleccionado.setX(this.getX() + 6);
 	}
 	
 	private void down(DeltaState deltaState) {
