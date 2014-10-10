@@ -6,6 +6,7 @@ import java.util.List;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
+import com.uqbar.vainilla.events.constants.Key;
 
 public class Pelota extends GameComponent<SoccerScene>{
 	
@@ -48,6 +49,11 @@ public class Pelota extends GameComponent<SoccerScene>{
 		this.velocidad = velocidad;
 	}
 	
+	
+	public boolean enRemate=false;
+	private int direccionRemate;
+	private double potencia;
+	
 	@Override
 	public void update(DeltaState deltaState) {
 		List<Jugador> jugadores = super.getScene().getJugadores(); 
@@ -57,13 +63,60 @@ public class Pelota extends GameComponent<SoccerScene>{
 				if(Colision.mustApply(this, jugador, nuevaPosicion) && jugador.isEstaSeleccionado()){
 					ejecutarMovimiento(deltaState, jugador.getX(), jugador.getY());
 					jugador.flag = true;
+
+					activarRemate(deltaState);
+					
 				}else{
 					jugador.flag = false;
 				}
 			}
 		
+		moverPelotaPorRemate();
+		
+		
 
 		super.update(deltaState);
+	}
+
+	private void moverPelotaPorRemate() {
+		//Si la pelota esta en remate
+		this.setVelocidad(getVelocidad()-0.2);
+		if(this.enRemate){
+			switch (direccionRemate) {
+			case Direccion.UP:
+				this.setY(getY()-potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.DOWN:
+				this.setY(getY()+potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.LEFT:
+				this.setX(getX()-potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.RIGHT:
+				this.setX(getX()+potencia);
+				this.ejecutarSpritePelota();
+				break;
+			}
+			this.ejecutarSpritePelota();
+			potencia-=1;
+			if(potencia < 0){
+				enRemate=false;
+			}
+		}
+	}
+
+	private void activarRemate(DeltaState deltaState) {
+		//Direccion del remate
+		direccionRemate = Direccion.obtenerDireccion(deltaState);
+		potencia = 22;
+		//Si se apreta enter para pegarle a la pelota
+		if(deltaState.isKeyBeingHold(Key.ENTER) && direccionRemate != 0){
+			enRemate=true;
+			
+		}
 	}
 
 	public void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
