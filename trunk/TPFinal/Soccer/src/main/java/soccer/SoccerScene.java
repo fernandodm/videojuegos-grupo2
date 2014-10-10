@@ -11,7 +11,13 @@ public class SoccerScene extends GameScene {
 
 	private Cancha cancha;
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
-	private Arco arco;
+	private List<Arco> arcos = new ArrayList<Arco>();
+	
+	public List<Arco> getArcos() {
+		return arcos;
+	}
+
+
 	private Pelota pelota;
 	
 	
@@ -24,12 +30,8 @@ public class SoccerScene extends GameScene {
 		this.addComponent(pelota);
 	}
 
-	public Arco getArco() {
-		return arco;
-	}
-
-	public void setArco(Arco arco) {
-		this.arco = arco;
+	public void addArco(Arco arco) {
+		this.arcos.add(arco);
 		this.addComponent(arco);
 	}
 

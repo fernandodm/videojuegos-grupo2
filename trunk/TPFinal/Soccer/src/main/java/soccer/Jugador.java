@@ -7,58 +7,34 @@ import java.util.List;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
-import com.uqbar.vainilla.events.constants.Key;
 
 public class Jugador extends GameComponent<SoccerScene>{
 	
-	private Key leftKey = Key.A;
-	private Key rigthKey = Key.D;
-	private Key upKey = Key.W;
-	private Key downKey = Key.S;
 
-	private boolean estaSeleccionado = false;
-		
+	private boolean estaSeleccionado = false;	
 	private Sprite image;
 	private double velocity;
 	Hashtable<Integer,List<Sprite>> images=new Hashtable<Integer, List<Sprite>>();
 	Hashtable<Integer, Integer> estados=new Hashtable<Integer, Integer>();
-	final static int UP=1;
-	final static int DOWN=2;
-	final static int LEFT=3;
-	final static int RIGHT=4;
-	final static int UPRIGHT=5;
-	final static int DOWNRIGHT=6;
-	final static int UPLEFT=7;
-	final static int DOWNLEFT=8;
 	private int time=0;
-	
 	private LabelSeleccionado labelSeleccionado;
 	public boolean flag=false;
-	
-	public LabelSeleccionado getLabelSeleccionado() {
-		return labelSeleccionado;
-	}
 
-	public void setLabelSeleccionado(LabelSeleccionado labelSeleccionado) {
-		this.labelSeleccionado = labelSeleccionado;
-	}
-
-	
 	
 	public Jugador(String imagePath, double vel, double x, double y, LabelSeleccionado label) {
 		
 		super(Sprite.fromImage(imagePath).crop(0,0,32,25), x, y);
-		estados.put(Jugador.UP, 0);
-		estados.put(Jugador.DOWN, 0);
-		estados.put(Jugador.LEFT, 0);
-		estados.put(Jugador.RIGHT, 0);
+		estados.put(Direccion.UP, 0);
+		estados.put(Direccion.DOWN, 0);
+		estados.put(Direccion.LEFT, 0);
+		estados.put(Direccion.RIGHT, 0);
 		
 		this.image = Sprite.fromImage(imagePath);
 		
-		agregarSprite(Jugador.UP,1,8,32,0);
-		agregarSprite(Jugador.DOWN,13,19,32,32);
-		agregarSprite(Jugador.LEFT,9,16,32,64);
-		agregarSprite(Jugador.RIGHT,16,19,32,0);
+		agregarSprite(Direccion.UP,1,8,32,0);
+		agregarSprite(Direccion.DOWN,13,19,32,32);
+		agregarSprite(Direccion.LEFT,9,16,32,64);
+		agregarSprite(Direccion.RIGHT,16,19,32,0);
 		
 		labelSeleccionado = label;
 		velocity = vel;
@@ -72,7 +48,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		}
 		//este if esta xq el sprite para correr a la derecha
 		//sigue en la segunda fila
-		if(direccion == Jugador.RIGHT){
+		if(direccion == Direccion.RIGHT){
 			for (int i = 1; i < 4; i++) {
 				imagesCorriendo.add(this.image.crop(32*i, 32, 32, 25));
 			}
@@ -85,72 +61,42 @@ public class Jugador extends GameComponent<SoccerScene>{
 	public void update(DeltaState deltaState) {
 		
 		if(isEstaSeleccionado()){
-		int direccion = obtenerDireccion(deltaState);
+		int direccion = Direccion.obtenerDireccion(deltaState);
 			switch (direccion) {
-			case UP:
+			case Direccion.UP:
 				this.up(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.UP,0);
+				this.ejecutarSprite(deltaState, Direccion.UP,0);
 				break;
-			case DOWN:
+			case Direccion.DOWN:
 				this.down(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.DOWN,0);
+				this.ejecutarSprite(deltaState, Direccion.DOWN,0);
 				break;
-			case LEFT:
+			case Direccion.LEFT:
 				this.left(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.LEFT,0);
+				this.ejecutarSprite(deltaState, Direccion.LEFT,0);
 				break;
-			case RIGHT:
+			case Direccion.RIGHT:
 				this.right(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.RIGHT,0);
+				this.ejecutarSprite(deltaState, Direccion.RIGHT,0);
 				break;
-			case UPRIGHT:
+			case Direccion.UPRIGHT:
 				this.upRight(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.UP,0.6);
+				this.ejecutarSprite(deltaState, Direccion.UP,0.6);
 				break;
-			case UPLEFT:
+			case Direccion.UPLEFT:
 				this.upLeft(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.UP,-0.6);
+				this.ejecutarSprite(deltaState, Direccion.UP,-0.6);
 				break;
-			case DOWNRIGHT:
+			case Direccion.DOWNRIGHT:
 				this.downRight(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.UP,2);
+				this.ejecutarSprite(deltaState, Direccion.UP,2);
 				break;
-			case DOWNLEFT:
+			case Direccion.DOWNLEFT:
 				this.downLeft(deltaState);
-				this.ejecutarSprite(deltaState, Jugador.UP,-2);
+				this.ejecutarSprite(deltaState, Direccion.UP,-2);
 				break;
 			}			
 		}
-	}
-	
-	private int obtenerDireccion(DeltaState deltaState) {
-		if (deltaState.isKeyBeingHold(upKey) && deltaState.isKeyBeingHold(rigthKey)) {
-			return UPRIGHT;
-		} 
-		if (deltaState.isKeyBeingHold(upKey) && deltaState.isKeyBeingHold(leftKey)) {
-			return UPLEFT;
-		} 
-		if (deltaState.isKeyBeingHold(downKey) && deltaState.isKeyBeingHold(rigthKey)) {
-			return DOWNRIGHT;
-		} 
-		if (deltaState.isKeyBeingHold(downKey) && deltaState.isKeyBeingHold(leftKey)) {
-			return DOWNLEFT;
-		} 
-		if (deltaState.isKeyBeingHold(upKey)) {
-			return UP;
-		} 
-			
-		if (deltaState.isKeyBeingHold(downKey)) {
-			return DOWN;
-		}
-	
-		if (deltaState.isKeyBeingHold(leftKey)) {
-			return LEFT;
-		} 
-		if (deltaState.isKeyBeingHold(rigthKey)) {
-			return RIGHT;
-		}
-		return 0;
 	}
 
 	public void ejecutarSprite(DeltaState deltaState, int direccion,double rotacion){
@@ -184,8 +130,9 @@ public class Jugador extends GameComponent<SoccerScene>{
 					this.setX(x);
 				}
 		}
+		
 		this.labelSeleccionado.setX(x + 10);
-		this.labelSeleccionado.setY(y + 30);
+		this.labelSeleccionado.setY(y - 10);
 	}
 
 	private void downRight(DeltaState deltaState) {
@@ -207,7 +154,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 				}
 		}
 		this.labelSeleccionado.setX(x + 10);
-		this.labelSeleccionado.setY(y + 30);
+		this.labelSeleccionado.setY(y - 15);
 	}
 	
 	private void down(DeltaState deltaState) {
@@ -296,13 +243,21 @@ public class Jugador extends GameComponent<SoccerScene>{
 				x.setY(x.getY()+ (0.4*n));
 			}
 		}
-		this.getScene().getArco().setY(this.getScene().getArco().getY()+ (0.4*n));
 		
+		this.getScene().getArcos().get(0).setY(this.getScene().getArcos().get(0).getY()+ (0.4*n));
+		this.getScene().getArcos().get(1).setY(this.getScene().getArcos().get(1).getY()+ (0.4*n));
 		this.getScene().getCancha().setY(this.getScene().getCancha().getY()+ (0.4*n));
 		
 		
 	}
 	
+	public LabelSeleccionado getLabelSeleccionado() {
+		return labelSeleccionado;
+	}
+
+	public void setLabelSeleccionado(LabelSeleccionado labelSeleccionado) {
+		this.labelSeleccionado = labelSeleccionado;
+	}
 	
 	public boolean isEstaSeleccionado() {
 		return estaSeleccionado;
