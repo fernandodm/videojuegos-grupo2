@@ -6,7 +6,6 @@ import java.util.List;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
-import com.uqbar.vainilla.events.constants.Key;
 
 public class Pelota extends GameComponent<SoccerScene>{
 	
@@ -14,6 +13,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 	private double velocidad;
 	private Sprite image;
 	private int time;
+	int estado = 0;
 	private ArrayList<Sprite> listSprites = new ArrayList<Sprite>();
 	
 	public Pelota(String pelotaPath, Vector vector, double velocidad){
@@ -47,7 +47,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 	public void setVelocidad(double velocidad) {
 		this.velocidad = velocidad;
 	}
-	int estado = 0;
+	
 	@Override
 	public void update(DeltaState deltaState) {
 		List<Jugador> jugadores = super.getScene().getJugadores(); 
@@ -55,7 +55,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 		for (Jugador jugador : jugadores) {
 			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());
 				if(Colision.mustApply(this, jugador, nuevaPosicion) && jugador.isEstaSeleccionado()){
-					ejecutarMovimiento(deltaState, jugador.getX(), jugador.getY(),true);
+					ejecutarMovimiento(deltaState, jugador.getX(), jugador.getY());
 					jugador.flag = true;
 				}else{
 					jugador.flag = false;
@@ -66,40 +66,80 @@ public class Pelota extends GameComponent<SoccerScene>{
 		super.update(deltaState);
 	}
 
-	public void ejecutarMovimiento(DeltaState deltaState, double x, double y, boolean b) {
-		if(deltaState.isKeyBeingHold(Key.W) && b){
+	public void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
+		int direccion = Direccion.obtenerDireccion(deltaState);
+		switch (direccion) {
+		case Direccion.UP:
 			this.setY(y-14);
-			this.setX(x);
+			this.setX(x + 3);
 			this.ejecutarSpritePelota();
-			
-//			if(this.getScene().getCancha().getY() !=0){
-//			this.getScene().getCancha().setY(this.getScene().getCancha().getY() + 4/3);
-//			}
-		}
-		if(deltaState.isKeyBeingHold(Key.S) && b){
+			break;
+		case Direccion.DOWN:
 			this.setY(y+26);
 			this.setX(x);
 			this.ejecutarSpritePelota();
-			System.out.println(this.getY());
-			
-//			if(this.getScene().getCancha().getY() > -930){
-//			this.getScene().getCancha().setY(this.getScene().getCancha().getY() - 4/3);
-//			}
-		}
-		if(deltaState.isKeyBeingHold(Key.A)){
-			this.setX(x-15);
+			break;
+		case Direccion.LEFT:
+			this.setX(x-11);
 			this.setY(y+4);
 			this.ejecutarSpritePelota();
-		}
-		if(deltaState.isKeyBeingHold(Key.D)){
+			break;
+		case Direccion.RIGHT:
 			this.setX(x+25);
 			this.setY(y+9);
 			this.ejecutarSpritePelota();
-		}		
+			break;
+		case Direccion.UPRIGHT:
+			this.setX(x + 20);
+			this.setY(y - 5);
+			this.ejecutarSpritePelota();
+			break;
+		case Direccion.UPLEFT:
+			this.setX(x - 6);
+			this.setY(y - 8);
+			this.ejecutarSpritePelota();
+			break;
+		case Direccion.DOWNRIGHT:
+			this.setX(x + 25);
+			this.setY(y + 7);
+			this.ejecutarSpritePelota();
+			break;
+		case Direccion.DOWNLEFT:
+			this.setX(x - 5);
+			this.setY(y + 15);
+			this.ejecutarSpritePelota();
+			break;
+		}			
+//		if(deltaState.isKeyBeingHold(Key.W) && b){
+//			this.setY(y-14);
+//			this.setX(x);
+//			this.ejecutarSpritePelota();
+////			if(this.getScene().getCancha().getY() !=0){
+////			this.getScene().getCancha().setY(this.getScene().getCancha().getY() + 4/3);
+////			}
+//		}
+//		if(deltaState.isKeyBeingHold(Key.S) && b){
+//			this.setY(y+26);
+//			this.setX(x);
+//			this.ejecutarSpritePelota();
+////			if(this.getScene().getCancha().getY() > -930){
+////			this.getScene().getCancha().setY(this.getScene().getCancha().getY() - 4/3);
+////			}
+//		}
+//		if(deltaState.isKeyBeingHold(Key.A)){
+//			this.setX(x-11);
+//			this.setY(y+4);
+//			this.ejecutarSpritePelota();
+////		}
+//		if(deltaState.isKeyBeingHold(Key.D)){
+//			this.setX(x+25);
+//			this.setY(y+9);
+//			this.ejecutarSpritePelota();
+//		}		
 	}
 
 	private void ejecutarSpritePelota() {
-		if(this.time == 7){
+		if(this.time == 12){
 			this.setAppearance(this.listSprites.get(this.estado));
 			this.estado = (this.estado+1)%this.listSprites.size();
 			this.time=0;

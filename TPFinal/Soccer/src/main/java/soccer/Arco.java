@@ -5,9 +5,9 @@ import com.uqbar.vainilla.appearances.Sprite;
 
 public class Arco extends GameComponent<SoccerScene>{
 	
-	public Arco(String arcoPath){
+	public Arco(String arcoPath, double rotacion, double x, double y){
 		
-		super(Sprite.fromImage(arcoPath).scaleTo(210, 100), 525,8);
+		super(Sprite.fromImage(arcoPath).scaleTo(210, 100).rotate(rotacion), x, y);
 		
 	
 	}
