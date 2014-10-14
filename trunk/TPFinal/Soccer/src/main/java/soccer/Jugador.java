@@ -116,7 +116,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 	private void downLeft(DeltaState deltaState) {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		double y = this.getY() + velocity * deltaState.getDelta();
-		if((int)this.getScene().getCancha().getY() <= -930 ){
+		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
 			this.setX(x);
 //			System.out.println(this.getY());
@@ -139,7 +139,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		double x = this.getX() + velocity * deltaState.getDelta();
 		double y = this.getY() + velocity * deltaState.getDelta();
 		
-		if((int)this.getScene().getCancha().getY() <= -930 ){
+		if(!Desplazador.getInstance().hayQueDesplazarCamara() ){
 			this.setY(y);
 			this.setX(x);
 //			System.out.println(this.getY());
@@ -159,7 +159,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 	
 	private void down(DeltaState deltaState) {
 		double y = this.getY() + velocity * deltaState.getDelta();
-		if((int)this.getScene().getCancha().getY() <= -930 ){
+		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
 		}else{
 				if(this.flag && this.getY() > 300){
@@ -186,7 +186,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 	
 	private void up(DeltaState deltaState) {
 		double y = this.getY() - velocity * deltaState.getDelta();
-		if((int)this.getScene().getCancha().getY() >= 0){
+		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
 		}else{
 				if(this.flag && this.getY() < 300){
@@ -202,7 +202,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 	private void upRight(DeltaState deltaState) {
 		double y = this.getY() - velocity* deltaState.getDelta();
 		double x = this.getX() + velocity * deltaState.getDelta();
-		if((int)this.getScene().getCancha().getY() >= 0){
+		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
 			this.setX(x);
 		}else{
@@ -221,7 +221,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 	private void upLeft(DeltaState deltaState) {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		double y = this.getY() - velocity * deltaState.getDelta();
-		if((int)this.getScene().getCancha().getY() >= 0){
+		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
 			this.setX(x);
 		}else{
