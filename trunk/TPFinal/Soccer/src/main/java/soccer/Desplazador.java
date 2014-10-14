@@ -54,7 +54,9 @@ public class Desplazador {
 	}
 
 	public boolean hayQueDesplazarCamara() {
-		return cancha.getY() <= 0 && cancha.getY() >= -930;
+		return cancha.getY() <= 0 && cancha.getY() >= -930
+				|| (cancha.getY() >=0 && pelota.getY() > 300) ||
+				 ((cancha.getY() <=-930 && pelota.getY() < 300));
 	}
 
 	public void desplazarComponentes(double n, DeltaState deltaState) {
