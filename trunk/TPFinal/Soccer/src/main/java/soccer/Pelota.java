@@ -71,17 +71,57 @@ public class Pelota extends GameComponent<SoccerScene>{
 				}
 			}
 		
-		moverPelotaPorRemate();
+		moverPelotaPorRemate(deltaState);
 		
 		
 
 		super.update(deltaState);
 	}
 
-	private void moverPelotaPorRemate() {
-		//Si la pelota esta en remate
-		this.setVelocidad(getVelocidad()-0.2);
+	private void moverPelotaPorRemate(DeltaState deltaState) {
+		
 		if(this.enRemate){
+				if(Desplazador.getInstance().hayQueDesplazarCamara()){
+					moverCamara(deltaState);
+				}else{
+					moverPelota();
+				}
+		}
+	}
+	
+	private void moverCamara(DeltaState deltaState) {
+		switch (direccionRemate) {
+		case Direccion.UP:
+			Desplazador.getInstance().desplazarComponentes(potencia, deltaState);
+			break;
+		case Direccion.UPRIGHT:
+			Desplazador.getInstance().desplazarComponentes(potencia, deltaState);
+			break;
+		case Direccion.UPLEFT:
+			Desplazador.getInstance().desplazarComponentes(potencia, deltaState);
+			break;
+		case Direccion.DOWN:
+			Desplazador.getInstance().desplazarComponentes(potencia*-1, deltaState);
+			break;
+		case Direccion.DOWNRIGHT:
+			Desplazador.getInstance().desplazarComponentes(potencia*-1, deltaState);
+			break;
+		case Direccion.DOWNLEFT:
+			Desplazador.getInstance().desplazarComponentes(potencia*-1, deltaState);
+			break;
+		default:
+			moverPelota();
+			break;
+		}
+		this.ejecutarSpritePelota();
+		potencia-=1;
+		if(potencia < 0){
+			enRemate=false;
+		}
+	}
+
+	private void moverPelota() {
+		//Si la pelota esta en remate
 			switch (direccionRemate) {
 			case Direccion.UP:
 				this.setY(getY()-potencia);
@@ -105,8 +145,9 @@ public class Pelota extends GameComponent<SoccerScene>{
 			if(potencia < 0){
 				enRemate=false;
 			}
-		}
 	}
+	
+	
 
 	private void activarRemate(DeltaState deltaState) {
 		//Direccion del remate
@@ -114,8 +155,8 @@ public class Pelota extends GameComponent<SoccerScene>{
 		potencia = 22;
 		//Si se apreta enter para pegarle a la pelota
 		if(deltaState.isKeyBeingHold(Key.ENTER) && direccionRemate != 0){
+			System.out.println(getScene().getCancha().getY());
 			enRemate=true;
-			
 		}
 	}
 
