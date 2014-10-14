@@ -40,7 +40,15 @@ public class SoccerGame extends Game {
 		scene.addArco(arcoArriba);
 		scene.addArco(arcoAbajo);
 		this.setCurrentScene(scene);
-
+		
+		Desplazador.getInstance().addComenent(arcoArriba);
+		Desplazador.getInstance().addComenent(arcoAbajo);
+		Desplazador.getInstance().addComenent(cancha);
+		Desplazador.getInstance().addComenent(jugador);
+		Desplazador.getInstance().addComenent(jugador2);
+		Desplazador.getInstance().addComenent(jugador3);
+		Desplazador.getInstance().setCancha(cancha);
+		Desplazador.getInstance().setPelota(pelota);
 	}
 
 	@Override
