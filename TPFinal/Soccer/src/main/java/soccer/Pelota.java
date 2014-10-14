@@ -155,7 +155,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 		potencia = 22;
 		//Si se apreta enter para pegarle a la pelota
 		if(deltaState.isKeyBeingHold(Key.ENTER) && direccionRemate != 0){
-			System.out.println(getScene().getCancha().getY());
+			
 			enRemate=true;
 		}
 	}
