@@ -13,7 +13,6 @@ public class Cancha extends GameComponent<SoccerScene>{
 	
 	@Override
 	public void update(DeltaState deltaState) {
-		Jugador jug = null;
 		boolean ahiSeleccionado = false; 
 		for(Jugador jugador: super.getScene().getJugadores()){
 			ahiSeleccionado = jugador.flag || ahiSeleccionado;
@@ -21,35 +20,35 @@ public class Cancha extends GameComponent<SoccerScene>{
 		
 		if(deltaState.isKeyPressed(Key.C) && !ahiSeleccionado){
 			/*Busco al jugador selecionado para deseleccionarlo*/
+			
 			for(Jugador jugador: super.getScene().getJugadores()){
 				if(jugador.isEstaSeleccionado()){
 					jugador.setEstaSeleccionado(false);
 					jugador.setAppearance(jugador.images.get(1).get(3));
-					jug = jugador;
-//					break;
+					break;
 				}
 			}
 			/*Ahora selecciono al jugador mas cercano
 			 * cuando este la pelota habra que hacerlo con ella*/
-			seleccionarJugadorMasCercano(jug);
+			seleccionarJugadorMasCercano(this.getScene().getPelota());
 		}
+		
 	
 	}
-	public void seleccionarJugadorMasCercano(Jugador seleccionado) {
+	public void seleccionarJugadorMasCercano(Pelota seleccionado) {
 		Jugador jugadorCerca = null;
 		double distancia = 100000; //es la maxima distancia entre dos jugadores
 		for(Jugador jugador: super.getScene().getJugadores()){
-			if(jugador != seleccionado){
-				/*Calculo la distancia entre dos jugadores (distancia entre dos puntos)*/
-				double distanciaActual = Math.sqrt(Math.pow((jugador.getX() - seleccionado.getX()),2) 
-						 			   + Math.pow((jugador.getY() - seleccionado.getY()), 2));
-				if(distanciaActual <= distancia){
-					distancia  = distanciaActual;
-					jugadorCerca = jugador;
-				}
-			}
+			/*Calculo la distancia entre dos jugadores (distancia entre dos puntos)*/
+			double distanciaActual = Math.sqrt(Math.pow((jugador.getX() - seleccionado.getX()),2) 
+					 			   + Math.pow((jugador.getY() - seleccionado.getY()), 2));
 			
+			if(distanciaActual <= distancia){
+				distancia  = distanciaActual;
+				jugadorCerca = jugador;
 		}
+			
+	}
 		
 		/*Selecciono al jugador mas cercano*/
 		jugadorCerca.setEstaSeleccionado(true);

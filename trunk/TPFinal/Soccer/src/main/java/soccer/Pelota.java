@@ -81,10 +81,23 @@ public class Pelota extends GameComponent<SoccerScene>{
 	private void moverPelotaPorRemate(DeltaState deltaState) {
 		
 		if(this.enRemate){
-				if(Desplazador.getInstance().hayQueDesplazarCamara()){
-					moverCamara(deltaState);
-				}else{
-					moverPelota();
+			if(Desplazador.getInstance().hayQueDesplazarCamara()){
+				colisionoConJugador();
+				moverCamara(deltaState);
+			}else{
+				moverPelota();
+			}
+		}
+	}
+
+	public void colisionoConJugador() {
+		List<Jugador> jugadores = super.getScene().getJugadores(); 
+		
+		for (Jugador jugador : jugadores) {
+			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());
+				if(Colision.mustApply(this, jugador, nuevaPosicion)&& !jugador.isEstaSeleccionado()){
+					this.setY(jugador.getY());
+					this.setX(jugador.getX());
 				}
 		}
 	}
