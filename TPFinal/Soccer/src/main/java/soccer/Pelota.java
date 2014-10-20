@@ -109,18 +109,22 @@ public class Pelota extends GameComponent<SoccerScene>{
 			break;
 		case Direccion.UPRIGHT:
 			Desplazador.getInstance().desplazarComponentes(potencia, deltaState);
+			this.setX(getX()+(0.4*potencia));
 			break;
 		case Direccion.UPLEFT:
 			Desplazador.getInstance().desplazarComponentes(potencia, deltaState);
+			this.setX(getX()-(0.4*potencia));
 			break;
 		case Direccion.DOWN:
 			Desplazador.getInstance().desplazarComponentes(potencia*-1, deltaState);
 			break;
 		case Direccion.DOWNRIGHT:
 			Desplazador.getInstance().desplazarComponentes(potencia*-1, deltaState);
+			this.setX(getX()+(0.4*potencia));
 			break;
 		case Direccion.DOWNLEFT:
 			Desplazador.getInstance().desplazarComponentes(potencia*-1, deltaState);
+			this.setX(getX()-(0.4*potencia));
 			break;
 		default:
 			moverPelota();
@@ -149,6 +153,26 @@ public class Pelota extends GameComponent<SoccerScene>{
 				this.ejecutarSpritePelota();
 				break;
 			case Direccion.RIGHT:
+				this.setX(getX()+potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.UPRIGHT:
+				this.setY(getY()-potencia);
+				this.setX(getX()+potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.UPLEFT:
+				this.setY(getY()-potencia);
+				this.setX(getX()-potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.DOWNLEFT:
+				this.setY(getY()+potencia);
+				this.setX(getX()-potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.DOWNRIGHT:
+				this.setY(getY()+potencia);
 				this.setX(getX()+potencia);
 				this.ejecutarSpritePelota();
 				break;
