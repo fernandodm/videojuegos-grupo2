@@ -104,8 +104,6 @@ public class Jugador extends GameComponent<SoccerScene>{
 			int estado = estados.get(direccion);
 			
 			this.setAppearance(images.get(direccion).get(estado).rotate(rotacion));
-//			estados.replace(direccion, estado + 1);
-//			estados.replace(direccion,(estado +1)%images.get(direccion).size());
 			estados.put(direccion, estado + 1);
 			estados.put(direccion,(estado +1)%images.get(direccion).size());
 			time=0;
@@ -119,16 +117,14 @@ public class Jugador extends GameComponent<SoccerScene>{
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
 			this.setX(x);
-//			System.out.println(this.getY());
 		}else{
-//			this.setY(y);
-				if(this.flag && this.getY() > 300){
-					this.desplazarComponentes(-1,deltaState);
-					this.setX(x);
-				}else{
-					this.setY(y);
-					this.setX(x);
-				}
+			if(this.flag && this.getY() > 300){
+				this.desplazarComponentes(-1,deltaState);
+				this.setX(x);
+			}else{
+				this.setY(y);
+				this.setX(x);
+			}
 		}
 		
 		this.labelSeleccionado.setX(x + 10);
@@ -142,16 +138,14 @@ public class Jugador extends GameComponent<SoccerScene>{
 		if(!Desplazador.getInstance().hayQueDesplazarCamara() ){
 			this.setY(y);
 			this.setX(x);
-//			System.out.println(this.getY());
 		}else{
-//			this.setY(y);
-				if(this.flag && this.getY() > 300){
-					this.desplazarComponentes(-1,deltaState);
-					this.setX(x);
-				}else{
-					this.setY(y);
-					this.setX(x);
-				}
+			if(this.flag && this.getY() > 300){
+				this.desplazarComponentes(-1,deltaState);
+				this.setX(x);
+			}else{
+				this.setY(y);
+				this.setX(x);
+			}
 		}
 		this.labelSeleccionado.setX(x + 10);
 		this.labelSeleccionado.setY(y - 15);
@@ -162,11 +156,11 @@ public class Jugador extends GameComponent<SoccerScene>{
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
 		}else{
-				if(this.flag && this.getY() > 300){
-					this.desplazarComponentes(-1,deltaState);
-				}else{
-					this.setY(y);
-				}
+			if(this.flag && this.getY() > 300){
+				this.desplazarComponentes(-1,deltaState);
+			}else{
+				this.setY(y);
+			}
 		}
 		this.labelSeleccionado.setY(y - 13);
 	}
@@ -189,11 +183,11 @@ public class Jugador extends GameComponent<SoccerScene>{
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
 		}else{
-				if(this.flag && this.getY() < 300){
-					this.desplazarComponentes(1,deltaState);
-				}else{
-					this.setY(y);
-				}
+			if(this.flag && this.getY() < 300){
+				this.desplazarComponentes(1,deltaState);
+			}else{
+				this.setY(y);
+			}
 		}
 		this.labelSeleccionado.setY(y + 26);
 		this.labelSeleccionado.setX(this.getX() + 6);
@@ -206,13 +200,13 @@ public class Jugador extends GameComponent<SoccerScene>{
 			this.setY(y);
 			this.setX(x);
 		}else{
-				if(this.flag && this.getY() < 300){
-					this.desplazarComponentes(1,deltaState);
-					this.setX(x);
-				}else{
-					this.setY(y);
-					this.setX(x);
-				}
+			if(this.flag && this.getY() < 300){
+				this.desplazarComponentes(1,deltaState);
+				this.setX(x);
+			}else{
+				this.setY(y);
+				this.setX(x);
+			}
 		}
 		this.labelSeleccionado.setY(y + 26);
 		this.labelSeleccionado.setX(this.getX() + 6);
@@ -225,13 +219,13 @@ public class Jugador extends GameComponent<SoccerScene>{
 			this.setY(y);
 			this.setX(x);
 		}else{
-				if(this.flag && this.getY() < 300){
-					this.desplazarComponentes(1,deltaState);
-					this.setX(x);
-				}else{
-					this.setY(y);
-					this.setX(x);
-				}
+			if(this.flag && this.getY() < 300){
+				this.desplazarComponentes(1,deltaState);
+				this.setX(x);
+			}else{
+				this.setY(y);
+				this.setX(x);
+			}
 		}
 		this.labelSeleccionado.setX(x + 10);
 		this.labelSeleccionado.setY(y + 30);
