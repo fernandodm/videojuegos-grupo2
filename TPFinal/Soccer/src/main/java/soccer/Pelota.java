@@ -10,17 +10,16 @@ import com.uqbar.vainilla.events.constants.Key;
 
 public class Pelota extends GameComponent<SoccerScene>{
 	
-	private Vector direccion;
 	private double velocidad;
 	private Sprite image;
 	private int time;
 	int estado = 0;
+	private Jugador jugador;
 	private ArrayList<Sprite> listSprites = new ArrayList<Sprite>();
 	
-	public Pelota(String pelotaPath, Vector vector, double velocidad){
+	public Pelota(String pelotaPath, double velocidad){
 		
 		super((Sprite.fromImage(pelotaPath).crop(0,0,63,63).scaleTo(15,15)),650, 300);
-		this.direccion = vector.asVersor();
 		this.velocidad = velocidad;	
 	
 		this.image = Sprite.fromImage(pelotaPath);
@@ -31,14 +30,6 @@ public class Pelota extends GameComponent<SoccerScene>{
 				listSprites.add(this.image.crop(63*i, 63*j,63,63).scaleTo(15, 15));
 			}
 		}
-	}
-
-	public Vector getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(Vector direccion) {
-		this.direccion = direccion;
 	}
 
 	public double getVelocidad() {
@@ -61,6 +52,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 		for (Jugador jugador : jugadores) {
 			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());
 				if(Colision.mustApply(this, jugador, nuevaPosicion) && jugador.isEstaSeleccionado()){
+					this.setJugador(jugador);
 					ejecutarMovimiento(deltaState, jugador.getX(), jugador.getY());
 					jugador.flag = true;
 
@@ -72,17 +64,20 @@ public class Pelota extends GameComponent<SoccerScene>{
 			}
 		
 		moverPelotaPorRemate(deltaState);
-		
-		
+	}
 
-		super.update(deltaState);
+	public Jugador getJugador() {
+		return jugador;
+	}
+
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
 	}
 
 	private void moverPelotaPorRemate(DeltaState deltaState) {
-		
+		colisionoConJugador();
 		if(this.enRemate){
 			if(Desplazador.getInstance().hayQueDesplazarCamara()){
-				colisionoConJugador();
 				moverCamara(deltaState);
 			}else{
 				moverPelota();
@@ -96,10 +91,19 @@ public class Pelota extends GameComponent<SoccerScene>{
 		for (Jugador jugador : jugadores) {
 			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());
 				if(Colision.mustApply(this, jugador, nuevaPosicion)&& !jugador.isEstaSeleccionado()){
-					this.setY(jugador.getY());
-					this.setX(jugador.getX());
+					this.cambiarJugadorSeleccionado(jugador);
 				}
 		}
+	}
+
+	public void cambiarJugadorSeleccionado(Jugador jugador) {
+		this.setY(jugador.getY());
+		this.setX(jugador.getX());
+		this.getJugador().setEstaSeleccionado(false);
+		jugador.setEstaSeleccionado(true);
+		this.setJugador(jugador);
+		enRemate = false;
+		potencia = -1;
 	}
 	
 	private void moverCamara(DeltaState deltaState) {
@@ -191,7 +195,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 		direccionRemate = Direccion.obtenerDireccion(deltaState);
 		potencia = 22;
 		//Si se apreta enter para pegarle a la pelota
-		if(deltaState.isKeyBeingHold(Key.ENTER) && direccionRemate != 0){
+		if(deltaState.isKeyPressed(Key.ENTER) && direccionRemate != 0){
 			
 			enRemate=true;
 		}
@@ -240,33 +244,7 @@ public class Pelota extends GameComponent<SoccerScene>{
 			this.setY(y + 15);
 			this.ejecutarSpritePelota();
 			break;
-		}			
-//		if(deltaState.isKeyBeingHold(Key.W) && b){
-//			this.setY(y-14);
-//			this.setX(x);
-//			this.ejecutarSpritePelota();
-////			if(this.getScene().getCancha().getY() !=0){
-////			this.getScene().getCancha().setY(this.getScene().getCancha().getY() + 4/3);
-////			}
-//		}
-//		if(deltaState.isKeyBeingHold(Key.S) && b){
-//			this.setY(y+26);
-//			this.setX(x);
-//			this.ejecutarSpritePelota();
-////			if(this.getScene().getCancha().getY() > -930){
-////			this.getScene().getCancha().setY(this.getScene().getCancha().getY() - 4/3);
-////			}
-//		}
-//		if(deltaState.isKeyBeingHold(Key.A)){
-//			this.setX(x-11);
-//			this.setY(y+4);
-//			this.ejecutarSpritePelota();
-////		}
-//		if(deltaState.isKeyBeingHold(Key.D)){
-//			this.setX(x+25);
-//			this.setY(y+9);
-//			this.ejecutarSpritePelota();
-//		}		
+		}				
 	}
 
 	private void ejecutarSpritePelota() {
