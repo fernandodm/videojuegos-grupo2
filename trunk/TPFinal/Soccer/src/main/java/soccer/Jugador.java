@@ -10,7 +10,16 @@ import com.uqbar.vainilla.appearances.Sprite;
 
 public class Jugador extends GameComponent<SoccerScene>{
 	
+	private EstadoJugador estado = new EstadoJugadorNoSelecionado(this);
+	
+	public EstadoJugador getEstado() {
+		return estado;
+	}
 
+	public void setEstado(EstadoJugador estado) {
+		this.estado = estado;
+	}
+	
 	private boolean estaSeleccionado = false;	
 	private Sprite image;
 	private double velocity;
@@ -18,6 +27,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 	Hashtable<Integer, Integer> estados=new Hashtable<Integer, Integer>();
 	private int time=0;
 	private LabelSeleccionado labelSeleccionado;
+	//esto es para mantener bien el focus y saber si el jugador tiene la pelota
 	public boolean flag=false;
 
 	
@@ -61,42 +71,12 @@ public class Jugador extends GameComponent<SoccerScene>{
 	public void update(DeltaState deltaState) {
 		
 		if(isEstaSeleccionado()){
-		int direccion = Direccion.obtenerDireccion(deltaState);
-			switch (direccion) {
-			case Direccion.UP:
-				this.up(deltaState);
-				this.ejecutarSprite(deltaState, Direccion.UP,0);
-				break;
-			case Direccion.DOWN:
-				this.down(deltaState);
-				this.ejecutarSprite(deltaState, Direccion.DOWN,0);
-				break;
-			case Direccion.LEFT:
-				this.left(deltaState);
-				this.ejecutarSprite(deltaState, Direccion.LEFT,0);
-				break;
-			case Direccion.RIGHT:
-				this.right(deltaState);
-				this.ejecutarSprite(deltaState, Direccion.RIGHT,0);
-				break;
-			case Direccion.UPRIGHT:
-				this.upRight(deltaState);
-				this.ejecutarSprite(deltaState, Direccion.UP,0.6);
-				break;
-			case Direccion.UPLEFT:
-				this.upLeft(deltaState);
-				this.ejecutarSprite(deltaState, Direccion.UP,-0.6);
-				break;
-			case Direccion.DOWNRIGHT:
-				this.downRight(deltaState);
-				this.ejecutarSprite(deltaState, Direccion.UP,2);
-				break;
-			case Direccion.DOWNLEFT:
-				this.downLeft(deltaState);
-				this.ejecutarSprite(deltaState, Direccion.UP,-2);
-				break;
-			}			
+			this.estado = new EstadoJugadorSeleccionado(this);
 		}
+		else{
+			this.estado = new EstadoJugadorNoSelecionado(this);
+		}
+			this.estado.update(deltaState);
 	}
 
 	public void ejecutarSprite(DeltaState deltaState, int direccion,double rotacion){
@@ -111,7 +91,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		time++;		
 	}
 	
-	private void downLeft(DeltaState deltaState) {
+	void downLeft(DeltaState deltaState) {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		double y = this.getY() + velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
@@ -131,7 +111,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado.setY(y - 10);
 	}
 
-	private void downRight(DeltaState deltaState) {
+	void downRight(DeltaState deltaState) {
 		double x = this.getX() + velocity * deltaState.getDelta();
 		double y = this.getY() + velocity * deltaState.getDelta();
 		
@@ -151,7 +131,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado.setY(y - 15);
 	}
 	
-	private void down(DeltaState deltaState) {
+	 void down(DeltaState deltaState) {
 		double y = this.getY() + velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
@@ -166,19 +146,19 @@ public class Jugador extends GameComponent<SoccerScene>{
 	}
 	
 
-	private void right(DeltaState deltaState) {
+	void right(DeltaState deltaState) {
 		double x = this.getX() + velocity * deltaState.getDelta(); 
 		this.setX(x);
 		this.labelSeleccionado.setX(x + 8);
 	}
 
-	private void left(DeltaState deltaState) {
+	void left(DeltaState deltaState) {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		this.setX(x);
 		this.labelSeleccionado.setX(x + 8);
 	}
 	
-	private void up(DeltaState deltaState) {
+	void up(DeltaState deltaState) {
 		double y = this.getY() - velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
@@ -193,7 +173,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado.setX(this.getX() + 6);
 	}
 	
-	private void upRight(DeltaState deltaState) {
+	void upRight(DeltaState deltaState) {
 		double y = this.getY() - velocity* deltaState.getDelta();
 		double x = this.getX() + velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
@@ -212,7 +192,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado.setX(this.getX() + 6);
 	}
 	
-	private void upLeft(DeltaState deltaState) {
+	void upLeft(DeltaState deltaState) {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		double y = this.getY() - velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){

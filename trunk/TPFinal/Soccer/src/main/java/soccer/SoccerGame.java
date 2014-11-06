@@ -21,7 +21,8 @@ public class SoccerGame extends Game {
 		Cancha cancha = new Cancha("cancha.png", 0, -460);
 		Arco arcoArriba = new Arco("arco.png", 0, 525, -452);
 		Arco arcoAbajo = new Arco("arco.png", 3.14, 525, 953);
-		Pelota pelota = new Pelota("pelota1.png", 10);
+		
+//		pelota.setEstadoP(new EstadoPelotaEnJuego(pelota));
 		
 		LabelSeleccionado label = new LabelSeleccionado(608, 325);
 		
@@ -29,16 +30,17 @@ public class SoccerGame extends Game {
 		Jugador jugador2 = new Jugador("jugadores.png", 150, 600, 350, label);
 		Jugador jugador3 = new Jugador("jugadores.png", 150, 800, 300, label);
 		jugador.setEstaSeleccionado(true);
+		Pelota pelota = new Pelota("pelota1.png", 10);
 		
 		scene.setCancha(cancha);
 		scene.addComponent(label);
-		scene.setPelota(pelota);
 		scene.addJugador(jugador);
 		scene.addJugador(jugador2);
 		scene.addJugador(jugador3);
 		
 		scene.addArco(arcoArriba);
 		scene.addArco(arcoAbajo);
+		scene.setPelota(pelota);
 		this.setCurrentScene(scene);
 		
 		Desplazador.getInstance().addComenent(arcoArriba);
