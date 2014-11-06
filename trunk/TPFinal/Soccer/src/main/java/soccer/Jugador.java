@@ -4,6 +4,10 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
+import soccer.estados.EstadoJugador;
+import soccer.estados.EstadoJugadorNoSelecionado;
+import soccer.estados.EstadoJugadorSeleccionado;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
@@ -91,7 +95,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		time++;		
 	}
 	
-	void downLeft(DeltaState deltaState) {
+	public void downLeft(DeltaState deltaState) {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		double y = this.getY() + velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
@@ -111,7 +115,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado.setY(y - 10);
 	}
 
-	void downRight(DeltaState deltaState) {
+	public void downRight(DeltaState deltaState) {
 		double x = this.getX() + velocity * deltaState.getDelta();
 		double y = this.getY() + velocity * deltaState.getDelta();
 		
@@ -131,7 +135,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado.setY(y - 15);
 	}
 	
-	 void down(DeltaState deltaState) {
+	public void down(DeltaState deltaState) {
 		double y = this.getY() + velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
@@ -146,19 +150,19 @@ public class Jugador extends GameComponent<SoccerScene>{
 	}
 	
 
-	void right(DeltaState deltaState) {
+	public void right(DeltaState deltaState) {
 		double x = this.getX() + velocity * deltaState.getDelta(); 
 		this.setX(x);
 		this.labelSeleccionado.setX(x + 8);
 	}
 
-	void left(DeltaState deltaState) {
+	public void left(DeltaState deltaState) {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		this.setX(x);
 		this.labelSeleccionado.setX(x + 8);
 	}
 	
-	void up(DeltaState deltaState) {
+	public void up(DeltaState deltaState) {
 		double y = this.getY() - velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
 			this.setY(y);
@@ -173,7 +177,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado.setX(this.getX() + 6);
 	}
 	
-	void upRight(DeltaState deltaState) {
+	public void upRight(DeltaState deltaState) {
 		double y = this.getY() - velocity* deltaState.getDelta();
 		double x = this.getX() + velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
@@ -192,7 +196,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado.setX(this.getX() + 6);
 	}
 	
-	void upLeft(DeltaState deltaState) {
+	public void upLeft(DeltaState deltaState) {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		double y = this.getY() - velocity * deltaState.getDelta();
 		if(!Desplazador.getInstance().hayQueDesplazarCamara()){
@@ -221,7 +225,7 @@ public class Jugador extends GameComponent<SoccerScene>{
 		this.getScene().getArcos().get(0).setY(this.getScene().getArcos().get(0).getY()+ (0.4*n));
 		this.getScene().getArcos().get(1).setY(this.getScene().getArcos().get(1).getY()+ (0.4*n));
 		this.getScene().getCancha().setY(this.getScene().getCancha().getY()+ (0.4*n));
-		
+//		this.labelSeleccionado.setY(this.getScene().getCancha().getY()+ (0.4*n));
 		
 	}
 	
