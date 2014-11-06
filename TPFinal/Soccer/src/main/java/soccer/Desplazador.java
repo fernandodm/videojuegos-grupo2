@@ -61,7 +61,7 @@ public class Desplazador {
 
 	public void desplazarComponentes(double n, DeltaState deltaState) {
 		for (GameComponent x : this.getaDesplazar()) {
-			x.setY(x.getY() + (0.4 * n));
+			x.setY(x.getY() +  n);
 		}
 
 	}

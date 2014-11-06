@@ -3,6 +3,9 @@ package soccer;
 import java.util.ArrayList;
 import java.util.List;
 
+import soccer.estados.EstadoPelota;
+import soccer.estados.EstadoPelotaFueraDeJuego;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
@@ -12,44 +15,33 @@ public class Pelota extends GameComponent<SoccerScene> {
 
 	private EstadoPelota estadoP = null;
 
-	private double velocidad;
 	private Sprite image;
 	private int time;
 	int estado = 0;
 	private Jugador jugador;
 	private ArrayList<Sprite> listSprites = new ArrayList<Sprite>();
 
-	public Pelota(String pelotaPath, double velocidad) {
-
-		super(
-				(Sprite.fromImage(pelotaPath).crop(0, 0, 63, 63)
-						.scaleTo(15, 15)), 650, 300);
-		this.velocidad = velocidad;
-
+	public boolean enRemate=false;
+	private int direccionRemate;
+	private double potencia;
+	private double gravedad = 4;
+	private int ultimaDireccion; //para que el jugador remate cuando esta quieto
+	
+public Pelota(String pelotaPath){
+		
+		super((Sprite.fromImage(pelotaPath).crop(0,0,63,63).scaleTo(15,15)),650, 300);
+	
 		this.image = Sprite.fromImage(pelotaPath);
-
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 3; j++) {
-				listSprites.add(this.image.crop(63 * i, 63 * j, 63, 63)
-						.scaleTo(15, 15));
+		
+		for (int i = 0 ; i < 2; i++) {
+			for(int j = 0; j< 3; j++ ){
+				listSprites.add(this.image.crop(63*i, 63*j,63,63).scaleTo(15, 15));
 			}
 		}
-
 		// this.estadoP = new EstadoPelotaEnJuego(this);
 	}
 
-	public double getVelocidad() {
-		return velocidad;
-	}
-
-	public void setVelocidad(double velocidad) {
-		this.velocidad = velocidad;
-	}
-
-	public boolean enRemate = false;
-	private int direccionRemate;
-	private double potencia;
-
+	
 	@Override
 	public void update(DeltaState deltaState) {
 
@@ -68,11 +60,12 @@ public class Pelota extends GameComponent<SoccerScene> {
 					jugador.flag = false;
 				}
 			}
+
 			this.moverPelotaPorRemate(deltaState);
 		} else {
 			this.estadoP.update(deltaState);
 		}
-		
+
 		if(this.getX() < 170 ){
 			this.estadoP = new EstadoPelotaFueraDeJuego(this);
 		}
@@ -94,7 +87,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 			if (Desplazador.getInstance().hayQueDesplazarCamara()) {
 				moverCamara(deltaState);
 			} else {
-				moverPelota();
+				moverPelota(deltaState);
 			}
 		}
 	}
@@ -121,106 +114,109 @@ public class Pelota extends GameComponent<SoccerScene> {
 
 		this.setJugador(jugador);
 		enRemate = false;
-		potencia = -1;
+//		potencia = -1;
 
 	}
 
-	private void moverCamara(DeltaState deltaState) {
+	private void moverCamara(DeltaState deltaState){
 		switch (direccionRemate) {
 		case Direccion.UP:
 			Desplazador.getInstance()
 					.desplazarComponentes(potencia, deltaState);
-			break;
-		case Direccion.UPRIGHT:
-			Desplazador.getInstance()
-					.desplazarComponentes(potencia, deltaState);
-			this.setX(getX() + (0.4 * potencia));
-			break;
-		case Direccion.UPLEFT:
-			Desplazador.getInstance()
-					.desplazarComponentes(potencia, deltaState);
-			this.setX(getX() - (0.4 * potencia));
-			break;
-		case Direccion.DOWN:
-			Desplazador.getInstance().desplazarComponentes(potencia * -1,
-					deltaState);
-			break;
-		case Direccion.DOWNRIGHT:
-			Desplazador.getInstance().desplazarComponentes(potencia * -1,
-					deltaState);
-			this.setX(getX() + (0.4 * potencia));
-			break;
-		case Direccion.DOWNLEFT:
-			Desplazador.getInstance().desplazarComponentes(potencia * -1,
-					deltaState);
-			this.setX(getX() - (0.4 * potencia));
-			break;
-		default:
-			moverPelota();
-			break;
-		}
-		this.ejecutarSpritePelota();
-		potencia -= 1;
-		if (potencia < 0) {
-			enRemate = false;
-		}
-	}
-
-	private void moverPelota() {
-		// Si la pelota esta en remate
-		switch (direccionRemate) {
-		case Direccion.UP:
-			this.setY(getY() - potencia);
-			this.ejecutarSpritePelota();
-			break;
-		case Direccion.DOWN:
-			this.setY(getY() + potencia);
-			this.ejecutarSpritePelota();
 			break;
 		case Direccion.LEFT:
-			this.setX(getX() - potencia);
+			this.setX(getX()-potencia);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.RIGHT:
-			this.setX(getX() + potencia);
+			this.setX(getX()+potencia);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.UPRIGHT:
-			this.setY(getY() - potencia);
-			this.setX(getX() + potencia);
-			this.ejecutarSpritePelota();
+			Desplazador.getInstance().desplazarComponentes(potencia, deltaState);
+			this.setX(getX()+potencia);
 			break;
 		case Direccion.UPLEFT:
-			this.setY(getY() - potencia);
-			this.setX(getX() - potencia);
-			this.ejecutarSpritePelota();
+			Desplazador.getInstance().desplazarComponentes(potencia, deltaState);
+			this.setX(getX()-potencia);
 			break;
-		case Direccion.DOWNLEFT:
-			this.setY(getY() + potencia);
-			this.setX(getX() - potencia);
-			this.ejecutarSpritePelota();
+		case Direccion.DOWN:
+			Desplazador.getInstance().desplazarComponentes(potencia * -1,
+					deltaState);
 			break;
 		case Direccion.DOWNRIGHT:
-			this.setY(getY() + potencia);
-			this.setX(getX() + potencia);
-			this.ejecutarSpritePelota();
+			Desplazador.getInstance().desplazarComponentes(potencia*-1, deltaState);
+			this.setX(getX()+potencia);
+			break;
+		case Direccion.DOWNLEFT:
+			Desplazador.getInstance().desplazarComponentes(potencia*-1, deltaState);
+			this.setX(getX()-potencia);
 			break;
 		}
 		this.ejecutarSpritePelota();
-		potencia -= 1;
-		if (potencia < 0) {
-			enRemate = false;
+		potencia -= gravedad*deltaState.getDelta();
+		if(potencia < 0){
+			enRemate=false;
 		}
 	}
 
-	void activarRemate(DeltaState deltaState) {
-		// Direccion del remate
-		direccionRemate = Direccion.obtenerDireccion(deltaState);
-		potencia = 22;
-		// Si se apreta enter para pegarle a la pelota
-		if (deltaState.isKeyPressed(Key.ENTER) && direccionRemate != 0) {
+	private void moverPelota(DeltaState deltaState) {
+		//Si la pelota esta en remate
+			switch (direccionRemate) {
+			case Direccion.UP:
+				this.setY(getY()-potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.DOWN:
+				this.setY(getY()+potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.LEFT:
+				this.setX(getX()-potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.RIGHT:
+				this.setX(getX()+potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.UPRIGHT:
+				this.setY(getY()-potencia);
+				this.setX(getX()+potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.UPLEFT:
+				this.setY(getY()-potencia);
+				this.setX(getX()-potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.DOWNLEFT:
+				this.setY(getY()+potencia);
+				this.setX(getX()-potencia);
+				this.ejecutarSpritePelota();
+				break;
+			case Direccion.DOWNRIGHT:
+				this.setY(getY()+potencia);
+				this.setX(getX()+potencia);
+				this.ejecutarSpritePelota();
+				break;
+			}
+			this.ejecutarSpritePelota();
+			potencia-= gravedad*deltaState.getDelta();
+			if(potencia < 0){
+				enRemate=false;
+			}
+	}
 
-			enRemate = true;
+	private void activarRemate(DeltaState deltaState) {
+		//Direccion del remate
+		direccionRemate = Direccion.obtenerDireccion(deltaState);
+		potencia =2;
+		//Si se apreta enter para pegarle a la pelota
+		if(deltaState.isKeyPressed(Key.ENTER)){
+			if(direccionRemate == 0){
+				direccionRemate = ultimaDireccion;
+			}
+			enRemate=true;
 		}
 	}
 
@@ -228,46 +224,54 @@ public class Pelota extends GameComponent<SoccerScene> {
 		int direccion = Direccion.obtenerDireccion(deltaState);
 		switch (direccion) {
 		case Direccion.UP:
-			this.setY(y - 14);
+			this.ultimaDireccion = Direccion.UP; 
+			this.setY(y-14);
 			this.setX(x + 3);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.DOWN:
-			this.setY(y + 26);
+			this.ultimaDireccion = Direccion.DOWN; 
+			this.setY(y+31);
 			this.setX(x);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.LEFT:
-			this.setX(x - 11);
-			this.setY(y + 4);
+			this.ultimaDireccion = Direccion.LEFT; 
+			this.setX(x-14);
+			this.setY(y+4);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.RIGHT:
-			this.setX(x + 25);
-			this.setY(y + 9);
+			this.ultimaDireccion = Direccion.RIGHT; 
+			this.setX(x+31);
+			this.setY(y+9);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.UPRIGHT:
-			this.setX(x + 20);
-			this.setY(y - 5);
+			this.ultimaDireccion = Direccion.UPRIGHT; 
+			this.setX(x + 25);
+			this.setY(y - 10);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.UPLEFT:
-			this.setX(x - 6);
-			this.setY(y - 8);
+			this.ultimaDireccion = Direccion.UPLEFT; 
+			this.setX(x - 8);
+			this.setY(y - 10);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.DOWNRIGHT:
-			this.setX(x + 25);
-			this.setY(y + 7);
+			this.ultimaDireccion = Direccion.DOWNRIGHT; 
+			this.setX(x + 30);
+			this.setY(y + 17);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.DOWNLEFT:
-			this.setX(x - 5);
-			this.setY(y + 15);
+			this.ultimaDireccion = Direccion.DOWNLEFT; 
+			this.setX(x - 12);
+			this.setY(y + 20);
 			this.ejecutarSpritePelota();
 			break;
-		}
+		}				
 	}
 
 	private void ejecutarSpritePelota() {
