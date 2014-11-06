@@ -1,16 +1,14 @@
 package soccer.estados;
 
 
-import java.util.List;
-
+import soccer.Colision;
+import soccer.Jugador;
 import soccer.Pelota;
+import soccer.Vector;
 
 import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.GameComponent;
 
 public class EstadoPelotaEnJuego extends EstadoPelota {
-//	List<Jugador> jugadores = super.getScene().getJugadores();
-	
 
 	public EstadoPelotaEnJuego(Pelota pelota) {
 		this.setPelota(pelota);
@@ -18,22 +16,33 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 
 	@Override
 	public void update(DeltaState deltaState) {
-//		List<Jugador> jugadores = super.getScene().getJugadores(); 
-//		
-//		for (Jugador jugador : jugadores) {
-//			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());
-//				if(Colision.mustApply(this, jugador, nuevaPosicion) && jugador.isEstaSeleccionado()){
-//					this.getPelota().setJugador(jugador);
-//					this.getPelota().ejecutarMovimiento(deltaState, jugador.getX(), jugador.getY());
-//					jugador.flag = true;
-//
-//					this.getPelota().activarRemate(deltaState);
-//				
-//				}else{
-//					jugador.flag = false;
-//				}
-//		}
-//		this.getPelota().moverPelotaPorRemate(deltaState);
+		for (Jugador jugador : this.getPelota().getScene().getEquipoLocal().getJugadores()) {
+			Vector nuevaPosicion = new Vector(jugador.getX(),
+					jugador.getY());
+			if (Colision.mustApply(this.getPelota(), jugador, nuevaPosicion)
+					&& jugador.isEstaSeleccionado()) {
+				this.getPelota().setJugador(jugador);
+				this.getPelota().ejecutarMovimiento(deltaState, jugador.getX(),
+						jugador.getY());
+				jugador.flag = true;
+				this.getPelota().activarRemate(deltaState);
+			} else {
+				jugador.flag = false;
+			}
+		}
+
+		this.getPelota().moverPelotaPorRemate(deltaState);
+		
+		if(this.getPelota().getX() < 170 ){
+			this.getPelota().setEstadoPelota(new EstadoPelotaFueraDeJuego(this.getPelota()));
+			for (Jugador jugador : this.getPelota().getScene().getEquipoLocal().getJugadores()) {
+				if(jugador.isEstaSeleccionado()){
+					jugador.setEstado(new EstadoJugadorEnLateral(jugador));
+					break;
+				}
+			}
+		}
+		System.out.println(this.getPelota().getX());
 	}
 
 }

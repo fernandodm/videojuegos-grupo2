@@ -10,11 +10,30 @@ import com.uqbar.vainilla.sound.SoundBuilder;
 public class SoccerScene extends GameScene {
 
 	private Cancha cancha;
-	private List<Jugador> jugadores = new ArrayList<Jugador>();
+//	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	private List<Arco> arcos = new ArrayList<Arco>();
+	private Equipo equipoLocal = new Equipo();
+	private Equipo equipoVisitante = new Equipo();
 	
 	public List<Arco> getArcos() {
 		return arcos;
+	}
+
+
+	public Equipo getEquipoLocal() {
+		return equipoLocal;
+	}
+
+	public void setEquipoLocal(Equipo equipoLocal) {
+		this.equipoLocal = equipoLocal;
+	}
+
+	public Equipo getEquipoVisitante() {
+		return equipoVisitante;
+	}
+
+	public void setEquipoVisitante(Equipo equipoVisitante) {
+		this.equipoVisitante = equipoVisitante;
 	}
 
 
@@ -46,15 +65,32 @@ public class SoccerScene extends GameScene {
 
 
 
-	public List<Jugador> getJugadores() {
-		return jugadores;
-	}
-
-	public void addJugador(Jugador jugador) {
+//	public List<Jugador> getJugadores() {
+//		return jugadores;
+//	}
+//
+//	public void addJugador(Jugador jugador) {
+//		this.addComponent(jugador);
+//		this.jugadores.add(jugador);
+//	}
+	
+	public void addJugadorEquipoLocal(Jugador jugador) {
 		this.addComponent(jugador);
-		this.jugadores.add(jugador);
+		this.equipoLocal.getJugadores().add(jugador);
 	}
 	
+	public void addJugadorEquipoVisitante(Jugador jugador) {
+		this.addComponent(jugador);
+		this.equipoVisitante.getJugadores().add(jugador);
+	}
+	
+	public List<Jugador> getJugadoresLocales() {
+		return this.equipoLocal.getJugadores();
+	}
+	
+	public List<Jugador> getJugadoresVisitantes() {
+		return this.equipoVisitante.getJugadores();
+	}
 	
 	public SoccerScene(String soundFile){
 		Sound s = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream(soundFile));
