@@ -267,8 +267,8 @@ public Pelota(String pelotaPath){
 			break;
 		case Direccion.DOWNLEFT:
 			this.ultimaDireccion = Direccion.DOWNLEFT; 
-			this.setX(x - 12);
-			this.setY(y + 20);
+			this.setX(x - 13);
+			this.setY(y + 21);
 			this.ejecutarSpritePelota();
 			break;
 		}				
