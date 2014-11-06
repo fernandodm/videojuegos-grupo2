@@ -1,11 +1,12 @@
 package soccer;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
 import soccer.estados.EstadoJugador;
-import soccer.estados.EstadoJugadorNoSelecionado;
+import soccer.estados.EstadoJugadorNoSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionado;
 
 import com.uqbar.vainilla.DeltaState;
@@ -14,7 +15,7 @@ import com.uqbar.vainilla.appearances.Sprite;
 
 public class Jugador extends GameComponent<SoccerScene>{
 	
-	private EstadoJugador estado = new EstadoJugadorNoSelecionado(this);
+	private EstadoJugador estado;
 	
 	public EstadoJugador getEstado() {
 		return estado;
@@ -74,13 +75,8 @@ public class Jugador extends GameComponent<SoccerScene>{
 	@Override
 	public void update(DeltaState deltaState) {
 		
-		if(isEstaSeleccionado()){
-			this.estado = new EstadoJugadorSeleccionado(this);
-		}
-		else{
-			this.estado = new EstadoJugadorNoSelecionado(this);
-		}
-			this.estado.update(deltaState);
+		this.estado.update(deltaState);
+		
 	}
 
 	public void ejecutarSprite(DeltaState deltaState, int direccion,double rotacion){
@@ -216,7 +212,10 @@ public class Jugador extends GameComponent<SoccerScene>{
 	}
 	
 	private void desplazarComponentes(double n, DeltaState deltaState){
-		for(Jugador x: this.getScene().getJugadores()){
+		List<Jugador> jugadores = new ArrayList<Jugador>();
+		jugadores.addAll(this.getScene().getJugadoresLocales());
+		jugadores.addAll(this.getScene().getJugadoresVisitantes());
+		for(Jugador x: jugadores){
 			if(x !=this){
 				x.setY(x.getY()+ (0.4*n));
 			}

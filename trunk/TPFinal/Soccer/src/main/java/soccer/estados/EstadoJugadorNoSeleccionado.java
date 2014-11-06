@@ -4,9 +4,9 @@ import soccer.Jugador;
 
 import com.uqbar.vainilla.DeltaState;
 
-public class EstadoJugadorNoSelecionado extends EstadoJugador {
+public class EstadoJugadorNoSeleccionado extends EstadoJugador {
 	
-	public EstadoJugadorNoSelecionado(Jugador jugador) {
+	public EstadoJugadorNoSeleccionado(Jugador jugador) {
 		this.setJugador(jugador);
 		// TODO Auto-generated constructor stub
 	}

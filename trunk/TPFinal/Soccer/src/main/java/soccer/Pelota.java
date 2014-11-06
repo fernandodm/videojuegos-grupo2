@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import soccer.estados.EstadoPelota;
+import soccer.estados.EstadoPelotaEnJuego;
 import soccer.estados.EstadoPelotaFueraDeJuego;
 
 import com.uqbar.vainilla.DeltaState;
@@ -13,7 +14,7 @@ import com.uqbar.vainilla.events.constants.Key;
 
 public class Pelota extends GameComponent<SoccerScene> {
 
-	private EstadoPelota estadoP = null;
+	private EstadoPelota estadoPelota;
 
 	private Sprite image;
 	private int time;
@@ -25,11 +26,11 @@ public class Pelota extends GameComponent<SoccerScene> {
 	private int direccionRemate;
 	private double potencia;
 	private double gravedad = 4;
-	private int ultimaDireccion; //para que el jugador remate cuando esta quieto
+	private int ultimaDireccion = Direccion.DOWN; //para que el jugador remate cuando esta quieto
 	
 public Pelota(String pelotaPath){
 		
-		super((Sprite.fromImage(pelotaPath).crop(0,0,63,63).scaleTo(15,15)),650, 300);
+		super((Sprite.fromImage(pelotaPath).crop(0,0,63,63).scaleTo(15,15)),625, 295);
 	
 		this.image = Sprite.fromImage(pelotaPath);
 		
@@ -38,39 +39,14 @@ public Pelota(String pelotaPath){
 				listSprites.add(this.image.crop(63*i, 63*j,63,63).scaleTo(15, 15));
 			}
 		}
-		// this.estadoP = new EstadoPelotaEnJuego(this);
+		this.estadoPelota = new EstadoPelotaEnJuego(this);
 	}
 
 	
 	@Override
 	public void update(DeltaState deltaState) {
+		this.estadoPelota.update(deltaState);
 
-		if (this.estadoP == null) {
-			for (Jugador jugador : super.getScene().getJugadores()) {
-				Vector nuevaPosicion = new Vector(jugador.getX(),
-						jugador.getY());
-				if (Colision.mustApply(this, jugador, nuevaPosicion)
-						&& jugador.isEstaSeleccionado()) {
-					this.setJugador(jugador);
-					this.ejecutarMovimiento(deltaState, jugador.getX(),
-							jugador.getY());
-					jugador.flag = true;
-					this.activarRemate(deltaState);
-				} else {
-					jugador.flag = false;
-				}
-			}
-
-			this.moverPelotaPorRemate(deltaState);
-		} else {
-			this.estadoP.update(deltaState);
-		}
-
-		if(this.getX() < 170 ){
-			this.estadoP = new EstadoPelotaFueraDeJuego(this);
-		}
-
-		 System.out.println(this.getX());
 	}
 
 	public Jugador getJugador() {
@@ -81,7 +57,7 @@ public Pelota(String pelotaPath){
 		this.jugador = jugador;
 	}
 
-	void moverPelotaPorRemate(DeltaState deltaState) {
+	public void moverPelotaPorRemate(DeltaState deltaState) {
 		colisionoConJugador();
 		if (this.enRemate) {
 			if (Desplazador.getInstance().hayQueDesplazarCamara()) {
@@ -93,7 +69,7 @@ public Pelota(String pelotaPath){
 	}
 
 	public void colisionoConJugador() {
-		List<Jugador> jugadores = super.getScene().getJugadores();
+		List<Jugador> jugadores = super.getScene().getEquipoLocal().getJugadores();
 
 		for (Jugador jugador : jugadores) {
 			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());
@@ -207,7 +183,7 @@ public Pelota(String pelotaPath){
 			}
 	}
 
-	private void activarRemate(DeltaState deltaState) {
+	public void activarRemate(DeltaState deltaState) {
 		//Direccion del remate
 		direccionRemate = Direccion.obtenerDireccion(deltaState);
 		potencia =2;
@@ -284,11 +260,11 @@ public Pelota(String pelotaPath){
 
 	}
 
-	public EstadoPelota getEstadoP() {
-		return estadoP;
+	public EstadoPelota getEstadoPelota() {
+		return estadoPelota;
 	}
 
-	public void setEstadoP(EstadoPelota estadoP) {
-		this.estadoP = estadoP;
+	public void setEstadoPelota(EstadoPelota estadoP) {
+		this.estadoPelota = estadoP;
 	}
 }
