@@ -20,4 +20,4 @@ public abstract class EstadoJugador extends GameComponent<SoccerScene> {
 	
 	public abstract void update(DeltaState deltaState);
 
-}
+	}

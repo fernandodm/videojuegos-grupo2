@@ -1,5 +1,8 @@
 package soccer;
 
+import soccer.estados.EstadoJugadorNoSeleccionado;
+import soccer.estados.EstadoJugadorSeleccionado;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
@@ -24,6 +27,7 @@ public class Cancha extends GameComponent<SoccerScene>{
 			for(Jugador jugador: super.getScene().getEquipoLocal().getJugadores()){
 				if(jugador.isEstaSeleccionado()){
 					jugador.setEstaSeleccionado(false);
+					jugador.setEstado(new EstadoJugadorNoSeleccionado(jugador));
 					jugador.setAppearance(jugador.images.get(1).get(3));
 					break;
 				}
@@ -51,6 +55,7 @@ public class Cancha extends GameComponent<SoccerScene>{
 	}
 		
 		/*Selecciono al jugador mas cercano*/
+		jugadorCerca.setEstado(new EstadoJugadorSeleccionado(jugadorCerca));
 		jugadorCerca.setEstaSeleccionado(true);
 		jugadorCerca.getLabelSeleccionado().setX(jugadorCerca.getX() + 7);
 		jugadorCerca.getLabelSeleccionado().setY(jugadorCerca.getY() + 28);
