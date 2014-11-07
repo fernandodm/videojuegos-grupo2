@@ -2,76 +2,78 @@ package soccer;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.LinkedList;
 import java.util.List;
-
 import soccer.estados.EstadoJugador;
-import soccer.estados.EstadoJugadorNoSeleccionado;
-import soccer.estados.EstadoJugadorSeleccionado;
-
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
 
-public class Jugador extends GameComponent<SoccerScene>{
+public abstract class Jugador extends GameComponent<SoccerScene>{
 	
-	private EstadoJugador estado;
-	
-	public EstadoJugador getEstado() {
-		return estado;
-	}
-
-	public void setEstado(EstadoJugador estado) {
-		this.estado = estado;
-	}
-	
+	private EstadoJugador estado;	
 	private boolean estaSeleccionado = false;	
 	private Sprite image;
 	private double velocity;
-	Hashtable<Integer,List<Sprite>> images=new Hashtable<Integer, List<Sprite>>();
 	Hashtable<Integer, Integer> estados=new Hashtable<Integer, Integer>();
 	private int time=0;
 	private LabelSeleccionado labelSeleccionado;
 	//esto es para mantener bien el focus y saber si el jugador tiene la pelota
 	public boolean flag=false;
-
+	Hashtable<Integer,List<Sprite>> images=new Hashtable<Integer, List<Sprite>>();
 	
-	public Jugador(String imagePath, double vel, double x, double y, LabelSeleccionado label) {
-		
-		super(Sprite.fromImage(imagePath).crop(0,0,32,25), x, y);
+	public Jugador(Sprite sprite, String imagePath, LabelSeleccionado label, double vel, double x, double y) {
+		super(sprite, x, y);
 		estados.put(Direccion.UP, 0);
 		estados.put(Direccion.DOWN, 0);
 		estados.put(Direccion.LEFT, 0);
 		estados.put(Direccion.RIGHT, 0);
-		
-		this.image = Sprite.fromImage(imagePath);
-		
-		agregarSprite(Direccion.UP,1,8,32,0);
-		agregarSprite(Direccion.DOWN,13,19,32,32);
-		agregarSprite(Direccion.LEFT,9,16,32,64);
-		agregarSprite(Direccion.RIGHT,16,19,32,0);
-		
-		labelSeleccionado = label;
-		velocity = vel;
+		this.setLabelSeleccionado(label);
+		this.setVelocity(vel);
+		this.setImage(Sprite.fromImage(imagePath));
 	}
 	
-	public void agregarSprite(int direccion,int principio,int fin,int x,int y){
-		
-		List<Sprite> imagesCorriendo = new LinkedList<Sprite>();
-		for (int i = principio; i < fin; i++) {
-			imagesCorriendo.add(this.image.crop(x*i, y, 32, 25));
-		}
-		//este if esta xq el sprite para correr a la derecha
-		//sigue en la segunda fila
-		if(direccion == Direccion.RIGHT){
-			for (int i = 1; i < 4; i++) {
-				imagesCorriendo.add(this.image.crop(32*i, 32, 32, 25));
-			}
-		}
-			
-		images.put(direccion, imagesCorriendo);
-	}
+	public abstract void agregarSprite(int direccion,int principio,int fin,int x,int y);
 	
+	public Sprite getImage() {
+		return image;
+	}
+
+	public void setImage(Sprite image) {
+		this.image = image;
+	}
+
+	public double getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(double velocity) {
+		this.velocity = velocity;
+	}
+
+	public Hashtable<Integer, Integer> getEstados() {
+		return estados;
+	}
+
+	public void setEstados(Hashtable<Integer, Integer> estados) {
+		this.estados = estados;
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
+
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
+
 	@Override
 	public void update(DeltaState deltaState) {
 		
@@ -242,6 +244,22 @@ public class Jugador extends GameComponent<SoccerScene>{
 
 	public void setEstaSeleccionado(boolean estaSeleccionado) {
 		this.estaSeleccionado = estaSeleccionado;
+	}
+	
+	public EstadoJugador getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoJugador estado) {
+		this.estado = estado;
+	}
+	
+	public Hashtable<Integer, List<Sprite>> getImages() {
+		return images;
+	}
+
+	public void setImages(Hashtable<Integer, List<Sprite>> images) {
+		this.images = images;
 	}
 
 }

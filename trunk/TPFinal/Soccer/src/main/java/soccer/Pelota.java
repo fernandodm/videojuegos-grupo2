@@ -3,10 +3,10 @@ package soccer;
 import java.util.ArrayList;
 import java.util.List;
 
+import soccer.estados.EstadoJugadorNoSeleccionado;
+import soccer.estados.EstadoJugadorSeleccionado;
 import soccer.estados.EstadoPelota;
 import soccer.estados.EstadoPelotaEnJuego;
-import soccer.estados.EstadoPelotaFueraDeJuego;
-
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
@@ -27,8 +27,9 @@ public class Pelota extends GameComponent<SoccerScene> {
 	private double potencia;
 	private double gravedad = 4;
 	private int ultimaDireccion = Direccion.DOWN; //para que el jugador remate cuando esta quieto
+		
 	
-public Pelota(String pelotaPath){
+	public Pelota(String pelotaPath){
 		
 		super((Sprite.fromImage(pelotaPath).crop(0,0,63,63).scaleTo(15,15)),625, 295);
 	
@@ -68,6 +69,26 @@ public Pelota(String pelotaPath){
 		}
 	}
 
+	public boolean isEnRemate() {
+		return enRemate;
+	}
+
+
+	public void setEnRemate(boolean enRemate) {
+		this.enRemate = enRemate;
+	}
+
+
+	public double getPotencia() {
+		return potencia;
+	}
+
+
+	public void setPotencia(double potencia) {
+		this.potencia = potencia;
+	}
+
+
 	public void colisionoConJugador() {
 		List<Jugador> jugadores = super.getScene().getEquipoLocal().getJugadores();
 
@@ -76,6 +97,7 @@ public Pelota(String pelotaPath){
 			if (Colision.mustApply(this, jugador, nuevaPosicion)
 					&& !jugador.isEstaSeleccionado()) {
 				this.cambiarJugadorSeleccionado(jugador);
+				this.estadoPelota.cambiar(new EstadoPelotaEnJuego(this));
 			}
 		}
 	}
@@ -83,9 +105,11 @@ public Pelota(String pelotaPath){
 	public void cambiarJugadorSeleccionado(Jugador jugador) {
 		this.setY(jugador.getY());
 		this.setX(jugador.getX());
-
+		
+		this.getJugador().setEstado(new EstadoJugadorNoSeleccionado(this.getJugador()));
 		this.getJugador().setEstaSeleccionado(false);
 
+		jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
 		jugador.setEstaSeleccionado(true);
 
 		this.setJugador(jugador);
@@ -133,6 +157,7 @@ public Pelota(String pelotaPath){
 		potencia -= gravedad*deltaState.getDelta();
 		if(potencia < 0){
 			enRemate=false;
+			this.estadoPelota.cambiar(new EstadoPelotaEnJuego(this));
 		}
 	}
 
@@ -180,13 +205,14 @@ public Pelota(String pelotaPath){
 			potencia-= gravedad*deltaState.getDelta();
 			if(potencia < 0){
 				enRemate=false;
+				this.estadoPelota.cambiar(new EstadoPelotaEnJuego(this));
 			}
 	}
 
 	public void activarRemate(DeltaState deltaState) {
 		//Direccion del remate
 		direccionRemate = Direccion.obtenerDireccion(deltaState);
-		potencia =2;
+		potencia = 2;
 		//Si se apreta enter para pegarle a la pelota
 		if(deltaState.isKeyPressed(Key.ENTER)){
 			if(direccionRemate == 0){
@@ -266,5 +292,14 @@ public Pelota(String pelotaPath){
 
 	public void setEstadoPelota(EstadoPelota estadoP) {
 		this.estadoPelota = estadoP;
+	}
+	
+	public int getUltimaDireccion() {
+		return ultimaDireccion;
+	}
+
+
+	public void setUltimaDireccion(int ultimaDireccion) {
+		this.ultimaDireccion = ultimaDireccion;
 	}
 }

@@ -28,17 +28,16 @@ public class SoccerGame extends Game {
 		Arco arcoAbajo = new Arco("arco.png", 3.14, 525, 953);
 		Pelota pelota = new Pelota("pelota1.png");
 
-//		pelota.setEstadoP(new EstadoPelotaEnJuego(pelota));
-		
 		LabelSeleccionado label = new LabelSeleccionado(625, 240);
 		
-		Jugador jugadorLocal1 = new Jugador("jugadores.png", 150, 440, 300, label);
-		Jugador jugadorLocal2 = new Jugador("jugadores.png", 150, 622, 265, label);
-		Jugador jugadorLocal3 = new Jugador("jugadores.png", 150, 800, 300, label);
-		Jugador jugadorLocal4 = new Jugador("jugadores.png", 150, 900, 700, label);
-		Jugador jugadorLocal5 = new Jugador("jugadores.png", 150, 350, 700, label);
-		Jugador jugadorLocal6 = new Jugador("jugadores.png", 150, 625, 720, label);
-		Jugador arqueroLocal = new Jugador("arqueros.png", 150, 622, 960, label);
+		JugadorLocal jugadorLocal1 = new JugadorLocal("jugadores.png", 150, 440, 300, label);
+		JugadorLocal jugadorLocal2 = new JugadorLocal("jugadores.png", 150, 622, 265, label);
+		JugadorLocal jugadorLocal3 = new JugadorLocal("jugadores.png", 150, 800, 300, label);
+		JugadorLocal jugadorLocal4 = new JugadorLocal("jugadores.png", 150, 900, 700, label);
+		JugadorLocal jugadorLocal5 = new JugadorLocal("jugadores.png", 150, 350, 700, label);
+		JugadorLocal jugadorLocal6 = new JugadorLocal("jugadores.png", 150, 625, 720, label);
+		JugadorLocal jugadorLocal7 = new JugadorLocal("jugadores.png", 150, 622, 500, label);
+		JugadorLocal arqueroLocal = new JugadorLocal("arqueros.png", 150, 622, 960, label);
 		
 		jugadorLocal1.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal1));
 		jugadorLocal2.setEstado(new EstadoJugadorSeleccionado(jugadorLocal2));
@@ -46,7 +45,26 @@ public class SoccerGame extends Game {
 		jugadorLocal4.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal4));
 		jugadorLocal5.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal5));
 		jugadorLocal6.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal6));
+		jugadorLocal7.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal7));
 		arqueroLocal.setEstado(new EstadoJugadorNoSeleccionado(arqueroLocal));
+		
+		JugadorVisitante jugadorVisitante1 = new JugadorVisitante("jugadores.png", 150, 440, 250, label);
+		JugadorVisitante jugadorVisitante2 = new JugadorVisitante("jugadores.png", 150, 622, 155, label);
+		JugadorVisitante jugadorVisitante3 = new JugadorVisitante("jugadores.png", 150, 800, 250, label);
+		JugadorVisitante jugadorVisitante4 = new JugadorVisitante("jugadores.png", 150, 900, -150, label);
+		JugadorVisitante jugadorVisitante5 = new JugadorVisitante("jugadores.png", 150, 350, -150, label);
+		JugadorVisitante jugadorVisitante6 = new JugadorVisitante("jugadores.png", 150, 625, -170, label);
+		JugadorVisitante jugadorVisitante7 = new JugadorVisitante("jugadores.png", 150, 622, -25, label);
+		JugadorVisitante arqueroVisitante = new JugadorVisitante("arqueros.png", 150, 622, -390, label);
+		
+		jugadorVisitante1.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante1));
+		jugadorVisitante2.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante2));
+		jugadorVisitante3.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante3));
+		jugadorVisitante4.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante4));
+		jugadorVisitante5.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante5));
+		jugadorVisitante6.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante6));
+		jugadorVisitante7.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante7));
+		arqueroVisitante.setEstado(new EstadoJugadorNoSeleccionado(arqueroVisitante));
 		
 		jugadorLocal2.setEstaSeleccionado(true);
 		jugadorLocal2.setAppearance(jugadorLocal2.images.get(Direccion.DOWN).get(3));
@@ -60,7 +78,17 @@ public class SoccerGame extends Game {
 		scene.addJugadorEquipoLocal(jugadorLocal4);
 		scene.addJugadorEquipoLocal(jugadorLocal5);
 		scene.addJugadorEquipoLocal(jugadorLocal6);
+		scene.addJugadorEquipoLocal(jugadorLocal7);
 		scene.addJugadorEquipoLocal(arqueroLocal);
+		
+		scene.addJugadorEquipoLocal(jugadorVisitante1);
+		scene.addJugadorEquipoLocal(jugadorVisitante2);
+		scene.addJugadorEquipoLocal(jugadorVisitante3);
+		scene.addJugadorEquipoLocal(jugadorVisitante4);
+		scene.addJugadorEquipoLocal(jugadorVisitante5);
+		scene.addJugadorEquipoLocal(jugadorVisitante6);
+		scene.addJugadorEquipoLocal(jugadorVisitante7);
+		scene.addJugadorEquipoLocal(arqueroVisitante);
 		
 		
 		scene.addArco(arcoArriba);
@@ -76,7 +104,18 @@ public class SoccerGame extends Game {
 		Desplazador.getInstance().addComenent(jugadorLocal4);
 		Desplazador.getInstance().addComenent(jugadorLocal5);
 		Desplazador.getInstance().addComenent(jugadorLocal6);
+		Desplazador.getInstance().addComenent(jugadorLocal7);
 		Desplazador.getInstance().addComenent(arqueroLocal);
+		
+		Desplazador.getInstance().addComenent(jugadorVisitante1);
+		Desplazador.getInstance().addComenent(jugadorVisitante2);
+		Desplazador.getInstance().addComenent(jugadorVisitante3);
+		Desplazador.getInstance().addComenent(jugadorVisitante4);
+		Desplazador.getInstance().addComenent(jugadorVisitante5);
+		Desplazador.getInstance().addComenent(jugadorVisitante6);
+		Desplazador.getInstance().addComenent(jugadorVisitante7);
+		Desplazador.getInstance().addComenent(arqueroVisitante);
+		
 		Desplazador.getInstance().setCancha(cancha);
 		Desplazador.getInstance().setPelota(pelota);
 		Desplazador.getInstance().addComenent(label);
