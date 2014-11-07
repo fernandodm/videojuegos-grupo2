@@ -90,7 +90,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 
 
 	public void colisionoConJugador() {
-		List<Jugador> jugadores = super.getScene().getEquipoLocal().getJugadores();
+		List<Jugador> jugadores = super.getScene().getJugadores();
 
 		for (Jugador jugador : jugadores) {
 			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());

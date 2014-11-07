@@ -17,14 +17,14 @@ public class Cancha extends GameComponent<SoccerScene>{
 	@Override
 	public void update(DeltaState deltaState) {
 		boolean ahiSeleccionado = false; 
-		for(Jugador jugador: super.getScene().getEquipoLocal().getJugadores()){
+		for(Jugador jugador: super.getScene().getJugadores()){
 			ahiSeleccionado = jugador.flag || ahiSeleccionado;
 		}
 		
 		if(deltaState.isKeyPressed(Key.C) && !ahiSeleccionado){
 			/*Busco al jugador selecionado para deseleccionarlo*/
 			
-			for(Jugador jugador: super.getScene().getEquipoLocal().getJugadores()){
+			for(Jugador jugador: super.getScene().getJugadores()){
 				if(jugador.isEstaSeleccionado()){
 					jugador.setEstaSeleccionado(false);
 					jugador.setEstado(new EstadoJugadorNoSeleccionado(jugador));
@@ -42,7 +42,7 @@ public class Cancha extends GameComponent<SoccerScene>{
 	public void seleccionarJugadorMasCercano(Pelota seleccionado) {
 		Jugador jugadorCerca = null;
 		double distancia = 100000; //es la maxima distancia entre dos jugadores
-		for(Jugador jugador: super.getScene().getEquipoLocal().getJugadores()){
+		for(Jugador jugador: super.getScene().getJugadores()){
 			/*Calculo la distancia entre dos jugadores (distancia entre dos puntos)*/
 			double distanciaActual = Math.sqrt(Math.pow((jugador.getX() - seleccionado.getX()),2) 
 					 			   + Math.pow((jugador.getY() - seleccionado.getY()), 2));

@@ -96,5 +96,15 @@ public class SoccerScene extends GameScene {
 		Sound s = new SoundBuilder().buildSound(this.getClass().getClassLoader().getResourceAsStream(soundFile));
 		s.play();
 	}
+
+
+	public List<Jugador> getJugadores() {
+		List<Jugador> jugadoresLocales = this.getPelota().getScene().getEquipoLocal().getJugadores();
+		List<Jugador> jugadoresVisitantes = this.getPelota().getScene().getEquipoVisitante().getJugadores();
+		List<Jugador> jugadores = new ArrayList<Jugador>();
+		jugadores.addAll(jugadoresLocales);
+		jugadores.addAll(jugadoresVisitantes);
+		return jugadores;
+	}
 	
 }
