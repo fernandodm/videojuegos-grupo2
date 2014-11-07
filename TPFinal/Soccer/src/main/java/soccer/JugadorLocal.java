@@ -35,4 +35,10 @@ public class JugadorLocal extends Jugador {
 		images.put(direccion, imagesCorriendo);
 	}
 
+	@Override
+	public Equipo equipoContrario() {
+		
+		return this.obtenerEquipoVisitante();
+	}
+
 }

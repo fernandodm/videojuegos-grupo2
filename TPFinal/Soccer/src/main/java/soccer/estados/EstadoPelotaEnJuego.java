@@ -1,6 +1,8 @@
 package soccer.estados;
 
 
+import java.util.List;
+
 import soccer.Colision;
 import soccer.Direccion;
 import soccer.Jugador;
@@ -17,7 +19,8 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 
 	@Override
 	public void update(DeltaState deltaState) {
-		for (Jugador jugador : this.getPelota().getScene().getEquipoLocal().getJugadores()) {
+				
+		for (Jugador jugador : this.getPelota().getScene().getJugadores()) {
 			Vector nuevaPosicion = new Vector(jugador.getX(),
 					jugador.getY());
 			if (Colision.mustApply(this.getPelota(), jugador, nuevaPosicion)
@@ -33,15 +36,15 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		}
 
 		this.getPelota().moverPelotaPorRemate(deltaState);
+		
 		if(this.getPelota().getX() < 162 || this.getPelota().getX() > 1090){
 			this.getPelota().setEstadoPelota(new EstadoPelotaFueraDeJuego(this.getPelota()));
-			for (Jugador jugador : this.getPelota().getScene().getEquipoLocal().getJugadores()) {
+			for (Jugador jugador : this.getPelota().getScene().getJugadores()) {
 				if(jugador.isEstaSeleccionado()){
 					jugador.setEstado(new EstadoJugadorEnLateral(jugador));
 					jugador.setAppearance(jugador.getImages().get(Direccion.RIGHT).get(0));
 					this.pocisionarJugador(jugador);
 					this.getPelota().setEnRemate(false);
-//					this.getPelota().setPotencia(potencia);
 					break;
 				}
 			}

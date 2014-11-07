@@ -33,6 +33,7 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 	}
 	
 	public abstract void agregarSprite(int direccion,int principio,int fin,int x,int y);
+	public abstract Equipo equipoContrario();
 	
 	public Sprite getImage() {
 		return image;
@@ -212,7 +213,7 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 		this.labelSeleccionado.setX(x + 10);
 		this.labelSeleccionado.setY(y + 30);
 	}
-	
+		
 	private void desplazarComponentes(double n, DeltaState deltaState){
 		List<Jugador> jugadores = new ArrayList<Jugador>();
 		jugadores.addAll(this.getScene().getJugadoresLocales());
@@ -228,6 +229,14 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 		this.getScene().getCancha().setY(this.getScene().getCancha().getY()+ (0.4*n));
 //		this.labelSeleccionado.setY(this.getScene().getCancha().getY()+ (0.4*n));
 		
+	}
+
+	public Equipo obtenerEquipoVisitante(){
+		return this.getScene().getEquipoVisitante();
+	}
+	
+	public Equipo obtenerEquipoLocal(){
+		return this.getScene().getEquipoLocal();
 	}
 	
 	public LabelSeleccionado getLabelSeleccionado() {
