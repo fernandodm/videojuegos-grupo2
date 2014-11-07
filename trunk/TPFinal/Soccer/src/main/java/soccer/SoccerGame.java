@@ -81,14 +81,14 @@ public class SoccerGame extends Game {
 		scene.addJugadorEquipoLocal(jugadorLocal7);
 		scene.addJugadorEquipoLocal(arqueroLocal);
 		
-		scene.addJugadorEquipoLocal(jugadorVisitante1);
-		scene.addJugadorEquipoLocal(jugadorVisitante2);
-		scene.addJugadorEquipoLocal(jugadorVisitante3);
-		scene.addJugadorEquipoLocal(jugadorVisitante4);
-		scene.addJugadorEquipoLocal(jugadorVisitante5);
-		scene.addJugadorEquipoLocal(jugadorVisitante6);
-		scene.addJugadorEquipoLocal(jugadorVisitante7);
-		scene.addJugadorEquipoLocal(arqueroVisitante);
+		scene.addJugadorEquipoVisitante(jugadorVisitante1);
+		scene.addJugadorEquipoVisitante(jugadorVisitante2);
+		scene.addJugadorEquipoVisitante(jugadorVisitante3);
+		scene.addJugadorEquipoVisitante(jugadorVisitante4);
+		scene.addJugadorEquipoVisitante(jugadorVisitante5);
+		scene.addJugadorEquipoVisitante(jugadorVisitante6);
+		scene.addJugadorEquipoVisitante(jugadorVisitante7);
+		scene.addJugadorEquipoVisitante(arqueroVisitante);
 		
 		
 		scene.addArco(arcoArriba);
