@@ -24,7 +24,7 @@ public class MenuInicial extends Game {
 	Dimension dimension = new Dimension(800, 600);
 	@Override
 	public Dimension getDisplaySize() {
-		return dimension;
+		return new Dimension(1280, 600);
 	}
 
 	@Override
