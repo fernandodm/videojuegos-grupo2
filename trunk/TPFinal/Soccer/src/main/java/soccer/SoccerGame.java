@@ -5,21 +5,23 @@ import java.awt.Dimension;
 
 
 
+
 import soccer.estados.EstadoJugadorNoSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionado;
 
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
+import com.uqbar.vainilla.GameScene;
 
-public class SoccerGame extends Game {
+public class SoccerGame extends GameScene {
 
-	@Override
-	protected void initializeResources() {
-		// TODO Auto-generated method stub
-	}
+//	@Override
+//	protected void initializeResources() {
+//		// TODO Auto-generated method stub
+//	}
 
-	@Override
-	protected void setUpScenes(){
+//	@Override
+	public SoccerScene construirScene(){
 		
 		SoccerScene scene = new SoccerScene("sonido1.wav");
 				
@@ -93,7 +95,7 @@ public class SoccerGame extends Game {
 		
 		scene.addArco(arcoArriba);
 		scene.addArco(arcoAbajo);
-		this.setCurrentScene(scene);
+//		this.setCurrentScene(scene);
 		
 		Desplazador.getInstance().addComenent(arcoArriba);
 		Desplazador.getInstance().addComenent(arcoAbajo);
@@ -119,23 +121,25 @@ public class SoccerGame extends Game {
 		Desplazador.getInstance().setCancha(cancha);
 		Desplazador.getInstance().setPelota(pelota);
 		Desplazador.getInstance().addComenent(label);
+		
+		return scene;
 	}
 	
-	@Override
-	public Dimension getDisplaySize() {
-		return new Dimension(1280, 600);
-	}
-
-	@Override
-	public String getTitle() {
-		return "Soccer";
-	}
-
-
-	public static void main(String[] args) {
-
-		new DesktopGameLauncher(new SoccerGame()).launch();
-
-	}
+//	@Override
+//	public Dimension getDisplaySize() {
+//		return new Dimension(1280, 600);
+//	}
+//
+//	@Override
+//	public String getTitle() {
+//		return "Soccer";
+//	}
+//
+//
+//	public static void main(String[] args) {
+//
+//		new DesktopGameLauncher(new SoccerGame()).launch();
+//
+//	}
 
 }
