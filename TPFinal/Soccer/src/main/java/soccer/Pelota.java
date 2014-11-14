@@ -46,6 +46,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 	
 	@Override
 	public void update(DeltaState deltaState) {
+		System.out.println(this.getY());
 		this.estadoPelota.update(deltaState);
 
 	}
@@ -264,7 +265,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 		case Direccion.DOWNRIGHT:
 			this.ultimaDireccion = Direccion.DOWNRIGHT; 
 			this.setX(x + 30);
-			this.setY(y + 17);
+			this.setY(y + 23);
 			this.ejecutarSpritePelota();
 			break;
 		case Direccion.DOWNLEFT:
