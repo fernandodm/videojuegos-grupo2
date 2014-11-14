@@ -230,6 +230,7 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 //		this.labelSeleccionado.setY(this.getScene().getCancha().getY()+ (0.4*n));
 		
 	}
+	
 
 	public Equipo obtenerEquipoVisitante(){
 		return this.getScene().getEquipoVisitante();
