@@ -41,7 +41,7 @@ public class Desplazador {
 		return desplazador;
 	}
 
-	public void addComenent(GameComponent go) {
+	public void addComponent(GameComponent go) {
 		this.getaDesplazar().add(go);
 	}
 
