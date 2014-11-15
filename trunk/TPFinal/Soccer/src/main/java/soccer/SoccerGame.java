@@ -100,31 +100,31 @@ public class SoccerGame extends Game {
         	scene.addComponent(tiempo);
         	this.setCurrentScene(scene);
         	
-        	Desplazador.getInstance().addComenent(arcoArriba);
-        	Desplazador.getInstance().addComenent(arcoAbajo);
-        	Desplazador.getInstance().addComenent(cancha);
-        	Desplazador.getInstance().addComenent(jugadorLocal1);
-        	Desplazador.getInstance().addComenent(jugadorLocal2);
-        	Desplazador.getInstance().addComenent(jugadorLocal3);
-        	Desplazador.getInstance().addComenent(jugadorLocal4);
-        	Desplazador.getInstance().addComenent(jugadorLocal5);
-        	Desplazador.getInstance().addComenent(jugadorLocal6);
-        	Desplazador.getInstance().addComenent(jugadorLocal7);
-        	Desplazador.getInstance().addComenent(arqueroLocal);
+        	Desplazador.getInstance().addComponent(arcoArriba);
+        	Desplazador.getInstance().addComponent(arcoAbajo);
+        	Desplazador.getInstance().addComponent(cancha);
+        	Desplazador.getInstance().addComponent(jugadorLocal1);
+        	Desplazador.getInstance().addComponent(jugadorLocal2);
+        	Desplazador.getInstance().addComponent(jugadorLocal3);
+        	Desplazador.getInstance().addComponent(jugadorLocal4);
+        	Desplazador.getInstance().addComponent(jugadorLocal5);
+        	Desplazador.getInstance().addComponent(jugadorLocal6);
+        	Desplazador.getInstance().addComponent(jugadorLocal7);
+        	Desplazador.getInstance().addComponent(arqueroLocal);
         	
-        	Desplazador.getInstance().addComenent(jugadorVisitante1);
-        	Desplazador.getInstance().addComenent(jugadorVisitante2);
-        	Desplazador.getInstance().addComenent(jugadorVisitante3);
-        	Desplazador.getInstance().addComenent(jugadorVisitante4);
-        	Desplazador.getInstance().addComenent(jugadorVisitante5);
-        	Desplazador.getInstance().addComenent(jugadorVisitante6);
-        	Desplazador.getInstance().addComenent(jugadorVisitante7);
-        	Desplazador.getInstance().addComenent(arqueroVisitante);
+        	Desplazador.getInstance().addComponent(jugadorVisitante1);
+        	Desplazador.getInstance().addComponent(jugadorVisitante2);
+        	Desplazador.getInstance().addComponent(jugadorVisitante3);
+        	Desplazador.getInstance().addComponent(jugadorVisitante4);
+        	Desplazador.getInstance().addComponent(jugadorVisitante5);
+        	Desplazador.getInstance().addComponent(jugadorVisitante6);
+        	Desplazador.getInstance().addComponent(jugadorVisitante7);
+        	Desplazador.getInstance().addComponent(arqueroVisitante);
         	
-        	Desplazador.getInstance().addComenent(tiempo);
+        	Desplazador.getInstance().addComponent(tiempo);
         	Desplazador.getInstance().setCancha(cancha);
         	Desplazador.getInstance().setPelota(pelota);
-        	Desplazador.getInstance().addComenent(label);
+        	Desplazador.getInstance().addComponent(label);
         }	
        
         @Override
