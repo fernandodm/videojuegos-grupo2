@@ -46,7 +46,6 @@ public class Pelota extends GameComponent<SoccerScene> {
 	
 	@Override
 	public void update(DeltaState deltaState) {
-		System.out.println(this.getY());
 		this.estadoPelota.update(deltaState);
 
 	}

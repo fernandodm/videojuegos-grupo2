@@ -1,6 +1,9 @@
 package soccer;
 
+import java.awt.Color;
 import java.awt.Dimension;
+
+
 
 
 
@@ -29,6 +32,8 @@ public class SoccerGame extends Game {
                 Pelota pelota = new Pelota("pelota1.png");
 
                 LabelSeleccionado label = new LabelSeleccionado(625, 240);
+                
+                Tiempo tiempo = new Tiempo(300, 10, Color.lightGray);
                
                 JugadorLocal jugadorLocal1 = new JugadorLocal("jugadores.png", 150, 440, 300, label);
                 JugadorLocal jugadorLocal2 = new JugadorLocal("jugadores.png", 150, 622, 265, label);
@@ -81,18 +86,19 @@ public class SoccerGame extends Game {
                 scene.addJugadorEquipoLocal(jugadorLocal7);
                 scene.addJugadorEquipoLocal(arqueroLocal);
                
-                scene.addJugadorEquipoLocal(jugadorVisitante1);
-                scene.addJugadorEquipoLocal(jugadorVisitante2);
-                scene.addJugadorEquipoLocal(jugadorVisitante3);
-                scene.addJugadorEquipoLocal(jugadorVisitante4);
-                scene.addJugadorEquipoLocal(jugadorVisitante5);
-                scene.addJugadorEquipoLocal(jugadorVisitante6);
-                scene.addJugadorEquipoLocal(jugadorVisitante7);
-                scene.addJugadorEquipoLocal(arqueroVisitante);
+                scene.addJugadorEquipoVisitante(jugadorVisitante1);
+                scene.addJugadorEquipoVisitante(jugadorVisitante2);
+                scene.addJugadorEquipoVisitante(jugadorVisitante3);
+                scene.addJugadorEquipoVisitante(jugadorVisitante4);
+                scene.addJugadorEquipoVisitante(jugadorVisitante5);
+                scene.addJugadorEquipoVisitante(jugadorVisitante6);
+                scene.addJugadorEquipoVisitante(jugadorVisitante7);
+                scene.addJugadorEquipoVisitante(arqueroVisitante);
                
                
                 scene.addArco(arcoArriba);
                 scene.addArco(arcoAbajo);
+                scene.addComponent(tiempo);
                 this.setCurrentScene(scene);
                
                 Desplazador.getInstance().addComenent(arcoArriba);
@@ -116,6 +122,7 @@ public class SoccerGame extends Game {
                 Desplazador.getInstance().addComenent(jugadorVisitante7);
                 Desplazador.getInstance().addComenent(arqueroVisitante);
                
+                Desplazador.getInstance().addComenent(tiempo);
                 Desplazador.getInstance().setCancha(cancha);
                 Desplazador.getInstance().setPelota(pelota);
                 Desplazador.getInstance().addComenent(label);
@@ -135,6 +142,10 @@ public class SoccerGame extends Game {
         public static void main(String[] args) {
 
                 new DesktopGameLauncher(new SoccerGame()).launch();
+//                while(Tiempo.minutos != 1){
+//        			System.out.println(Tiempo.minutos + ":" + Tiempo.segundos);
+//        			Tiempo.ejecutar();
+//        		}
 
         }
 

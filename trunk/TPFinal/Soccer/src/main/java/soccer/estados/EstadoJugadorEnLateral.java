@@ -27,11 +27,11 @@ public class EstadoJugadorEnLateral extends EstadoJugador {
 
 	}
 
-	private void ejecutar(int right, int downright, int upright, int n, double radio, DeltaState deltaState) {
+	private void ejecutar(int dir, int downright, int upright, int n, double radio, DeltaState deltaState) {
 		int direccion = obtenerDireccion(deltaState);
 		//por si no se apreto ninguna tecla
-		if(direccion == 0 && !seMovio)
-			this.getJugador().getScene().getPelota().setUltimaDireccion(right);
+		if((direccion == 0 && !seMovio))
+			this.getJugador().getScene().getPelota().setUltimaDireccion(dir);
 		
 		switch (direccion) {
 		case Direccion.UP:
@@ -45,12 +45,12 @@ public class EstadoJugadorEnLateral extends EstadoJugador {
 				seMovioDown++;
 			}
 			if(seMovioUp == 2){
-				this.getJugador().setAppearance(this.getJugador().getImages().get(right).get(n));
+				this.getJugador().setAppearance(this.getJugador().getImages().get(dir).get(n));
 				this.getJugador().setY(this.getJugador().getY() - 20);
 				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() - 20);
 				seMovioUp--;
 				seMovioDown++;
-				this.getJugador().getScene().getPelota().setUltimaDireccion(right);
+				this.getJugador().getScene().getPelota().setUltimaDireccion(dir);
 			}
 			seMovio = true;
 			break;
@@ -65,10 +65,10 @@ public class EstadoJugadorEnLateral extends EstadoJugador {
 				seMovioDown--;
 			}
 			if(seMovioDown == 2){
-				this.getJugador().setAppearance(this.getJugador().getImages().get(right).get(n));
+				this.getJugador().setAppearance(this.getJugador().getImages().get(dir).get(n));
 				this.getJugador().setY(this.getJugador().getY() + 20);
 				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() + 20);
-				this.getJugador().getScene().getPelota().setUltimaDireccion(right);
+				this.getJugador().getScene().getPelota().setUltimaDireccion(dir);
 				seMovioUp++;
 				seMovioDown--;
 			}
