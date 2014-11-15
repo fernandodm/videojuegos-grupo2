@@ -1,6 +1,5 @@
 package soccer.estados;
 
-
 import java.util.List;
 
 import soccer.Colision;
@@ -49,16 +48,42 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 
 	private void verificarLateral() {
 		if(this.getPelota().getX() < 162 || this.getPelota().getX() > 1090){
-			this.getPelota().setEstadoPelota(new EstadoPelotaFueraDeJuego(this.getPelota()));
-			for (Jugador jugador : this.getPelota().getScene().getJugadores()) {
-				if(jugador.isEstaSeleccionado()){
-					jugador.setEstado(new EstadoJugadorEnLateral(jugador));
-					jugador.setAppearance(jugador.getImages().get(Direccion.RIGHT).get(0));
-					this.pocisionarJugadorLateral(jugador);
-					this.getPelota().setEnRemate(false);
-					break;
-				}
-			}
+			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateral(this.getPelota()));
+			seleccionarJugadorAlLateral();
+		}
+	}
+
+	public void seleccionarJugadorAlLateral() {
+		Jugador jugador = this.getPelota().getJugador();
+		jugador.setFlag(false);
+		jugador.setEstaSeleccionado(false);
+		jugador.setEstado(new EstadoJugadorNoSeleccionado(jugador));
+		if(jugador.getX() < 202 || jugador.getX() > 1050 && !jugador.isEstaSeleccionado())
+			jugador.setY(jugador.getY() + 80);
+		
+		List<Jugador> juagdores = jugador.equipoContrario().getJugadores();
+		Jugador jugadorAlLateral = juagdores.get(4);
+		
+		jugadorAlLateral.setFlag(true);
+		jugadorAlLateral.setEstaSeleccionado(true);
+		this.getPelota().setJugador(jugadorAlLateral);
+		jugadorAlLateral.setEstado(new EstadoJugadorEnLateral(jugadorAlLateral));
+		jugadorAlLateral.setAppearance(jugadorAlLateral.getImages().get(Direccion.RIGHT).get(0));
+		this.pocisionarJugadorLateral(jugadorAlLateral);
+		this.getPelota().setEnRemate(false);
+		
+		//acerco un jugador cerca del lateral
+		this.acercarJugador(juagdores);
+	}
+
+	private void acercarJugador(List<Jugador> juagdores) {
+		Jugador jugadorCandidatoAPase = juagdores.get(1);
+		if(this.getPelota().getX() < 162){
+			jugadorCandidatoAPase.setX(this.getPelota().getX() + 30);
+			jugadorCandidatoAPase.setY(this.getPelota().getY() - 45);
+		}else{
+			jugadorCandidatoAPase.setX(this.getPelota().getX() - 30);
+			jugadorCandidatoAPase.setY(this.getPelota().getY() - 45);
 		}
 	}
 
@@ -74,7 +99,6 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			jugador.getLabelSeleccionado().setX(jugador.getX() + 25);
 			jugador.getLabelSeleccionado().setY(jugador.getY() + 10);
 		}
-		
 	}
 
 	@Override
