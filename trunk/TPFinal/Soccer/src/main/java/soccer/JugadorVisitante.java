@@ -39,4 +39,9 @@ public class JugadorVisitante extends Jugador {
 		return this.obtenerEquipoLocal();
 	}
 
+	@Override
+	public boolean isLocal() {
+		return false;
+	}
+
 }
