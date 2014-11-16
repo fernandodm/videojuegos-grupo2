@@ -97,7 +97,7 @@ public class SoccerGame extends Game {
         	
         	scene.addArco(arcoArriba);
         	scene.addArco(arcoAbajo);
-        	scene.setTiempo(tiempo);
+//        	scene.setTiempo(tiempo);
         	this.setCurrentScene(scene);
         	
         	Desplazador.getInstance().addComponent(arcoArriba);

@@ -272,4 +272,6 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 		this.images = images;
 	}
 
+	public abstract boolean isLocal();
+
 }
