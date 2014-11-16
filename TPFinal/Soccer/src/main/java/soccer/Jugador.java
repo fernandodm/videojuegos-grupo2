@@ -227,7 +227,7 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 		this.getScene().getArcos().get(0).setY(this.getScene().getArcos().get(0).getY()+ (0.4*n));
 		this.getScene().getArcos().get(1).setY(this.getScene().getArcos().get(1).getY()+ (0.4*n));
 		this.getScene().getCancha().setY(this.getScene().getCancha().getY()+ (0.4*n));
-//		this.labelSeleccionado.setY(this.getScene().getCancha().getY()+ (0.4*n));
+//		this.getScene().getTiempo().setY(this.getScene().getTiempo().getY());
 		
 	}
 	
