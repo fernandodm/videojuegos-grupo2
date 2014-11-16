@@ -97,7 +97,7 @@ public class SoccerGame extends Game {
         	
         	scene.addArco(arcoArriba);
         	scene.addArco(arcoAbajo);
-        	scene.addComponent(tiempo);
+        	scene.setTiempo(tiempo);
         	this.setCurrentScene(scene);
         	
         	Desplazador.getInstance().addComponent(arcoArriba);
@@ -121,7 +121,6 @@ public class SoccerGame extends Game {
         	Desplazador.getInstance().addComponent(jugadorVisitante7);
         	Desplazador.getInstance().addComponent(arqueroVisitante);
         	
-        	Desplazador.getInstance().addComponent(tiempo);
         	Desplazador.getInstance().setCancha(cancha);
         	Desplazador.getInstance().setPelota(pelota);
         	Desplazador.getInstance().addComponent(label);

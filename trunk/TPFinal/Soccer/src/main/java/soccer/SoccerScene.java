@@ -17,7 +17,19 @@ public class SoccerScene extends GameScene {
 	private List<Arco> arcos = new ArrayList<Arco>();
 	private Equipo equipoLocal = new Equipo();
 	private Equipo equipoVisitante = new Equipo();
+	private Tiempo tiempo;
 	
+	public Tiempo getTiempo() {
+		return tiempo;
+	}
+
+
+	public void setTiempo(Tiempo tiempo) {
+		this.tiempo = tiempo;
+		this.addComponent(tiempo);
+	}
+
+
 	public List<Arco> getArcos() {
 		return arcos;
 	}
