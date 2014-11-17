@@ -128,7 +128,6 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		jugadorAlCorner.setEstaSeleccionado(true);
 		this.getPelota().setJugador(jugadorAlCorner);
 		jugadorAlCorner.setEstado(new EstadoJugadorEnCorner(jugadorAlCorner));
-		jugadorAlCorner.setAppearance(jugadorAlCorner.getImages().get(Direccion.RIGHT).get(0));
 		this.posicionarJugadorCorner(jugadorAlCorner);
 		this.getPelota().setEnRemate(false);
 		
@@ -140,13 +139,11 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 	private void posicionarJugadorCorner(Jugador jugador) {
 		
 		if(this.getPelota().getY() < 50){
-			jugador.setY(50);
+			jugador.setY(47);
 			this.getPelota().setY(58);
 			posicionarIzquierdaODerecha(jugador);	
-			jugador.getLabelSeleccionado().setX(jugador.getX() - 10);
-			jugador.getLabelSeleccionado().setY(jugador.getY() + 6);
 		}else{
-			jugador.setY(528);
+			jugador.setY(518);
 			this.getPelota().setY(515);
 			posicionarIzquierdaODerecha(jugador);	
 			jugador.getLabelSeleccionado().setX(jugador.getX() + 25);
@@ -157,11 +154,17 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 
 	public void posicionarIzquierdaODerecha(Jugador jugador) {
 		if(this.getPelota().getX() < 640){
+			jugador.setAppearance(jugador.getImages().get(Direccion.RIGHT).get(0).rotate(0.3));
 			jugador.setX(145);
 			this.getPelota().setX(172);
+			jugador.getLabelSeleccionado().setX(jugador.getX() - 10);
+			jugador.getLabelSeleccionado().setY(jugador.getY() + 6);
 		}else{
+			jugador.setAppearance(jugador.getImages().get(Direccion.LEFT).get(3).rotate(0.3));
 			jugador.setX(1100);
 			this.getPelota().setX(1080);
+			jugador.getLabelSeleccionado().setX(jugador.getX() + 27);
+			jugador.getLabelSeleccionado().setY(jugador.getY() + 6);
 		}
 	}
 
