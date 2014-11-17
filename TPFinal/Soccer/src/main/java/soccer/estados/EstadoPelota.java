@@ -19,6 +19,4 @@ public abstract class EstadoPelota extends GameComponent<SoccerScene> {
 	
 	public abstract void update(DeltaState deltaState);
 
-	public abstract void cambiar(EstadoPelotaEnJuego estadoPelotaEnJuego);
-
 }

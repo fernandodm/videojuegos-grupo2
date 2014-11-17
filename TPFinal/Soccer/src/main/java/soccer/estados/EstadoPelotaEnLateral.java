@@ -34,10 +34,4 @@ public class EstadoPelotaEnLateral extends EstadoPelota {
 				&& Direccion.DOWNRIGHT != direccion && Direccion.UPRIGHT != direccion;
 	}
 
-	@Override
-	public void cambiar(EstadoPelotaEnJuego estadoPelotaEnJuego) {
-		this.getPelota().setEstadoPelota(estadoPelotaEnJuego);
-		
-	}
-
 }

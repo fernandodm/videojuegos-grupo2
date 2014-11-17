@@ -225,11 +225,4 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			jugador.getLabelSeleccionado().setY(jugador.getY() + 10);
 		}
 	}
-
-	@Override
-	public void cambiar(EstadoPelotaEnJuego estadoPelotaEnJuego) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

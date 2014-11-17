@@ -97,7 +97,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 			if (Colision.mustApply(this, jugador, nuevaPosicion)
 					&& !jugador.isEstaSeleccionado()) {
 				this.cambiarJugadorSeleccionado(jugador);
-				this.estadoPelota.cambiar(new EstadoPelotaEnJuego(this));
+				this.estadoPelota = new EstadoPelotaEnJuego(this);
 			}
 		}
 	}
@@ -157,7 +157,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 		potencia -= gravedad*deltaState.getDelta();
 		if(potencia < 0){
 			enRemate=false;
-			this.estadoPelota.cambiar(new EstadoPelotaEnJuego(this));
+			this.estadoPelota = new EstadoPelotaEnJuego(this);
 		}
 	}
 
@@ -205,7 +205,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 			potencia-= gravedad*deltaState.getDelta();
 			if(potencia < 0){
 				enRemate=false;
-				this.estadoPelota.cambiar(new EstadoPelotaEnJuego(this));
+				this.estadoPelota = new EstadoPelotaEnJuego(this);
 			}
 	}
 
