@@ -21,7 +21,7 @@ public class SoccerGame extends Game {
                 // TODO Auto-generated method stub
         }
         
-        public void resetGame(Marcador marcador){
+        public void resetGame(Marcador marcador, Tiempo tiempo){
         	SoccerScene scene = new SoccerScene("sonido1.wav");
         	
         	Cancha cancha = new Cancha("cancha.png", 0, -460);
@@ -31,7 +31,6 @@ public class SoccerGame extends Game {
 	
         	LabelSeleccionado label = new LabelSeleccionado(625, 240);
 	                
-        	Tiempo tiempo = new Tiempo(300, 10, Color.lightGray);
         		
         	JugadorLocal jugadorLocal1 = new JugadorLocal("jugadores.png", 150, 440, 300, label);
         	JugadorLocal jugadorLocal2 = new JugadorLocal("jugadores.png", 150, 622, 265, label);
