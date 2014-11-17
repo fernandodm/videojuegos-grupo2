@@ -1,9 +1,11 @@
 package soccer.estados;
 
+import soccer.Direccion;
 import soccer.Jugador;
 import soccer.Pelota;
 
 import com.uqbar.vainilla.DeltaState;
+import com.uqbar.vainilla.events.constants.Key;
 
 public class EstadoPelotaCorner extends EstadoPelota {
 
@@ -13,6 +15,7 @@ public class EstadoPelotaCorner extends EstadoPelota {
 
 	@Override
 	public void update(DeltaState deltaState) {
+		int direccion = Direccion.obtenerDireccion(deltaState);
 		for(Jugador jugador : this.getPelota().getJugador().equipoContrario().getJugadores()){
 			if(jugador.isEstaSeleccionado()){
 				jugador.setEstaSeleccionado(false);
@@ -21,13 +24,29 @@ public class EstadoPelotaCorner extends EstadoPelota {
 				break;
 			}
 		}
+		if(this.noApretoDireccion(direccion) || this.getPelota().isEnRemate()){
+			if(deltaState.isKeyPressed(Key.ENTER)){
+				this.getPelota().activarRemate(deltaState);
+				this.getPelota().getJugador().setEstado(new EstadoJugadorSeleccionado(this.getPelota().getJugador()));
+			}
+			this.getPelota().moverPelotaPorRemate(deltaState);
+//			this.getPelota().setEstadoPelota(new EstadoPelotaEnJuego(this.getPelota()));
+		}
+		/*
 		if(this.getPelota().getY() < 50){
 			
 		}else{
 			
+		}*/
+	}
+		
+		public boolean noApretoDireccion(int direccion){
+			return Direccion.LEFT != direccion && Direccion.DOWN != direccion 
+					&& Direccion.UP != direccion && Direccion.UP != direccion
+					&& Direccion.DOWNLEFT != direccion && Direccion.UPLEFT != direccion
+					&& Direccion.DOWNRIGHT != direccion && Direccion.UPRIGHT != direccion;
 		}
 
-	}
 
 	@Override
 	public void cambiar(EstadoPelotaEnJuego estadoPelotaEnJuego) {
@@ -35,20 +54,5 @@ public class EstadoPelotaCorner extends EstadoPelota {
 
 	}
 	
-	private void pocisionarJugadorCorner(Jugador jugador) {
-		if(this.getPelota().getX() < 640){
-			this.getPelota().setX(162);
-			jugador.setX(138);
-			jugador.setY(this.getPelota().getY()-3);
-			jugador.getLabelSeleccionado().setX(jugador.getX() - 10);
-			jugador.getLabelSeleccionado().setY(jugador.getY() + 6);
-		}else{
-			jugador.setX(1090+10);
-			jugador.setY(this.getPelota().getY()-3);
-			jugador.getLabelSeleccionado().setX(jugador.getX() + 25);
-			jugador.getLabelSeleccionado().setY(jugador.getY() + 10);
-		}
-		
-	}
 
 }
