@@ -40,7 +40,9 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 	}
 
 	private void verificarCorner() {
-		if(this.getPelota().getY() < 50 || this.getPelota().getY() > 528){
+		boolean gol = !(this.getPelota().getX()>550 && this.getPelota().getX()<700 );
+		if((this.getPelota().getY() < 50 && gol) 
+		|| this.getPelota().getY() > 528 && gol){
 						
 			if(fueCorner()){
 				this.getPelota().setEstadoPelota(new EstadoPelotaCorner(this.getPelota()));
