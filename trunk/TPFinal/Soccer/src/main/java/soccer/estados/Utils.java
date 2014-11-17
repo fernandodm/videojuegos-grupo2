@@ -3,6 +3,7 @@ package soccer.estados;
 import java.util.List;
 
 import soccer.Arco;
+import soccer.Direccion;
 import soccer.Jugador;
 import soccer.Pelota;
 import soccer.SoccerScene;
@@ -52,8 +53,23 @@ public class Utils {
 		return false;
 	}
 
-	public static int direccionPelota() {
+	public static int direccionPelota(double x,double y) {
 		Pelota pelota = Utils.scene.getPelota();
+		if(pelota.getY()> y){
+			if(pelota.getX()< x){
+				return Direccion.DOWNRIGHT;
+			}else{
+				return Direccion.DOWNLEFT;
+			}
+		}
+		if(pelota.getY()< y){
+			if(pelota.getX()< x){
+
+				return Direccion.UPRIGHT;
+			}else{
+				return Direccion.UPLEFT;
+			}
+		}
 		return pelota.getUltimaDireccion();
 	}
 }
