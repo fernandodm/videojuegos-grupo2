@@ -13,7 +13,7 @@ public class EstadoJugadorNoSeleccionadoCPU extends EstadoJugador {
 
 	public void update(DeltaState deltaState) {
 		if(Utils.distanciaConPelota(this.getJugador().getX(), this.getJugador().getY())> 150
-				){
+				|| Utils.tienePelotaVisitante()){
 			return;
 		}
 		int direccion = Utils.direccionPelota(this.getJugador().getX(),this.getJugador().getY());
