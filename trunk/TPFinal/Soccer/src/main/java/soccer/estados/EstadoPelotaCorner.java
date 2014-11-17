@@ -46,13 +46,4 @@ public class EstadoPelotaCorner extends EstadoPelota {
 					&& Direccion.DOWNLEFT != direccion && Direccion.UPLEFT != direccion
 					&& Direccion.DOWNRIGHT != direccion && Direccion.UPRIGHT != direccion;
 		}
-
-
-	@Override
-	public void cambiar(EstadoPelotaEnJuego estadoPelotaEnJuego) {
-		// TODO Auto-generated method stub
-
-	}
-	
-
 }
