@@ -52,6 +52,21 @@ public class Utils {
 		}
 		return false;
 	}
+	
+	public static Jugador jugadorLocalMasCercano(double x,double y) {
+		Jugador jugadorCerca = null;
+		double distancia = 100000; //es la maxima distancia entre dos jugadores
+		List<Jugador> Jugadores = Utils.scene.getJugadoresLocales();
+		for (Jugador jugador : Jugadores) {
+				double distanciaActual = Math.sqrt(Math.pow((x - jugador.getX()), 2)
+						+ Math.pow((y - jugador.getY()), 2));
+				if(distanciaActual <= distancia){
+					distancia  = distanciaActual;
+					jugadorCerca = jugador;
+				}
+		}
+		return jugadorCerca;
+	}
 
 	public static int direccionPelota(double x,double y) {
 		Pelota pelota = Utils.scene.getPelota();

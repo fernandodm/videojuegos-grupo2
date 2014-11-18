@@ -3,6 +3,10 @@ package soccer;
 import java.util.LinkedList;
 import java.util.List;
 
+import soccer.estados.EstadoJugadorNoSeleccionadoCPU;
+import soccer.estados.EstadoJugadorSeleccionado;
+import soccer.estados.EstadoJugadorSeleccionadoCPU;
+
 import com.uqbar.vainilla.appearances.Sprite;
 
 public class JugadorVisitante extends Jugador {
@@ -15,6 +19,7 @@ public class JugadorVisitante extends Jugador {
 		agregarSprite(Direccion.DOWN,13,19,32,192);
 		agregarSprite(Direccion.LEFT,8,16,32,224);
 		agregarSprite(Direccion.RIGHT,16,19,32,160);
+		this.setEstado(new EstadoJugadorNoSeleccionadoCPU(this));
 	}
 	
 	public void agregarSprite(int direccion,int principio,int fin,int x,int y){
@@ -42,6 +47,11 @@ public class JugadorVisitante extends Jugador {
 	@Override
 	public boolean isLocal() {
 		return false;
+	}
+
+	@Override
+	public void setEstadoSleccionado(Jugador jugador) {
+		this.setEstado(new EstadoJugadorSeleccionadoCPU(jugador));
 	}
 
 }
