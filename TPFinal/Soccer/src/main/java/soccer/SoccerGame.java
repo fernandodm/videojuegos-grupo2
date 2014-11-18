@@ -8,8 +8,10 @@ import java.awt.Dimension;
 
 
 
+
 import soccer.estados.EstadoJugadorNoSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionado;
+import soccer.estados.Utils;
 
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
@@ -50,23 +52,15 @@ public class SoccerGame extends Game {
         	jugadorLocal7.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal7));
         	arqueroLocal.setEstado(new EstadoJugadorNoSeleccionado(arqueroLocal));
         	
-        	JugadorVisitante jugadorVisitante1 = new JugadorVisitante("jugadores.png", 150, 440, 250, label);
-        	JugadorVisitante jugadorVisitante2 = new JugadorVisitante("jugadores.png", 150, 622, 155, label);
-        	JugadorVisitante jugadorVisitante3 = new JugadorVisitante("jugadores.png", 150, 800, 250, label);
-        	JugadorVisitante jugadorVisitante4 = new JugadorVisitante("jugadores.png", 150, 900, -150, label);
-        	JugadorVisitante jugadorVisitante5 = new JugadorVisitante("jugadores.png", 150, 350, -150, label);
-        	JugadorVisitante jugadorVisitante6 = new JugadorVisitante("jugadores.png", 150, 625, -170, label);
-        	JugadorVisitante jugadorVisitante7 = new JugadorVisitante("jugadores.png", 150, 622, -25, label);
+        	JugadorVisitante jugadorVisitante1 = new JugadorVisitante("jugadores.png", 85, 440, 250, label);
+        	JugadorVisitante jugadorVisitante2 = new JugadorVisitante("jugadores.png", 85, 622, 155, label);
+        	JugadorVisitante jugadorVisitante3 = new JugadorVisitante("jugadores.png", 85, 800, 250, label);
+        	JugadorVisitante jugadorVisitante4 = new JugadorVisitante("jugadores.png", 85, 900, -150, label);
+        	JugadorVisitante jugadorVisitante5 = new JugadorVisitante("jugadores.png", 85, 350, -150, label);
+        	JugadorVisitante jugadorVisitante6 = new JugadorVisitante("jugadores.png", 85, 625, -170, label);
+        	JugadorVisitante jugadorVisitante7 = new JugadorVisitante("jugadores.png", 85, 622, -25, label);
         	JugadorVisitante arqueroVisitante = new JugadorVisitante("arqueros.png", 150, 622, -390, label);
-        	
-        	jugadorVisitante1.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante1));
-        	jugadorVisitante2.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante2));
-        	jugadorVisitante3.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante3));
-        	jugadorVisitante4.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante4));
-        	jugadorVisitante5.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante5));
-        	jugadorVisitante6.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante6));
-        	jugadorVisitante7.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante7));
-        	arqueroVisitante.setEstado(new EstadoJugadorNoSeleccionado(arqueroVisitante));
+      
         	
         	jugadorLocal2.setEstaSeleccionado(true);
         	jugadorLocal2.setAppearance(jugadorLocal2.images.get(Direccion.DOWN).get(3));
@@ -131,7 +125,7 @@ public class SoccerGame extends Game {
         protected void setUpScenes(){
 		               
         	SoccerScene scene = new SoccerScene("sonido1.wav");
-        	
+        	Utils.scene=scene;
         	Cancha cancha = new Cancha("cancha.png", 0, -460);
         	Arco arcoArriba = new Arco("arco.png", 0, 525, -452);
         	Arco arcoAbajo = new Arco("arco.png", 3.14, 525, 953);
@@ -160,23 +154,15 @@ public class SoccerGame extends Game {
         	jugadorLocal7.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal7));
         	arqueroLocal.setEstado(new EstadoJugadorNoSeleccionado(arqueroLocal));
         	
-        	JugadorVisitante jugadorVisitante1 = new JugadorVisitante("jugadores.png", 150, 440, 250, label);
-        	JugadorVisitante jugadorVisitante2 = new JugadorVisitante("jugadores.png", 150, 622, 155, label);
-        	JugadorVisitante jugadorVisitante3 = new JugadorVisitante("jugadores.png", 150, 800, 250, label);
-        	JugadorVisitante jugadorVisitante4 = new JugadorVisitante("jugadores.png", 150, 900, -150, label);
-        	JugadorVisitante jugadorVisitante5 = new JugadorVisitante("jugadores.png", 150, 350, -150, label);
-        	JugadorVisitante jugadorVisitante6 = new JugadorVisitante("jugadores.png", 150, 625, -170, label);
-        	JugadorVisitante jugadorVisitante7 = new JugadorVisitante("jugadores.png", 150, 622, -25, label);
+        	JugadorVisitante jugadorVisitante1 = new JugadorVisitante("jugadores.png", 85, 440, 250, label);
+        	JugadorVisitante jugadorVisitante2 = new JugadorVisitante("jugadores.png", 85, 622, 155, label);
+        	JugadorVisitante jugadorVisitante3 = new JugadorVisitante("jugadores.png", 85, 800, 250, label);
+        	JugadorVisitante jugadorVisitante4 = new JugadorVisitante("jugadores.png", 85, 900, -150, label);
+        	JugadorVisitante jugadorVisitante5 = new JugadorVisitante("jugadores.png", 85, 350, -150, label);
+        	JugadorVisitante jugadorVisitante6 = new JugadorVisitante("jugadores.png", 85, 625, -170, label);
+        	JugadorVisitante jugadorVisitante7 = new JugadorVisitante("jugadores.png", 85, 622, -25, label);
         	JugadorVisitante arqueroVisitante = new JugadorVisitante("arqueros.png", 150, 622, -390, label);
-        	
-        	jugadorVisitante1.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante1));
-        	jugadorVisitante2.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante2));
-        	jugadorVisitante3.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante3));
-        	jugadorVisitante4.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante4));
-        	jugadorVisitante5.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante5));
-        	jugadorVisitante6.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante6));
-        	jugadorVisitante7.setEstado(new EstadoJugadorNoSeleccionado(jugadorVisitante7));
-        	arqueroVisitante.setEstado(new EstadoJugadorNoSeleccionado(arqueroVisitante));
+        
         	
         	jugadorLocal2.setEstaSeleccionado(true);
         	jugadorLocal2.setAppearance(jugadorLocal2.images.get(Direccion.DOWN).get(3));
