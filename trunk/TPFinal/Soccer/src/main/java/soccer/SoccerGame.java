@@ -9,6 +9,8 @@ import java.awt.Dimension;
 
 
 
+
+import soccer.estados.EstadoArqueroCpu;
 import soccer.estados.EstadoJugadorNoSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionado;
 import soccer.estados.Utils;
@@ -24,8 +26,9 @@ public class SoccerGame extends Game {
         }
         
         public void resetGame(Marcador marcador, Tiempo tiempo){
-        	SoccerScene scene = new SoccerScene("sonido1.wav");
         	
+        	SoccerScene scene = new SoccerScene("sonido1.wav");
+        	Utils.scene=scene;
         	Cancha cancha = new Cancha("cancha.png", 0, -460);
         	Arco arcoArriba = new Arco("arco.png", 0, 525, -452);
         	Arco arcoAbajo = new Arco("arco.png", 3.14, 525, 953);
@@ -60,7 +63,7 @@ public class SoccerGame extends Game {
         	JugadorVisitante jugadorVisitante6 = new JugadorVisitante("jugadores.png", 85, 625, -170, label);
         	JugadorVisitante jugadorVisitante7 = new JugadorVisitante("jugadores.png", 85, 622, -25, label);
         	JugadorVisitante arqueroVisitante = new JugadorVisitante("arqueros.png", 150, 622, -390, label);
-      
+        
         	
         	jugadorLocal2.setEstaSeleccionado(true);
         	jugadorLocal2.setAppearance(jugadorLocal2.images.get(Direccion.DOWN).get(3));
@@ -85,6 +88,8 @@ public class SoccerGame extends Game {
         	scene.addJugadorEquipoVisitante(jugadorVisitante6);
         	scene.addJugadorEquipoVisitante(jugadorVisitante7);
         	scene.addJugadorEquipoVisitante(arqueroVisitante);
+        	
+        	arqueroVisitante.setEstado(new EstadoArqueroCpu(arqueroVisitante));
         	
         	scene.addArco(arcoArriba);
         	scene.addArco(arcoAbajo);
@@ -116,8 +121,6 @@ public class SoccerGame extends Game {
         	Desplazador.getInstance().setCancha(cancha);
         	Desplazador.getInstance().setPelota(pelota);
         	Desplazador.getInstance().addComponent(label);
-
-        	
         	
         }
 
@@ -187,6 +190,8 @@ public class SoccerGame extends Game {
         	scene.addJugadorEquipoVisitante(jugadorVisitante6);
         	scene.addJugadorEquipoVisitante(jugadorVisitante7);
         	scene.addJugadorEquipoVisitante(arqueroVisitante);
+        	
+        	arqueroVisitante.setEstado(new EstadoArqueroCpu(arqueroVisitante));
         	
         	scene.addArco(arcoArriba);
         	scene.addArco(arcoAbajo);

@@ -3,9 +3,7 @@ package soccer;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-
 import soccer.estados.EstadoJugador;
-
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
@@ -111,9 +109,10 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 				this.setX(x);
 			}
 		}
-		
-		this.labelSeleccionado.setX(x + 10);
-		this.labelSeleccionado.setY(y - 10);
+		if(this.estaSeleccionado){
+			this.labelSeleccionado.setX(x + 10);
+			this.labelSeleccionado.setY(y - 10);
+		}
 	}
 
 	public void downRight(DeltaState deltaState) {
@@ -132,8 +131,10 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 				this.setX(x);
 			}
 		}
-		this.labelSeleccionado.setX(x + 10);
-		this.labelSeleccionado.setY(y - 15);
+		if(this.estaSeleccionado){
+			this.labelSeleccionado.setX(x + 10);
+			this.labelSeleccionado.setY(y - 15);
+		}
 	}
 	
 	public void down(DeltaState deltaState) {
@@ -147,20 +148,26 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 				this.setY(y);
 			}
 		}
-		this.labelSeleccionado.setY(y - 13);
+		if(this.estaSeleccionado){
+			this.labelSeleccionado.setY(y - 13);
+		}
 	}
 	
 
 	public void right(DeltaState deltaState) {
 		double x = this.getX() + velocity * deltaState.getDelta(); 
 		this.setX(x);
-		this.labelSeleccionado.setX(x + 8);
+			if(this.estaSeleccionado){
+				this.labelSeleccionado.setX(x + 8);
+			}
 	}
 
 	public void left(DeltaState deltaState) {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		this.setX(x);
-		this.labelSeleccionado.setX(x + 8);
+			if(this.estaSeleccionado){
+				this.labelSeleccionado.setX(x + 8);
+			}
 	}
 	
 	public void up(DeltaState deltaState) {
@@ -174,8 +181,10 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 				this.setY(y);
 			}
 		}
-		this.labelSeleccionado.setY(y + 26);
-		this.labelSeleccionado.setX(this.getX() + 6);
+		if(this.estaSeleccionado){
+			this.labelSeleccionado.setY(y + 26);
+			this.labelSeleccionado.setX(this.getX() + 6);
+		}
 	}
 	
 	public void upRight(DeltaState deltaState) {
@@ -193,8 +202,10 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 				this.setX(x);
 			}
 		}
-		this.labelSeleccionado.setY(y + 26);
-		this.labelSeleccionado.setX(this.getX() + 6);
+		if(this.estaSeleccionado){
+			this.labelSeleccionado.setY(y + 26);
+			this.labelSeleccionado.setX(this.getX() + 6);
+		}
 	}
 	
 	public void upLeft(DeltaState deltaState) {
@@ -212,8 +223,10 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 				this.setX(x);
 			}
 		}
-		this.labelSeleccionado.setX(x + 10);
-		this.labelSeleccionado.setY(y + 30);
+		if(this.estaSeleccionado){
+			this.labelSeleccionado.setX(x + 10);
+			this.labelSeleccionado.setY(y + 30);
+		}
 	}
 		
 	private void desplazarComponentes(double n, DeltaState deltaState){
@@ -276,5 +289,4 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 
 	public abstract boolean isLocal();
 
-	public abstract void setEstadoSleccionado(Jugador jugador);
 }

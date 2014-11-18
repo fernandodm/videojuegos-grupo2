@@ -48,9 +48,5 @@ public class JugadorLocal extends Jugador {
 		return true;
 	}
 
-	@Override
-	public void setEstadoSleccionado(Jugador jugador) {
-		this.setEstado(new EstadoJugadorSeleccionado(jugador));
-	}
 
 }

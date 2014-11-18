@@ -49,9 +49,5 @@ public class JugadorVisitante extends Jugador {
 		return false;
 	}
 
-	@Override
-	public void setEstadoSleccionado(Jugador jugador) {
-		this.setEstado(new EstadoJugadorSeleccionadoCPU(jugador));
-	}
 
 }
