@@ -3,7 +3,9 @@ package soccer;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+
 import soccer.estados.EstadoJugador;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
@@ -274,4 +276,5 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 
 	public abstract boolean isLocal();
 
+	public abstract void setEstadoSleccionado(Jugador jugador);
 }
