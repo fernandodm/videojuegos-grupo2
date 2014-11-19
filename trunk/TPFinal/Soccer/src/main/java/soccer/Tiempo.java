@@ -19,7 +19,7 @@ public class Tiempo extends GameComponent<SoccerScene> {
 
 	@Override
 	public void update(DeltaState deltaState) {
-		if(minutos == 1){
+		if(minutos == 4){
 			this.getGame().setCurrentScene(new FinalScene());
 		}
 		((Label)this.getAppearance()).setText("Tiempo: " + this.minutos + ":" + this.segundos);
@@ -40,12 +40,5 @@ public class Tiempo extends GameComponent<SoccerScene> {
 		}
 		
 		actualizar++;
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 	}
 }

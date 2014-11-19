@@ -116,55 +116,65 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		jugador.setFlag(false);
 		jugador.setEstaSeleccionado(false);
 		jugador.setEstado(new EstadoJugadorNoSeleccionado(jugador));
-//		/*Si el jugador esta muy cerca del lateral y se va con la pelota
-//		 * lo corro para abajo al jugador q la tiro para q no colisionen 
-//		 * dos jugadores con la pelota*/
-//		if(jugador.getX() < 202 || jugador.getX() > 1050 && !jugador.isEstaSeleccionado())
-//			jugador.setY(jugador.getY() + 80);
 		
-		List<Jugador> juagdores = jugador.equipoContrario().getJugadores();
-		Jugador jugadorAlCorner = juagdores.get(5);
+		List<Jugador> jugadores = jugador.equipoContrario().getJugadores();
+		Jugador jugadorAlCorner = jugadores.get(5);
+		
+		Jugador jugadorCercanoAlCorner = jugadores.get(1);
+		
 		jugadorAlCorner.setFlag(true);
 		jugadorAlCorner.setEstaSeleccionado(true);
 		this.getPelota().setJugador(jugadorAlCorner);
 		jugadorAlCorner.setEstado(new EstadoJugadorEnCorner(jugadorAlCorner));
-		this.posicionarJugadorCorner(jugadorAlCorner);
+		this.posicionarJugadorCorner(jugadorAlCorner, jugadorCercanoAlCorner);
 		this.getPelota().setEnRemate(false);
 		
-		//acerco un jugador cerca del lateral
-//		this.acercarJugador(juagdores);
+		//acerco un jugador cerca del corner
+//		this.acercarJugadorAlCorner(juagdores);
 		
 	}
 
-	private void posicionarJugadorCorner(Jugador jugador) {
+	private void posicionarJugadorCorner(Jugador jugador, Jugador jugadorCercanoAlCorner) {
 		
 		if(this.getPelota().getY() < 50){
 			jugador.setY(47);
 			this.getPelota().setY(58);
-			posicionarIzquierdaODerecha(jugador);	
+			posicionarIzquierdaODerecha(jugador, jugadorCercanoAlCorner, 60);	
 		}else{
 			jugador.setY(518);
 			this.getPelota().setY(515);
-			posicionarIzquierdaODerecha(jugador);	
+			posicionarIzquierdaODerecha(jugador, jugadorCercanoAlCorner, -60);	
 			jugador.getLabelSeleccionado().setX(jugador.getX() + 25);
 			jugador.getLabelSeleccionado().setY(jugador.getY() + 10);
 		}
 		
 	}
 
-	public void posicionarIzquierdaODerecha(Jugador jugador) {
+	public void posicionarIzquierdaODerecha(Jugador jugador, Jugador jugadorCercanoAlCorner, int y) {
+		
+		
 		if(this.getPelota().getX() < 640){
 			jugador.setAppearance(jugador.getImages().get(Direccion.RIGHT).get(0).rotate(0.3));
 			jugador.setX(145);
 			this.getPelota().setX(172);
 			jugador.getLabelSeleccionado().setX(jugador.getX() - 10);
 			jugador.getLabelSeleccionado().setY(jugador.getY() + 6);
+			
+			jugadorCercanoAlCorner.setAppearance(jugador.getImages().get(Direccion.RIGHT).get(0));
+			
+			jugadorCercanoAlCorner.setX(this.getPelota().getX());
+			jugadorCercanoAlCorner.setY(this.getPelota().getY() + y);
 		}else{
 			jugador.setAppearance(jugador.getImages().get(Direccion.LEFT).get(3).rotate(0.3));
 			jugador.setX(1100);
 			this.getPelota().setX(1080);
 			jugador.getLabelSeleccionado().setX(jugador.getX() + 27);
 			jugador.getLabelSeleccionado().setY(jugador.getY() + 6);
+			
+			jugadorCercanoAlCorner.setAppearance(jugador.getImages().get(Direccion.LEFT).get(2));
+			
+			jugadorCercanoAlCorner.setX(this.getPelota().getX() - 15);
+			jugadorCercanoAlCorner.setY(this.getPelota().getY() + y);
 		}
 	}
 
@@ -198,10 +208,21 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		this.getPelota().setEnRemate(false);
 		
 		//acerco un jugador cerca del lateral
-		this.acercarJugador(juagdores);
+		this.acercarJugadorAlLateral(juagdores);
+	}
+	
+	private void acercarJugadorAlCorner(List<Jugador> juagdores) {
+		Jugador jugadorCandidatoAPase = juagdores.get(1);
+		if(this.getPelota().getX() < 50){
+			jugadorCandidatoAPase.setX(this.getPelota().getX() + 30);
+			jugadorCandidatoAPase.setY(this.getPelota().getY() - 45);
+		}else{
+			jugadorCandidatoAPase.setX(this.getPelota().getX() - 30);
+			jugadorCandidatoAPase.setY(this.getPelota().getY() - 45);
+		}
 	}
 
-	private void acercarJugador(List<Jugador> juagdores) {
+	private void acercarJugadorAlLateral(List<Jugador> juagdores) {
 		Jugador jugadorCandidatoAPase = juagdores.get(1);
 		if(this.getPelota().getX() < 162){
 			jugadorCandidatoAPase.setX(this.getPelota().getX() + 30);
