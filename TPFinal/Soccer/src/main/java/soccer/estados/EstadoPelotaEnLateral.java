@@ -29,7 +29,7 @@ public class EstadoPelotaEnLateral extends EstadoPelota {
 	public boolean noApretoDireccion(int direccion){
 		
 		return Direccion.LEFT != direccion && Direccion.DOWN != direccion 
-				&& Direccion.UP != direccion && Direccion.UP != direccion
+				&& Direccion.RIGHT != direccion && Direccion.UP != direccion
 				&& Direccion.DOWNLEFT != direccion && Direccion.UPLEFT != direccion
 				&& Direccion.DOWNRIGHT != direccion && Direccion.UPRIGHT != direccion;
 	}

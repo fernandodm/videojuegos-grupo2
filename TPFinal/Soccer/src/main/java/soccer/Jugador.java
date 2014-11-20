@@ -150,6 +150,7 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 		}
 		if(this.estaSeleccionado){
 			this.labelSeleccionado.setY(y - 13);
+			this.labelSeleccionado.setX(this.getX() + 6);
 		}
 	}
 	
@@ -158,6 +159,7 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 		double x = this.getX() + velocity * deltaState.getDelta(); 
 		this.setX(x);
 			if(this.estaSeleccionado){
+				this.labelSeleccionado.setY(this.getY() - 13);
 				this.labelSeleccionado.setX(x + 8);
 			}
 	}
@@ -166,6 +168,7 @@ public abstract class Jugador extends GameComponent<SoccerScene>{
 		double x = this.getX() - velocity * deltaState.getDelta();
 		this.setX(x);
 			if(this.estaSeleccionado){
+				this.labelSeleccionado.setY(this.getY() - 13);	
 				this.labelSeleccionado.setX(x + 8);
 			}
 	}

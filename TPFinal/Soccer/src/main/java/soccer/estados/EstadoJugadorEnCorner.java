@@ -37,7 +37,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 		int direccion = obtenerDireccion(deltaState);
 		//por si no se apreto ninguna tecla
 		if((direccion == 0 && !seMovio))
-			this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.LEFT);
+			this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.UPLEFT);
 		
 		switch (direccion) {
 		case Direccion.UP:
@@ -75,10 +75,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 	
 	
 	
-	
-	
-	
-	
+		
 	
 	
 	
@@ -86,7 +83,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 		int direccion = obtenerDireccion(deltaState);
 		//por si no se apreto ninguna tecla
 		if((direccion == 0 && !seMovio))
-			this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.RIGHT);
+			this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.UPRIGHT);
 		
 		switch (direccion) {
 		case Direccion.UP:
@@ -129,7 +126,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 		int direccion = obtenerDireccion(deltaState);
 		//por si no se apreto ninguna tecla
 		if((direccion == 0 && !seMovio))
-			this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.LEFT);
+			this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.DOWNLEFT);
 		
 		switch (direccion) {
 		case Direccion.UP:
@@ -175,7 +172,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 		int direccion = obtenerDireccion(deltaState);
 		//por si no se apreto ninguna tecla
 		if((direccion == 0 && !seMovio))
-			this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.RIGHT);
+			this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.DOWNRIGHT);
 		
 		switch (direccion) {
 		case Direccion.UP:
@@ -209,54 +206,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	private void ejecutar(int dir, int downright, int upright, int n, double radio, DeltaState deltaState, double sumX, double sumY) {
-		int direccion = obtenerDireccion(deltaState);
-		//por si no se apreto ninguna tecla
-		if((direccion == 0 && !seMovio))
-			this.getJugador().getScene().getPelota().setUltimaDireccion(dir);
-		
-		switch (direccion) {
-		case Direccion.UP:
-			
-			if(seMovioUp == 1){
-				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.DOWN).get(n));
-				this.getJugador().setY(this.getJugador().getY() - sumY);
-				this.getJugador().setX(this.getJugador().getX() + sumX);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() - sumY);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() + 22);
-				this.getJugador().getScene().getPelota().setUltimaDireccion(downright);
-				seMovioUp--;
-				seMovioDown++;
-			}
-			seMovio = true;
-			break;
-		case Direccion.DOWN:
 
-			if(seMovioDown == 1){
-				this.getJugador().setAppearance(this.getJugador().getImages().get(dir).get(n).rotate(radio));
-				this.getJugador().setY(this.getJugador().getY() + sumY);
-				this.getJugador().setX(this.getJugador().getX() - sumX);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() + sumY);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() - 22);
-				this.getJugador().getScene().getPelota().setUltimaDireccion(upright);
-				seMovioUp++;
-				seMovioDown--;
-			}
-			seMovio = true;
-			break;
-		}
-		
-	}
 
 	private int obtenerDireccion(DeltaState deltaState) {
 		if (deltaState.isKeyPressed(Key.W)) {
