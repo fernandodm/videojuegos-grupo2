@@ -107,6 +107,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 					&& !jugador.isEstaSeleccionado()) {
 				this.cambiarJugadorSeleccionado(jugador);
 				this.estadoPelota = new EstadoPelotaEnJuego(this);
+				this.remateEnCorner = false;
 			}
 		}
 	}
