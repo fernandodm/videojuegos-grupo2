@@ -2,10 +2,6 @@ package soccer;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import soccer.estados.EstadoJugadorNoSeleccionado;
-import soccer.estados.EstadoJugadorSeleccionado;
-
 import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.sound.Sound;
 import com.uqbar.vainilla.sound.SoundBuilder;
@@ -13,7 +9,6 @@ import com.uqbar.vainilla.sound.SoundBuilder;
 public class SoccerScene extends GameScene {
 
 	private Cancha cancha;
-	// private List<Jugador> jugadores = new ArrayList<Jugador>();
 	private List<Arco> arcos = new ArrayList<Arco>();
 	private Equipo equipoLocal = new Equipo();
 	private Equipo equipoVisitante = new Equipo();
@@ -78,15 +73,6 @@ public class SoccerScene extends GameScene {
 		this.addComponent(cancha);
 		this.cancha = cancha;
 	}
-
-	// public List<Jugador> getJugadores() {
-	// return jugadores;
-	// }
-	//
-	// public void addJugador(Jugador jugador) {
-	// this.addComponent(jugador);
-	// this.jugadores.add(jugador);
-	// }
 
 	public void addJugadorEquipoLocal(Jugador jugador) {
 		this.addComponent(jugador);

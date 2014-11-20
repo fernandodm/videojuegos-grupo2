@@ -128,10 +128,6 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		jugadorAlCorner.setEstado(new EstadoJugadorEnCorner(jugadorAlCorner));
 		this.posicionarJugadorCorner(jugadorAlCorner, jugadorCercanoAlCorner);
 		this.getPelota().setEnRemate(false);
-		
-		//acerco un jugador cerca del corner
-//		this.acercarJugadorAlCorner(juagdores);
-		
 	}
 
 	private void posicionarJugadorCorner(Jugador jugador, Jugador jugadorCercanoAlCorner) {

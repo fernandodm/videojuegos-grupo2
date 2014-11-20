@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import soccer.estados.EstadoJugadorNoSeleccionadoCPU;
-import soccer.estados.EstadoJugadorSeleccionado;
-import soccer.estados.EstadoJugadorSeleccionadoCPU;
 
 import com.uqbar.vainilla.appearances.Sprite;
 
