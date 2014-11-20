@@ -372,9 +372,7 @@ public class SoccerScene extends GameScene {
 
 	public void resetScene(Marcador marcador){
 		this.setMarcador(marcador);
-		((SoccerGame)this.getGame()).resetGame(marcador,this.getTiempo());
-//		this.getGame().setCurrentScene(((ArkanoidGame)this.getGame()).buildScene("Perdiste!!! Presione N para volver a jugar."));
-	
+		((SoccerGame)this.getGame()).resetGame(marcador,this.getTiempo());	
 	}
 
 }

@@ -3,13 +3,6 @@ package soccer;
 import java.awt.Color;
 import java.awt.Dimension;
 
-
-
-
-
-
-
-
 import soccer.estados.EstadoArqueroCpu;
 import soccer.estados.EstadoJugadorNoSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionado;
@@ -17,6 +10,8 @@ import soccer.estados.Utils;
 
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
+import com.uqbar.vainilla.GameScene;
+
 
 public class SoccerGame extends Game {
 
@@ -235,6 +230,9 @@ public class SoccerGame extends Game {
                 return "Soccer";
         }
 
+        public GanasteOPerdisteScene buildScene(String msj, String resultado) {
+    		return new GanasteOPerdisteScene(msj, resultado);
+    	}
 
         public static void main(String[] args) {
 

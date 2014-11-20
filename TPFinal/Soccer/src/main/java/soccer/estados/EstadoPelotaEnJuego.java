@@ -207,17 +207,6 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		this.acercarJugadorAlLateral(juagdores);
 	}
 	
-	private void acercarJugadorAlCorner(List<Jugador> juagdores) {
-		Jugador jugadorCandidatoAPase = juagdores.get(1);
-		if(this.getPelota().getX() < 50){
-			jugadorCandidatoAPase.setX(this.getPelota().getX() + 30);
-			jugadorCandidatoAPase.setY(this.getPelota().getY() - 45);
-		}else{
-			jugadorCandidatoAPase.setX(this.getPelota().getX() - 30);
-			jugadorCandidatoAPase.setY(this.getPelota().getY() - 45);
-		}
-	}
-
 	private void acercarJugadorAlLateral(List<Jugador> juagdores) {
 		Jugador jugadorCandidatoAPase = juagdores.get(1);
 		if(this.getPelota().getX() < 162){

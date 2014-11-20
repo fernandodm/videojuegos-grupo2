@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
+import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.appearances.Label;
 
 public class Tiempo extends GameComponent<SoccerScene> {
@@ -20,7 +21,16 @@ public class Tiempo extends GameComponent<SoccerScene> {
 	@Override
 	public void update(DeltaState deltaState) {
 		if(minutos == 4){
-			this.getGame().setCurrentScene(new FinalScene());
+			String resultado = "Resultado: " + this.getScene().getMarcador().getMarcadorLocal() + " - " + this.getScene().getMarcador().getMarcadorVisitante();
+			if(this.getScene().getMarcador().getMarcadorLocal() > this.getScene().getMarcador().getMarcadorVisitante()){
+				this.getGame().setCurrentScene(((SoccerGame)this.getGame()).buildScene("Ganaste!!! Presione N para volver a jugar.", resultado));
+			}else{
+				if(this.getScene().getMarcador().getMarcadorLocal() < this.getScene().getMarcador().getMarcadorVisitante()){
+					this.getGame().setCurrentScene(((SoccerGame)this.getGame()).buildScene("Perdiste!!! Presione N para volver a jugar.", resultado));
+				}else{
+					this.getGame().setCurrentScene(((SoccerGame)this.getGame()).buildScene("Empataron!!! Presione N para volver a jugar.", resultado));
+				}
+			}
 		}
 		((Label)this.getAppearance()).setText("Tiempo: " + this.minutos + ":" + this.segundos);
 		this.ejecutar();
