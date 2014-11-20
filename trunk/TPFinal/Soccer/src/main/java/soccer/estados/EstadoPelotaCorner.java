@@ -1,7 +1,6 @@
 package soccer.estados;
 
 import soccer.Direccion;
-import soccer.Jugador;
 import soccer.Pelota;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.events.constants.Key;
@@ -15,13 +14,7 @@ public class EstadoPelotaCorner extends EstadoPelota {
 	@Override
 	public void update(DeltaState deltaState) {
 		int direccion = Direccion.obtenerDireccion(deltaState);
-//		for(Jugador jugador : this.getPelota().getJugador().equipoContrario().getJugadores()){
-//			if(jugador.isEstaSeleccionado()){
-//				jugador.setEstaSeleccionado(false);
-//				jugador.setEstado(new EstadoJugadorNoSeleccionado(jugador));
-//				break;
-//			}
-//		}
+
 		if(this.noApretoDireccion(direccion) || this.getPelota().isEnRemate()){
 			if(deltaState.isKeyPressed(Key.ENTER)){
 				this.getPelota().activarRemate(deltaState);

@@ -12,7 +12,7 @@ public class Marcador extends GameComponent<SoccerScene>{
 	private int marcadorVisitante = 0;
 	
 	public Marcador() {
-		super(new Label(new Font("verdana",  Font.BOLD, 20), Color.BLACK, "0" ), 0, 10);
+		super(new Label(new Font("verdana",  Font.BOLD, 20), Color.LIGHT_GRAY, "0" ), 640, 10);
 	}
 
 	
@@ -37,5 +37,25 @@ public class Marcador extends GameComponent<SoccerScene>{
 			this.marcadorVisitante++;
 			super.getScene().resetScene(this);
 		}
+	}
+
+
+	public int getMarcadorLocal() {
+		return marcadorLocal;
+	}
+
+
+	public void setMarcadorLocal(int marcadorLocal) {
+		this.marcadorLocal = marcadorLocal;
+	}
+
+
+	public int getMarcadorVisitante() {
+		return marcadorVisitante;
+	}
+
+
+	public void setMarcadorVisitante(int marcadorVisitante) {
+		this.marcadorVisitante = marcadorVisitante;
 	}
 }
