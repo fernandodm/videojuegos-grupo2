@@ -3,8 +3,6 @@ package soccer;
 import java.util.LinkedList;
 import java.util.List;
 
-import soccer.estados.EstadoJugadorSeleccionado;
-
 import com.uqbar.vainilla.appearances.Sprite;
 
 public class JugadorLocal extends Jugador {
