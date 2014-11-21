@@ -6,14 +6,55 @@ import soccer.Jugador;
 import com.uqbar.vainilla.DeltaState;
 
 public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
-	
-	public EstadoJugadorSeleccionadoCPU(Jugador jugador){
+
+	public EstadoJugadorSeleccionadoCPU(Jugador jugador) {
 		this.setJugador(jugador);
 	}
 
 	@Override
 	public void update(DeltaState deltaState) {
-//		if(!(this.getScene().getPelota().getX() < 173) && !(this.getScene().getPelota().getX() > 1091) ){
-
+		Jugador jugador = Utils.jugadorLocalMasCercano(
+				this.getJugador().getX(), this.getJugador().getY());
+		if (jugador.distancia(this.getJugador()) < 90) {
+			int direccion = Utils.direccionEsquivar(this.getJugador().getX(),
+					this.getJugador().getY());
+			switch (direccion) {
+			case Direccion.DOWN:
+				this.getJugador().up(deltaState);
+				this.getJugador().ejecutarSprite(deltaState, Direccion.UP, 0);
+				break;
+			case Direccion.UP:
+				this.getJugador().down(deltaState);
+				this.getJugador().ejecutarSprite(deltaState, Direccion.DOWN, 0);
+				break;
+			case Direccion.RIGHT:
+				this.getJugador().left(deltaState);
+				this.getJugador().ejecutarSprite(deltaState, Direccion.LEFT, 0);
+				break;
+			case Direccion.LEFT:
+				this.getJugador().right(deltaState);
+				this.getJugador()
+						.ejecutarSprite(deltaState, Direccion.RIGHT, 0);
+				break;
+			case Direccion.UPLEFT:
+				this.getJugador().upRight(deltaState);
+				this.getJugador().ejecutarSprite(deltaState, Direccion.UP, 0.6);
+				break;
+			case Direccion.UPRIGHT:
+				this.getJugador().upLeft(deltaState);
+				this.getJugador()
+						.ejecutarSprite(deltaState, Direccion.UP, -0.6);
+				break;
+			case Direccion.DOWNLEFT:
+				this.getJugador().downRight(deltaState);
+				this.getJugador().ejecutarSprite(deltaState, Direccion.UP, 2);
+				break;
+			case Direccion.DOWNRIGHT:
+				this.getJugador().downLeft(deltaState);
+				this.getJugador().ejecutarSprite(deltaState, Direccion.UP, -2);
+				break;
+			// }
+			}
+		}
 	}
 }
