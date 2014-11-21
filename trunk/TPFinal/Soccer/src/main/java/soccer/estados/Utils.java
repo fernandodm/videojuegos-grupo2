@@ -87,4 +87,24 @@ public class Utils {
 		}
 		return pelota.getUltimaDireccion();
 	}
+	
+	public static int direccionEsquivar(double x,double y) {
+		Pelota pelota = Utils.scene.getPelota();
+		if(pelota.getY()> y){
+			if(pelota.getX()< x){
+				return Direccion.DOWNRIGHT;
+			}else{
+				return Direccion.DOWNLEFT;
+			}
+		}
+		if(pelota.getY()< y){
+			if(pelota.getX()< x){
+				return Direccion.UPRIGHT;
+			}else{
+				return Direccion.UPLEFT;
+			}
+		}
+		
+		return pelota.getUltimaDireccion();
+	}
 }
