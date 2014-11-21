@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import soccer.estados.EstadoJugadorNoSeleccionadoCPU;
+import soccer.estados.EstadoJugadorSeleccionadoCPU;
 
 import com.uqbar.vainilla.appearances.Sprite;
 
@@ -45,6 +46,12 @@ public class JugadorVisitante extends Jugador {
 	@Override
 	public boolean isLocal() {
 		return false;
+	}
+
+	@Override
+	public void setEstadoSeleccionado(Jugador jugadorCerca) {
+		this.setEstado(new EstadoJugadorSeleccionadoCPU(jugadorCerca));
+		
 	}
 
 

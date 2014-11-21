@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import soccer.estados.EstadoJugadorNoSeleccionado;
+import soccer.estados.EstadoJugadorNoSeleccionadoCPU;
 import soccer.estados.EstadoJugadorSeleccionado;
+import soccer.estados.EstadoJugadorSeleccionadoCPU;
 import soccer.estados.EstadoPelota;
 import soccer.estados.EstadoPelotaEnJuego;
+
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Sprite;
@@ -116,11 +119,67 @@ public class Pelota extends GameComponent<SoccerScene> {
 		this.setY(jugador.getY());
 		this.setX(jugador.getX());
 		
-		this.getJugador().setEstado(new EstadoJugadorNoSeleccionado(this.getJugador()));
-		this.getJugador().setEstaSeleccionado(false);
+		if(jugador.getClass().equals(JugadorVisitante.class)
+				&& !this.getJugador().getClass().equals(JugadorVisitante.class)){
+			
+			List<Jugador> jugadoresv = super.getScene().getJugadoresVisitantes();
+			for (Jugador jv : jugadoresv) {
+				jv.setEstado(new EstadoJugadorNoSeleccionadoCPU(jv));
+				jv.setEstaSeleccionado(false);
+			}
+			
+			jugador.setEstadoSeleccionado(jugador);
+			jugador.setEstaSeleccionado(true);
+			
+			List<Jugador> jugadores = super.getScene().getJugadoresLocales();
 
-		jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
-		jugador.setEstaSeleccionado(true);
+			for (Jugador j : jugadores) {
+				j.setEstado(new EstadoJugadorNoSeleccionado(j));
+				j.setEstaSeleccionado(false);
+			}
+			this.getJugador().setEstado(new EstadoJugadorSeleccionado(this.getJugador()));
+			this.getJugador().setEstaSeleccionado(true);
+			
+		}else if(jugador.getClass().equals(JugadorVisitante.class)
+				&& this.getJugador().getClass().equals(JugadorVisitante.class)){
+			jugador.setEstadoSeleccionado(jugador);
+			jugador.setEstaSeleccionado(true);
+			
+			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+			this.getJugador().setEstaSeleccionado(false);
+			
+		}else if(!jugador.getClass().equals(JugadorVisitante.class)
+				&& this.getJugador().getClass().equals(JugadorVisitante.class)){
+			
+			List<Jugador> jugadoresl = super.getScene().getJugadoresLocales();
+
+			for (Jugador jl : jugadoresl) {
+				jl.setEstado(new EstadoJugadorNoSeleccionado(jl));
+				jl.setEstaSeleccionado(false);
+			}
+			
+			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
+			jugador.setEstaSeleccionado(true);
+			
+			List<Jugador> jugadores = super.getScene().getJugadoresVisitantes();
+
+			for (Jugador j : jugadores) {
+				j.setEstado(new EstadoJugadorNoSeleccionadoCPU(j));
+				j.setEstaSeleccionado(false);
+			}
+			this.getJugador().setEstado(new EstadoJugadorSeleccionadoCPU(this.getJugador()));
+			this.getJugador().setEstaSeleccionado(true);
+			
+		}else if(!jugador.getClass().equals(JugadorVisitante.class)
+				&& !this.getJugador().getClass().equals(JugadorVisitante.class)){
+			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
+			jugador.setEstaSeleccionado(true);
+			
+			this.getJugador().setEstado(new EstadoJugadorNoSeleccionado(this.getJugador()));
+			this.getJugador().setEstaSeleccionado(false);
+		}
+		
+
 
 		this.setJugador(jugador);
 		enRemate = false;
