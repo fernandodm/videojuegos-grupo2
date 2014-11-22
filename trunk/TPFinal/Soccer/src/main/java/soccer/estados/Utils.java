@@ -70,19 +70,36 @@ public class Utils {
 
 	public static int direccionPelota(double x,double y) {
 		Pelota pelota = Utils.scene.getPelota();
+		
+		if((int)pelota.getX() == (int) x){
+			if(pelota.getY()> y){
+				return Direccion.DOWN;
+			}else{
+				return Direccion.UP;
+			}
+		}
+		
+		if((int)pelota.getY() == (int) y){
+			if(pelota.getX()> x){
+				return Direccion.RIGHT;
+			}else{
+				return Direccion.LEFT;
+			}
+		}
+		
 		if(pelota.getY()> y){
 			if(pelota.getX()< x){
-				return Direccion.DOWNRIGHT;
-			}else{
 				return Direccion.DOWNLEFT;
+			}else{
+				return Direccion.DOWNRIGHT;
 			}
 		}
 		if(pelota.getY()< y){
 			if(pelota.getX()< x){
 
-				return Direccion.UPRIGHT;
-			}else{
 				return Direccion.UPLEFT;
+			}else{
+				return Direccion.UPRIGHT;
 			}
 		}
 		return pelota.getUltimaDireccion();
