@@ -118,20 +118,32 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 	private void saqueDeArco() {
 		
 		Jugador jugador = this.getPelota().getJugador();
-		jugador.setFlag(false);
-		jugador.setEstaSeleccionado(false);
-		jugador.setEstado(new EstadoJugadorNoSeleccionado(jugador));
-
+		
+		for(Jugador jug: this.getPelota().getScene().getJugadores()){
+			jug.setFlag(false);
+			jug.setEstaSeleccionado(false);
+			jug.setEstadoNoSeleccionado(jug);
+		}
 		
 		List<Jugador> juagdores = jugador.equipoContrario().getJugadores();
 		Jugador arquero = juagdores.get(7);
 		arquero.setFlag(true);
 		arquero.setEstaSeleccionado(true);
 		this.getPelota().setJugador(arquero);
-		arquero.setEstado(new EstadoJugadorSeleccionado(arquero));
-		arquero.setAppearance(arquero.getImages().get(Direccion.UP).get(3));
+		
+		arquero.setEstadoSeleccionado(arquero);
+		setearAparienciaArquero(arquero);
 		this.posicionarSaqueDeArco(arquero);
 		this.getPelota().setEnRemate(false);
+		
+	}
+
+	public void setearAparienciaArquero(Jugador arquero) {
+		if(arquero instanceof JugadorLocal){
+			arquero.setAppearance(arquero.getImages().get(Direccion.UP).get(3));
+		}else{
+			arquero.setAppearance(arquero.getImages().get(Direccion.DOWN).get(3));
+		}
 		
 	}
 
@@ -174,9 +186,14 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 	private void seleccionarJugadorAlCorner() {
 		
 		Jugador jugador = this.getPelota().getJugador();
-		jugador.setFlag(false);
-		jugador.setEstaSeleccionado(false);
-		jugador.setEstado(new EstadoJugadorNoSeleccionado(jugador));
+
+		
+		for(Jugador jug: this.getPelota().getScene().getJugadores()){
+			jug.setFlag(false);
+			jug.setEstaSeleccionado(false);
+			jug.setEstadoNoSeleccionado(jug);
+		}
+	
 		
 		List<Jugador> jugadores = jugador.equipoContrario().getJugadores();
 		Jugador jugadorAlCorner = jugadores.get(5);
@@ -244,9 +261,11 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 
 	public void seleccionarJugadorAlLateral() {
 		Jugador jugador = this.getPelota().getJugador();
-		jugador.setFlag(false);
-		jugador.setEstaSeleccionado(false);
-		jugador.setEstado(new EstadoJugadorNoSeleccionado(jugador));
+		for(Jugador jug: this.getPelota().getScene().getJugadores()){
+			jug.setFlag(false);
+			jug.setEstaSeleccionado(false);
+			jug.setEstadoNoSeleccionado(jug);
+		}
 		/*Si el jugador esta muy cerca del lateral y se va con la pelota
 		 * lo corro para abajo al jugador q la tiro para q no colisionen 
 		 * dos jugadores con la pelota*/

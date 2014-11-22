@@ -343,59 +343,59 @@ public class Pelota extends GameComponent<SoccerScene> {
 		}
 	}
 
-	public void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
-		int direccion = Direccion.obtenerDireccion(deltaState);
-		switch (direccion) {
-		case Direccion.UP:
-			this.ultimaDireccion = Direccion.UP; 
-			this.setY(y-14);
-			this.setX(x + 3);
-			this.ejecutarSpritePelota();
-			break;
-		case Direccion.DOWN:
-			this.ultimaDireccion = Direccion.DOWN; 
-			this.setY(y+31);
-			this.setX(x);
-			this.ejecutarSpritePelota();
-			break;
-		case Direccion.LEFT:
-			this.ultimaDireccion = Direccion.LEFT; 
-			this.setX(x-14);
-			this.setY(y+4);
-			this.ejecutarSpritePelota();
-			break;
-		case Direccion.RIGHT:
-			this.ultimaDireccion = Direccion.RIGHT; 
-			this.setX(x+31);
-			this.setY(y+9);
-			this.ejecutarSpritePelota();
-			break;
-		case Direccion.UPRIGHT:
-			this.ultimaDireccion = Direccion.UPRIGHT; 
-			this.setX(x + 25);
-			this.setY(y - 10);
-			this.ejecutarSpritePelota();
-			break;
-		case Direccion.UPLEFT:
-			this.ultimaDireccion = Direccion.UPLEFT; 
-			this.setX(x - 8);
-			this.setY(y - 10);
-			this.ejecutarSpritePelota();
-			break;
-		case Direccion.DOWNRIGHT:
-			this.ultimaDireccion = Direccion.DOWNRIGHT; 
-			this.setX(x + 30);
-			this.setY(y + 23);
-			this.ejecutarSpritePelota();
-			break;
-		case Direccion.DOWNLEFT:
-			this.ultimaDireccion = Direccion.DOWNLEFT; 
-			this.setX(x - 13);
-			this.setY(y + 21);
-			this.ejecutarSpritePelota();
-			break;
-		}				
-	}
+//	public void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
+//		int direccion = Direccion.obtenerDireccion(deltaState);
+//		switch (direccion) {
+//		case Direccion.UP:
+//			this.ultimaDireccion = Direccion.UP; 
+//			this.setY(y-14);
+//			this.setX(x + 3);
+//			this.ejecutarSpritePelota();
+//			break;
+//		case Direccion.DOWN:
+//			this.ultimaDireccion = Direccion.DOWN; 
+//			this.setY(y+31);
+//			this.setX(x);
+//			this.ejecutarSpritePelota();
+//			break;
+//		case Direccion.LEFT:
+//			this.ultimaDireccion = Direccion.LEFT; 
+//			this.setX(x-14);
+//			this.setY(y+4);
+//			this.ejecutarSpritePelota();
+//			break;
+//		case Direccion.RIGHT:
+//			this.ultimaDireccion = Direccion.RIGHT; 
+//			this.setX(x+31);
+//			this.setY(y+9);
+//			this.ejecutarSpritePelota();
+//			break;
+//		case Direccion.UPRIGHT:
+//			this.ultimaDireccion = Direccion.UPRIGHT; 
+//			this.setX(x + 25);
+//			this.setY(y - 10);
+//			this.ejecutarSpritePelota();
+//			break;
+//		case Direccion.UPLEFT:
+//			this.ultimaDireccion = Direccion.UPLEFT; 
+//			this.setX(x - 8);
+//			this.setY(y - 10);
+//			this.ejecutarSpritePelota();
+//			break;
+//		case Direccion.DOWNRIGHT:
+//			this.ultimaDireccion = Direccion.DOWNRIGHT; 
+//			this.setX(x + 30);
+//			this.setY(y + 23);
+//			this.ejecutarSpritePelota();
+//			break;
+//		case Direccion.DOWNLEFT:
+//			this.ultimaDireccion = Direccion.DOWNLEFT; 
+//			this.setX(x - 13);
+//			this.setY(y + 21);
+//			this.ejecutarSpritePelota();
+//			break;
+//		}				
+//	}
 
 	public void ejecutarSpritePelota() {
 		if (this.time == 12) {

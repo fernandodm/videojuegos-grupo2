@@ -3,6 +3,7 @@ package soccer;
 import java.util.LinkedList;
 import java.util.List;
 
+import soccer.estados.EstadoJugadorNoSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionado;
 
 import com.uqbar.vainilla.appearances.Sprite;
@@ -55,6 +56,11 @@ public class JugadorLocal extends Jugador {
 	public void setEstadoSeleccionado(Jugador jugadorCerca) {
 		this.setEstado(new EstadoJugadorSeleccionado(jugadorCerca));
 
+	}
+
+	@Override
+	public void setEstadoNoSeleccionado(Jugador jugador) {
+		this.setEstado(new EstadoJugadorNoSeleccionado(jugador));
 	}
 
 }
