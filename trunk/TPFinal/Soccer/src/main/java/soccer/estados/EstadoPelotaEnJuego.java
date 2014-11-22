@@ -5,6 +5,8 @@ import java.util.List;
 import soccer.Colision;
 import soccer.Direccion;
 import soccer.Jugador;
+import soccer.JugadorLocal;
+import soccer.JugadorVisitante;
 import soccer.Pelota;
 import soccer.Vector;
 
@@ -25,7 +27,9 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			if (Colision.mustApply(this.getPelota(), jugador, nuevaPosicion)
 					&& jugador.isEstaSeleccionado()) {
 				this.getPelota().setJugador(jugador);
-				this.getPelota().ejecutarMovimiento(deltaState, jugador.getX(),
+//				this.getPelota().ejecutarMovimiento(deltaState, jugador.getX(),
+//						jugador.getY());
+				this.ejecutarMovimiento(deltaState, jugador.getX(),
 						jugador.getY());
 				jugador.flag = true;
 				this.getPelota().activarRemate(deltaState);
@@ -37,6 +41,63 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		this.getPelota().moverPelotaPorRemate(deltaState);
 		this.verificarCorner();
 		this.verificarLateral();
+	}
+	
+	public void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
+	
+		if(getPelota().getJugador() instanceof JugadorLocal){
+		int direccion = Direccion.obtenerDireccion(deltaState);
+		switch (direccion) {
+		case Direccion.UP:
+			this.getPelota().setUltimaDireccion(Direccion.UP); 
+			this.getPelota().setY(y-14);
+			this.getPelota().setX(x + 3);
+			this.getPelota().ejecutarSpritePelota();
+			break;
+		case Direccion.DOWN:
+			this.getPelota().setUltimaDireccion(Direccion.DOWN); 
+			this.getPelota().setY(y+31);
+			this.getPelota().setX(x);
+			this.getPelota().ejecutarSpritePelota();
+			break;
+		case Direccion.LEFT:
+			this.getPelota().setUltimaDireccion(Direccion.LEFT); 
+			this.getPelota().setX(x-14);
+			this.getPelota().setY(y+4);
+			this.getPelota().ejecutarSpritePelota();
+			break;
+		case Direccion.RIGHT:
+			this.getPelota().setUltimaDireccion(Direccion.RIGHT); 
+			this.getPelota().setX(x+31);
+			this.getPelota().setY(y+9);
+			this.getPelota().ejecutarSpritePelota();
+			break;
+		case Direccion.UPRIGHT:
+			this.getPelota().setUltimaDireccion(Direccion.UPRIGHT); 
+			this.getPelota().setX(x + 25);
+			this.getPelota().setY(y - 10);
+			this.getPelota().ejecutarSpritePelota();
+			break;
+		case Direccion.UPLEFT:
+			this.getPelota().setUltimaDireccion(Direccion.UPLEFT); 
+			this.getPelota().setX(x - 8);
+			this.getPelota().setY(y - 10);
+			this.getPelota().ejecutarSpritePelota();
+			break;
+		case Direccion.DOWNRIGHT:
+			this.getPelota().setUltimaDireccion(Direccion.DOWNRIGHT); 
+			this.getPelota().setX(x + 30);
+			this.getPelota().setY(y + 23);
+			this.getPelota().ejecutarSpritePelota();
+			break;
+		case Direccion.DOWNLEFT:
+			this.getPelota().setUltimaDireccion(Direccion.DOWNLEFT); 
+			this.getPelota().setX(x - 13);
+			this.getPelota().setY(y + 21);
+			this.getPelota().ejecutarSpritePelota();
+			break;
+		}
+		}
 	}
 
 	private void verificarCorner() {
