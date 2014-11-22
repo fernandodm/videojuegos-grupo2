@@ -90,21 +90,25 @@ public class Utils {
 	
 	public static int direccionEsquivar(double x,double y) {
 		Pelota pelota = Utils.scene.getPelota();
-		if(pelota.getY()> y){
+		
+		if(pelota.getY()> y && pelota.getUltimaDireccion() != Direccion.DOWNLEFT
+				&& pelota.getUltimaDireccion() != Direccion.DOWNRIGHT){
 			if(pelota.getX()< x){
-				return Direccion.DOWNRIGHT;
-			}else{
-				return Direccion.DOWNLEFT;
-			}
-		}
-		if(pelota.getY()< y){
-			if(pelota.getX()< x){
-				return Direccion.UPRIGHT;
-			}else{
 				return Direccion.UPLEFT;
+			}else{
+				return Direccion.UPRIGHT;
 			}
 		}
 		
+		if(pelota.getY()< y && pelota.getUltimaDireccion() != Direccion.UPLEFT
+				&& pelota.getUltimaDireccion() != Direccion.UPRIGHT){
+			if(pelota.getX()< x){
+				return Direccion.DOWNLEFT;
+			}else{
+				return Direccion.DOWNRIGHT;
+			}
+		}
+
 		return pelota.getUltimaDireccion();
 	}
 }
