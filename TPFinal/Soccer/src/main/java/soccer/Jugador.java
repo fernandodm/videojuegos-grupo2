@@ -18,19 +18,18 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 	private double velocity;
 	Hashtable<Integer, Integer> estados = new Hashtable<Integer, Integer>();
 	private int time = 0;
-	private LabelSeleccionado labelSeleccionado;
+	
 	// esto es para mantener bien el focus y saber si el jugador tiene la pelota
 	public boolean flag = false;
 	Hashtable<Integer, List<Sprite>> images = new Hashtable<Integer, List<Sprite>>();
 
-	public Jugador(Sprite sprite, String imagePath, LabelSeleccionado label,
+	public Jugador(Sprite sprite, String imagePath,
 			double vel, double x, double y) {
 		super(sprite, x, y);
 		estados.put(Direccion.UP, 0);
 		estados.put(Direccion.DOWN, 0);
 		estados.put(Direccion.LEFT, 0);
 		estados.put(Direccion.RIGHT, 0);
-		this.setLabelSeleccionado(label);
 		this.setVelocity(vel);
 		this.setImage(Sprite.fromImage(imagePath));
 	}
@@ -39,6 +38,8 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 			int x, int y);
 
 	public abstract Equipo equipoContrario();
+	
+	public abstract void moverLabel(double x, double y);
 
 	public Sprite getImage() {
 		return image;
@@ -117,8 +118,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 			}
 		}
 		if (this.estaSeleccionado) {
-			this.labelSeleccionado.setX(x + 10);
-			this.labelSeleccionado.setY(y - 10);
+			this.moverLabel(x + 10, y - 10);
 		}
 	}
 
@@ -139,8 +139,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 			}
 		}
 		if (this.estaSeleccionado) {
-			this.labelSeleccionado.setX(x + 10);
-			this.labelSeleccionado.setY(y - 15);
+			this.moverLabel(x + 10, y - 15);
 		}
 	}
 
@@ -156,8 +155,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 			}
 		}
 		if (this.estaSeleccionado) {
-			this.labelSeleccionado.setY(y - 13);
-			this.labelSeleccionado.setX(this.getX() + 6);
+			this.moverLabel(this.getX() + 6, y - 13);
 		}
 	}
 
@@ -165,8 +163,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 		double x = this.getX() + velocity * deltaState.getDelta();
 		this.setX(x);
 		if (this.estaSeleccionado) {
-			this.labelSeleccionado.setY(this.getY() - 13);
-			this.labelSeleccionado.setX(x + 8);
+			this.moverLabel(x + 8, this.getY() - 13);
 		}
 	}
 
@@ -174,8 +171,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 		double x = this.getX() - velocity * deltaState.getDelta();
 		this.setX(x);
 		if (this.estaSeleccionado) {
-			this.labelSeleccionado.setY(this.getY() - 13);
-			this.labelSeleccionado.setX(x + 8);
+			this.moverLabel(x + 8, this.getY() - 13);
 		}
 	}
 
@@ -191,8 +187,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 			}
 		}
 		if (this.estaSeleccionado) {
-			this.labelSeleccionado.setY(y + 26);
-			this.labelSeleccionado.setX(this.getX() + 6);
+			this.moverLabel(this.getX() + 6, y + 26);
 		}
 	}
 
@@ -212,8 +207,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 			}
 		}
 		if (this.estaSeleccionado) {
-			this.labelSeleccionado.setY(y + 26);
-			this.labelSeleccionado.setX(this.getX() + 6);
+			this.moverLabel(this.getX() + 6, y + 26);
 		}
 	}
 
@@ -233,8 +227,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 			}
 		}
 		if (this.estaSeleccionado) {
-			this.labelSeleccionado.setX(x + 10);
-			this.labelSeleccionado.setY(y + 30);
+			this.moverLabel(x + 1, y + 30);
 		}
 	}
 
@@ -254,8 +247,9 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 				.setY(this.getScene().getArcos().get(1).getY() + (0.4 * n));
 		this.getScene().getCancha()
 				.setY(this.getScene().getCancha().getY() + (0.4 * n));
-		// this.getScene().getTiempo().setY(this.getScene().getTiempo().getY());
-
+		
+		this.getScene().getLabel().setY(this.getScene().getLabel().getY() + (0.4 * n));
+ 
 	}
 
 	public Equipo obtenerEquipoVisitante() {
@@ -264,14 +258,6 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 
 	public Equipo obtenerEquipoLocal() {
 		return this.getScene().getEquipoLocal();
-	}
-
-	public LabelSeleccionado getLabelSeleccionado() {
-		return labelSeleccionado;
-	}
-
-	public void setLabelSeleccionado(LabelSeleccionado labelSeleccionado) {
-		this.labelSeleccionado = labelSeleccionado;
 	}
 
 	public boolean isEstaSeleccionado() {
@@ -305,8 +291,9 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 				+ Math.pow((this.getY() - jugador.getY()), 2));
 
 	}
-
+	
 	public abstract void setEstadoSeleccionado(Jugador jugadorCerca);
 	public abstract void setEstadoNoSeleccionado(Jugador jugador);
+	public abstract void setEstadoAlLateral(Jugador jugador);
 	
 }

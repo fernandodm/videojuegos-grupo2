@@ -3,6 +3,8 @@ package soccer;
 import java.util.LinkedList;
 import java.util.List;
 
+import soccer.estados.EstadoJugadorEnLateral;
+import soccer.estados.EstadoJugadorEnLateralCPU;
 import soccer.estados.EstadoJugadorNoSeleccionadoCPU;
 import soccer.estados.EstadoJugadorSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionadoCPU;
@@ -11,9 +13,9 @@ import com.uqbar.vainilla.appearances.Sprite;
 
 public class JugadorVisitante extends Jugador {
 
-	public JugadorVisitante(String imagePath, double vel, double x, double y, LabelSeleccionado label) {
+	public JugadorVisitante(String imagePath, double vel, double x, double y) {
 		
-		super(Sprite.fromImage(imagePath).crop(12*32,192,32,25), imagePath, label, vel, x, y);
+		super(Sprite.fromImage(imagePath).crop(12*32,192,32,25), imagePath, vel, x, y);
 		
 		agregarSprite(Direccion.UP,1,8,32,160);
 		agregarSprite(Direccion.DOWN,13,19,32,192);
@@ -61,5 +63,12 @@ public class JugadorVisitante extends Jugador {
 		
 	}
 
+	@Override
+	public void moverLabel(double x, double y) {}
+
+	@Override
+	public void setEstadoAlLateral(Jugador jugador) {
+		this.setEstado(new EstadoJugadorEnLateralCPU(jugador));
+	}
 
 }

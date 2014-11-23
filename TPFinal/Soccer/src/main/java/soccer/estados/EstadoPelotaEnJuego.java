@@ -32,7 +32,8 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 				this.ejecutarMovimiento(deltaState, jugador.getX(),
 						jugador.getY());
 				jugador.flag = true;
-				this.getPelota().activarRemate(deltaState);
+				if(this.getPelota().getJugador() instanceof JugadorLocal)
+					this.getPelota().activarRemate(deltaState);
 			} else {
 				jugador.flag = false;
 			}
@@ -119,10 +120,12 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		
 		Jugador jugador = this.getPelota().getJugador();
 		
-		for(Jugador jug: this.getPelota().getScene().getJugadores()){
-			jug.setFlag(false);
-			jug.setEstaSeleccionado(false);
-			jug.setEstadoNoSeleccionado(jug);
+		if(jugador instanceof JugadorVisitante){
+			for(Jugador jug: this.getPelota().getScene().getJugadores()){
+				jug.setFlag(false);
+				jug.setEstaSeleccionado(false);
+				jug.setEstadoNoSeleccionado(jug);
+			}
 		}
 		
 		List<Jugador> juagdores = jugador.equipoContrario().getJugadores();
@@ -153,15 +156,13 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			arquero.setY(80);
 			this.getPelota().setY(105);
 			this.getPelota().setX(550);
-			arquero.getLabelSeleccionado().setX(arquero.getX() - 10);
-			arquero.getLabelSeleccionado().setY(arquero.getY() + 6);
+			arquero.moverLabel(arquero.getX() - 10, arquero.getY() + 6);
 		}else{
 			arquero.setX(550);
 			arquero.setY(490);
 			this.getPelota().setY(470);
 			this.getPelota().setX(550);
-			arquero.getLabelSeleccionado().setX(arquero.getX() + 25);
-			arquero.getLabelSeleccionado().setY(arquero.getY() + 10);
+			arquero.moverLabel(arquero.getX() + 25, arquero.getY() + 10);
 		}
 		
 	}
@@ -218,8 +219,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			jugador.setY(518);
 			this.getPelota().setY(515);
 			posicionarIzquierdaODerecha(jugador, jugadorCercanoAlCorner, -60);	
-			jugador.getLabelSeleccionado().setX(jugador.getX() + 25);
-			jugador.getLabelSeleccionado().setY(jugador.getY() + 10);
+			jugador.moverLabel(jugador.getX() + 25, jugador.getY() + 10);
 		}
 		
 	}
@@ -231,8 +231,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			jugador.setAppearance(jugador.getImages().get(Direccion.RIGHT).get(0).rotate(0.3));
 			jugador.setX(145);
 			this.getPelota().setX(172);
-			jugador.getLabelSeleccionado().setX(jugador.getX() - 10);
-			jugador.getLabelSeleccionado().setY(jugador.getY() + 6);
+			jugador.moverLabel(jugador.getX() - 10, jugador.getY() + 6);
 			
 			jugadorCercanoAlCorner.setAppearance(jugador.getImages().get(Direccion.RIGHT).get(0));
 			
@@ -242,9 +241,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			jugador.setAppearance(jugador.getImages().get(Direccion.LEFT).get(3).rotate(0.3));
 			jugador.setX(1100);
 			this.getPelota().setX(1080);
-			jugador.getLabelSeleccionado().setX(jugador.getX() + 27);
-			jugador.getLabelSeleccionado().setY(jugador.getY() + 6);
-			
+			jugador.moverLabel(jugador.getX() + 27, jugador.getY() + 6);
 			jugadorCercanoAlCorner.setAppearance(jugador.getImages().get(Direccion.LEFT).get(2));
 			
 			jugadorCercanoAlCorner.setX(this.getPelota().getX() - 15);
@@ -254,23 +251,28 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 
 	private void verificarLateral() {
 		if(this.getPelota().getX() < 162 || this.getPelota().getX() > 1090){
-			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateral(this.getPelota()));
 			seleccionarJugadorAlLateral();
 		}
 	}
 
 	public void seleccionarJugadorAlLateral() {
 		Jugador jugador = this.getPelota().getJugador();
-		for(Jugador jug: this.getPelota().getScene().getJugadores()){
-			jug.setFlag(false);
-			jug.setEstaSeleccionado(false);
-			jug.setEstadoNoSeleccionado(jug);
+	
+		if(jugador instanceof JugadorLocal){
+			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateralCPU(this.getPelota()));
+		}else{
+			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateral(this.getPelota()));
+			for(Jugador jug: this.getPelota().getScene().getJugadores()){
+				jug.setFlag(false);
+				jug.setEstaSeleccionado(false);
+				jug.setEstadoNoSeleccionado(jug);
+			}
 		}
 		/*Si el jugador esta muy cerca del lateral y se va con la pelota
 		 * lo corro para abajo al jugador q la tiro para q no colisionen 
 		 * dos jugadores con la pelota*/
 		if(jugador.getX() < 202 || jugador.getX() > 1050 && !jugador.isEstaSeleccionado())
-			jugador.setY(jugador.getY() + 80);
+			jugador.setY(jugador.getY() + 200);
 		
 		List<Jugador> juagdores = jugador.equipoContrario().getJugadores();
 		Jugador jugadorAlLateral = juagdores.get(4);
@@ -278,7 +280,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		jugadorAlLateral.setFlag(true);
 		jugadorAlLateral.setEstaSeleccionado(true);
 		this.getPelota().setJugador(jugadorAlLateral);
-		jugadorAlLateral.setEstado(new EstadoJugadorEnLateral(jugadorAlLateral));
+		jugadorAlLateral.setEstadoAlLateral(jugadorAlLateral);
 		jugadorAlLateral.setAppearance(jugadorAlLateral.getImages().get(Direccion.RIGHT).get(0));
 		this.posicionarJugadorLateral(jugadorAlLateral);
 		this.getPelota().setEnRemate(false);
@@ -302,13 +304,11 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		if(this.getPelota().getX() < 162){
 			jugador.setX(this.getPelota().getX()-25);
 			jugador.setY(this.getPelota().getY()-3);
-			jugador.getLabelSeleccionado().setX(jugador.getX() - 10);
-			jugador.getLabelSeleccionado().setY(jugador.getY() + 6);
+			jugador.moverLabel(jugador.getX() - 10, jugador.getY() + 6);
 		}else{
 			jugador.setX(this.getPelota().getX()+10);
 			jugador.setY(this.getPelota().getY()-3);
-			jugador.getLabelSeleccionado().setX(jugador.getX() + 25);
-			jugador.getLabelSeleccionado().setY(jugador.getY() + 10);
+			jugador.moverLabel(jugador.getX() + 25, jugador.getY() + 10);
 		}
 	}
 }

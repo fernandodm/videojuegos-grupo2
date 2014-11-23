@@ -15,15 +15,15 @@ public class Cancha extends GameComponent<SoccerScene> {
 
 	@Override
 	public void update(DeltaState deltaState) {
-		boolean ahiSeleccionado = false;
-		for (Jugador jugador : super.getScene().getJugadores()) {
-			ahiSeleccionado = jugador.flag || ahiSeleccionado;
-		}
-
-		if (deltaState.isKeyPressed(Key.C) && !ahiSeleccionado) {
+//		boolean ahiSeleccionado = false;
+//		for (Jugador jugador : super.getScene().getJugadores()) {
+//			ahiSeleccionado = jugador.flag || ahiSeleccionado;
+//		}
+//		&& !ahiSeleccionado
+		if (deltaState.isKeyPressed(Key.C) ) {
 			/* Busco al jugador selecionado para deseleccionarlo */
 
-			for (Jugador jugador : super.getScene().getJugadores()) {
+			for (Jugador jugador : super.getScene().getEquipoLocal().getJugadores()) {
 				if (jugador.isEstaSeleccionado()) {
 					jugador.setEstaSeleccionado(false);
 					jugador.setEstado(new EstadoJugadorNoSeleccionado(jugador));
@@ -43,7 +43,7 @@ public class Cancha extends GameComponent<SoccerScene> {
 	public void seleccionarJugadorMasCercano(Pelota seleccionado) {
 		Jugador jugadorCerca = null;
 		double distancia = 100000; // es la maxima distancia entre dos jugadores
-		for (Jugador jugador : super.getScene().getJugadores()) {
+		for (Jugador jugador : super.getScene().getEquipoLocal().getJugadores()) {
 			/*
 			 * Calculo la distancia entre dos jugadores (distancia entre dos
 			 * puntos)
@@ -62,9 +62,7 @@ public class Cancha extends GameComponent<SoccerScene> {
 		/* Selecciono al jugador mas cercano */
 		jugadorCerca.setEstadoSeleccionado(jugadorCerca);
 		jugadorCerca.setEstaSeleccionado(true);
-		jugadorCerca.getLabelSeleccionado().setX(jugadorCerca.getX() + 7);
-		jugadorCerca.getLabelSeleccionado().setY(jugadorCerca.getY() + 28);
-
+		jugadorCerca.moverLabel(jugadorCerca.getX() + 7, jugadorCerca.getY() + 28);
 	}
 
 }

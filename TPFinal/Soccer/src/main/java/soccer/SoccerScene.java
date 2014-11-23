@@ -14,6 +14,16 @@ public class SoccerScene extends GameScene {
 	private Equipo equipoVisitante = new Equipo();
 	private Tiempo tiempo;
 	private Marcador marcador;
+	private LabelSeleccionado label;
+
+	public LabelSeleccionado getLabel() {
+		return label;
+	}
+
+	public void setLabel(LabelSeleccionado label) {
+		this.label = label;
+		this.addComponent(label);
+	}
 
 	public Tiempo getTiempo() {
 		return tiempo;
