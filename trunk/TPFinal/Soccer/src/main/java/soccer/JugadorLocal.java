@@ -3,23 +3,28 @@ package soccer;
 import java.util.LinkedList;
 import java.util.List;
 
+import soccer.estados.EstadoJugadorEnLateral;
 import soccer.estados.EstadoJugadorNoSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionado;
 
 import com.uqbar.vainilla.appearances.Sprite;
 
 public class JugadorLocal extends Jugador {
+	
+	private LabelSeleccionado labelSeleccionado;
 
 	public JugadorLocal(String imagePath, double vel, double x, double y,
 			LabelSeleccionado label) {
 
-		super(Sprite.fromImage(imagePath).crop(0, 0, 32, 25), imagePath, label,
+		super(Sprite.fromImage(imagePath).crop(0, 0, 32, 25), imagePath,
 				vel, x, y);
 
 		agregarSprite(Direccion.UP, 1, 8, 32, 0);
 		agregarSprite(Direccion.DOWN, 13, 19, 32, 32);
 		agregarSprite(Direccion.LEFT, 9, 16, 32, 64);
 		agregarSprite(Direccion.RIGHT, 16, 19, 32, 0);
+		
+		this.labelSeleccionado = label;
 
 	}
 
@@ -61,6 +66,27 @@ public class JugadorLocal extends Jugador {
 	@Override
 	public void setEstadoNoSeleccionado(Jugador jugador) {
 		this.setEstado(new EstadoJugadorNoSeleccionado(jugador));
+	}
+	
+	public LabelSeleccionado getLabelSeleccionado() {
+		return labelSeleccionado;
+	}
+
+	public void setLabelSeleccionado(LabelSeleccionado labelSeleccionado) {
+		this.labelSeleccionado = labelSeleccionado;
+	}
+
+	@Override
+	public void moverLabel(double x, double y) {
+		this.labelSeleccionado.setX(x);
+		this.labelSeleccionado.setY(y);
+		
+	}
+
+	@Override
+	public void setEstadoAlLateral(Jugador jugador) {
+		this.setEstado(new EstadoJugadorEnLateral(jugador));
+		
 	}
 
 }

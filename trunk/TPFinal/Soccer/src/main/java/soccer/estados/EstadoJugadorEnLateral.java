@@ -39,7 +39,7 @@ public class EstadoJugadorEnLateral extends EstadoJugador {
 			if(seMovioUp == 1){
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.DOWN).get(3).rotate(-radio));
 				this.getJugador().setY(this.getJugador().getY() - 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() - 20);
+				this.getJugador().moverLabel(this.getJugador().getX(), this.getJugador().getY() - 20);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(downright);
 				seMovioUp--;
 				seMovioDown++;
@@ -47,7 +47,7 @@ public class EstadoJugadorEnLateral extends EstadoJugador {
 			if(seMovioUp == 2){
 				this.getJugador().setAppearance(this.getJugador().getImages().get(dir).get(n));
 				this.getJugador().setY(this.getJugador().getY() - 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() - 20);
+				this.getJugador().moverLabel(this.getJugador().getX(), this.getJugador().getY() - 20);
 				seMovioUp--;
 				seMovioDown++;
 				this.getJugador().getScene().getPelota().setUltimaDireccion(dir);
@@ -59,7 +59,7 @@ public class EstadoJugadorEnLateral extends EstadoJugador {
 			if(seMovioDown == 1){
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.UP).get(3).rotate(radio));
 				this.getJugador().setY(this.getJugador().getY() + 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() + 20);
+				this.getJugador().moverLabel(this.getJugador().getX(), this.getJugador().getY() + 20);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(upright);
 				seMovioUp++;
 				seMovioDown--;
@@ -67,7 +67,7 @@ public class EstadoJugadorEnLateral extends EstadoJugador {
 			if(seMovioDown == 2){
 				this.getJugador().setAppearance(this.getJugador().getImages().get(dir).get(n));
 				this.getJugador().setY(this.getJugador().getY() + 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() + 20);
+				this.getJugador().moverLabel(this.getJugador().getX(), this.getJugador().getY() + 20);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(dir);
 				seMovioUp++;
 				seMovioDown--;

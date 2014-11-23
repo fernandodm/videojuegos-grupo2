@@ -46,8 +46,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.UP).get(1));
 				this.getJugador().setY(this.getJugador().getY() + 21);
 				this.getJugador().setX(this.getJugador().getX() - 22);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() + 21);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() - 22);
+				this.getJugador().moverLabel(this.getJugador().getX() - 22, this.getJugador().getY() + 21);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.UP);
 				seMovioUp--;
 				seMovioDown++;
@@ -60,8 +59,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.LEFT).get(3).rotate(0.3));
 				this.getJugador().setY(this.getJugador().getY() - 21);
 				this.getJugador().setX(this.getJugador().getX() + 22);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() - 21);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() + 22);
+				this.getJugador().moverLabel(this.getJugador().getX() + 22, this.getJugador().getY() - 21);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.UPLEFT);
 				seMovioUp++;
 				seMovioDown--;
@@ -92,8 +90,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.UP).get(0));
 				this.getJugador().setY(this.getJugador().getY() + 22);
 				this.getJugador().setX(this.getJugador().getX() + 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() + 22);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() + 20);
+				this.getJugador().moverLabel(this.getJugador().getX() + 20, this.getJugador().getY() + 22);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.UP);
 				seMovioUp--;
 				seMovioDown++;
@@ -106,8 +103,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.RIGHT).get(0).rotate(0));
 				this.getJugador().setY(this.getJugador().getY() - 22);
 				this.getJugador().setX(this.getJugador().getX() - 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() - 22);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() - 20);
+				this.getJugador().moverLabel(this.getJugador().getX() - 20, this.getJugador().getY() - 22);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.UPRIGHT);
 				seMovioUp++;
 				seMovioDown--;
@@ -135,8 +131,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.DOWN).get(3));
 				this.getJugador().setY(this.getJugador().getY() - 25);
 				this.getJugador().setX(this.getJugador().getX() - 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() - 25);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() - 20);
+				this.getJugador().moverLabel(this.getJugador().getX() - 20, this.getJugador().getY() - 25);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.DOWN);
 				seMovioUp--;
 				seMovioDown++;
@@ -149,8 +144,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.LEFT).get(3).rotate(-0.3));
 				this.getJugador().setY(this.getJugador().getY() + 25);
 				this.getJugador().setX(this.getJugador().getX() + 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() + 25);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() + 20);
+				this.getJugador().moverLabel(this.getJugador().getX() + 20, this.getJugador().getY() + 25);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.DOWNLEFT);
 				seMovioUp++;
 				seMovioDown--;
@@ -181,8 +175,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.DOWN).get(3));
 				this.getJugador().setY(this.getJugador().getY() - 22);
 				this.getJugador().setX(this.getJugador().getX() + 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() - 22);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() + 22);
+				this.getJugador().moverLabel(this.getJugador().getX() + 22, this.getJugador().getY() - 22);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.DOWN);
 				seMovioUp--;
 				seMovioDown++;
@@ -195,8 +188,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.RIGHT).get(0).rotate(0.3));
 				this.getJugador().setY(this.getJugador().getY() + 22);
 				this.getJugador().setX(this.getJugador().getX() - 20);
-				this.getJugador().getLabelSeleccionado().setY(this.getJugador().getLabelSeleccionado().getY() + 22);
-				this.getJugador().getLabelSeleccionado().setX(this.getJugador().getLabelSeleccionado().getX() - 22);
+				this.getJugador().moverLabel(this.getJugador().getX() - 22, this.getJugador().getY() + 22);
 				this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.DOWNRIGHT);
 				seMovioUp++;
 				seMovioDown--;

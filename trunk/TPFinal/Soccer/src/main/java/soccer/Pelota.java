@@ -119,8 +119,8 @@ public class Pelota extends GameComponent<SoccerScene> {
 		this.setY(jugador.getY());
 		this.setX(jugador.getX());
 		
-		if(jugador.getClass().equals(JugadorVisitante.class)
-				&& !this.getJugador().getClass().equals(JugadorVisitante.class)){
+		if(jugador instanceof JugadorVisitante
+				&& !(this.getJugador() instanceof JugadorVisitante)){
 			
 			List<Jugador> jugadoresv = super.getScene().getJugadoresVisitantes();
 			for (Jugador jv : jugadoresv) {
@@ -140,16 +140,16 @@ public class Pelota extends GameComponent<SoccerScene> {
 			this.getJugador().setEstado(new EstadoJugadorSeleccionado(this.getJugador()));
 			this.getJugador().setEstaSeleccionado(true);
 			
-		}else if(jugador.getClass().equals(JugadorVisitante.class)
-				&& this.getJugador().getClass().equals(JugadorVisitante.class)){
+		}else if(jugador instanceof JugadorVisitante
+				&& this.getJugador() instanceof JugadorVisitante){
 			jugador.setEstadoSeleccionado(jugador);
 			jugador.setEstaSeleccionado(true);
 			
 			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
 			this.getJugador().setEstaSeleccionado(false);
 			
-		}else if(!jugador.getClass().equals(JugadorVisitante.class)
-				&& this.getJugador().getClass().equals(JugadorVisitante.class)){
+		}else if(!(jugador instanceof JugadorVisitante)
+				&& this.getJugador() instanceof JugadorVisitante){
 			
 			List<Jugador> jugadoresl = super.getScene().getJugadoresLocales();
 
@@ -167,11 +167,11 @@ public class Pelota extends GameComponent<SoccerScene> {
 				j.setEstado(new EstadoJugadorNoSeleccionadoCPU(j));
 				j.setEstaSeleccionado(false);
 			}
-			this.getJugador().setEstado(new EstadoJugadorSeleccionadoCPU(this.getJugador()));
-			this.getJugador().setEstaSeleccionado(true);
+			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+			this.getJugador().setEstaSeleccionado(false);
 			
-		}else if(!jugador.getClass().equals(JugadorVisitante.class)
-				&& !this.getJugador().getClass().equals(JugadorVisitante.class)){
+		}else if(!(jugador instanceof JugadorVisitante)
+				&& !(this.getJugador() instanceof JugadorVisitante)){
 			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
 			jugador.setEstaSeleccionado(true);
 			
@@ -422,5 +422,15 @@ public class Pelota extends GameComponent<SoccerScene> {
 
 	public void setUltimaDireccion(int ultimaDireccion) {
 		this.ultimaDireccion = ultimaDireccion;
+	}
+
+
+	public int getDireccionRemate() {
+		return direccionRemate;
+	}
+
+
+	public void setDireccionRemate(int direccionRemate) {
+		this.direccionRemate = direccionRemate;
 	}
 }

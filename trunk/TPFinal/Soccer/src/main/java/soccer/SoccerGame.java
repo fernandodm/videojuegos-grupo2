@@ -48,21 +48,21 @@ public class SoccerGame extends Game {
         	jugadorLocal7.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal7));
         	arqueroLocal.setEstado(new EstadoJugadorNoSeleccionado(arqueroLocal));
         	
-        	JugadorVisitante jugadorVisitante1 = new JugadorVisitante("jugadores.png", 85, 440, 250, label);
-        	JugadorVisitante jugadorVisitante2 = new JugadorVisitante("jugadores.png", 85, 622, 155, label);
-        	JugadorVisitante jugadorVisitante3 = new JugadorVisitante("jugadores.png", 85, 800, 250, label);
-        	JugadorVisitante jugadorVisitante4 = new JugadorVisitante("jugadores.png", 85, 900, -150, label);
-        	JugadorVisitante jugadorVisitante5 = new JugadorVisitante("jugadores.png", 85, 350, -150, label);
-        	JugadorVisitante jugadorVisitante6 = new JugadorVisitante("jugadores.png", 85, 625, -170, label);
-        	JugadorVisitante jugadorVisitante7 = new JugadorVisitante("jugadores.png", 85, 622, -25, label);
-        	JugadorVisitante arqueroVisitante = new JugadorVisitante("arqueros.png", 150, 622, -390, label);
+        	JugadorVisitante jugadorVisitante1 = new JugadorVisitante("jugadores.png", 85, 440, 250);
+        	JugadorVisitante jugadorVisitante2 = new JugadorVisitante("jugadores.png", 85, 622, 155);
+        	JugadorVisitante jugadorVisitante3 = new JugadorVisitante("jugadores.png", 85, 800, 250);
+        	JugadorVisitante jugadorVisitante4 = new JugadorVisitante("jugadores.png", 85, 900, -150);
+        	JugadorVisitante jugadorVisitante5 = new JugadorVisitante("jugadores.png", 85, 350, -150);
+        	JugadorVisitante jugadorVisitante6 = new JugadorVisitante("jugadores.png", 85, 625, -170);
+        	JugadorVisitante jugadorVisitante7 = new JugadorVisitante("jugadores.png", 85, 622, -25);
+        	JugadorVisitante arqueroVisitante = new JugadorVisitante("arqueros.png", 150, 622, -390 );
         
         	
         	jugadorLocal2.setEstaSeleccionado(true);
         	jugadorLocal2.setAppearance(jugadorLocal2.images.get(Direccion.DOWN).get(3));
 	               
         	scene.setCancha(cancha);
-        	scene.addComponent(label);
+        	scene.setLabel(label);
         	scene.setPelota(pelota);
         	scene.addJugadorEquipoLocal(jugadorLocal1);
         	scene.addJugadorEquipoLocal(jugadorLocal2);
