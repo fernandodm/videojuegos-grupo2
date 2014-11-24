@@ -21,7 +21,7 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 		}
 		
 		if(!Utils.tienePelotaVisitante()){
-			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+
 			return;
 		}
 		
