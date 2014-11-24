@@ -8,7 +8,6 @@ import soccer.estados.EstadoJugadorNoSeleccionadoCPU;
 import soccer.estados.EstadoJugadorSeleccionado;
 import soccer.estados.EstadoPelota;
 import soccer.estados.EstadoPelotaEnJuego;
-import soccer.estados.Utils;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
@@ -116,38 +115,70 @@ public class Pelota extends GameComponent<SoccerScene> {
 		this.setY(jugador.getY());
 		this.setX(jugador.getX());
 
-		seleccionarJugador(jugador);
-		deseleccionarJugador(this.getJugador());
+		if (jugador instanceof JugadorVisitante
+				&& !(this.getJugador() instanceof JugadorVisitante)) {
+
+			List<Jugador> jugadoresv = super.getScene()
+					.getJugadoresVisitantes();
+			for (Jugador jv : jugadoresv) {
+				jv.setEstado(new EstadoJugadorNoSeleccionadoCPU(jv));
+				jv.setEstaSeleccionado(false);
+			}
+			jugador.setEstadoSeleccionado(jugador);
+			jugador.setEstaSeleccionado(true);
+
+			List<Jugador> jugadores = super.getScene().getJugadoresLocales();
+
+			for (Jugador j : jugadores) {
+				j.setEstado(new EstadoJugadorNoSeleccionado(j));
+				j.setEstaSeleccionado(false);
+			}
+			this.getJugador().setEstado(
+					new EstadoJugadorSeleccionado(this.getJugador()));
+			this.getJugador().setEstaSeleccionado(true);
+
+		} else if (jugador instanceof JugadorVisitante
+				&& this.getJugador() instanceof JugadorVisitante) {
+			jugador.setEstadoSeleccionado(jugador);
+			jugador.setEstaSeleccionado(true);
+			this.getJugador().setEstado(
+					new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+			this.getJugador().setEstaSeleccionado(false);
+
+		} else if (!(jugador instanceof JugadorVisitante)
+				&& this.getJugador() instanceof JugadorVisitante) {
+
+			List<Jugador> jugadoresl = super.getScene().getJugadoresLocales();
+
+			for (Jugador jl : jugadoresl) {
+				jl.setEstado(new EstadoJugadorNoSeleccionado(jl));
+				jl.setEstaSeleccionado(false);
+			}
+			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
+			jugador.setEstaSeleccionado(true);
+
+			List<Jugador> jugadores = super.getScene().getJugadoresVisitantes();
+
+			for (Jugador j : jugadores) {
+				j.setEstado(new EstadoJugadorNoSeleccionadoCPU(j));
+				j.setEstaSeleccionado(false);
+			}
+			this.getJugador().setEstado(
+					new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+			this.getJugador().setEstaSeleccionado(false);
+
+		} else if (!(jugador instanceof JugadorVisitante)
+				&& !(this.getJugador() instanceof JugadorVisitante)) {
+			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
+			jugador.setEstaSeleccionado(true);
+
+			this.getJugador().setEstado(
+					new EstadoJugadorNoSeleccionado(this.getJugador()));
+			this.getJugador().setEstaSeleccionado(false);
+		}
 
 		this.setJugador(jugador);
 		enRemate = false;
-	}
-
-	private void deseleccionarJugador(Jugador jugador2) {
-		if (jugador2 instanceof JugadorVisitante) {
-			jugador2.setEstaSeleccionado(false);
-			jugador2.setEstado(new EstadoJugadorNoSeleccionadoCPU(jugador2));
-			jugador2.flag=false;
-		}else{
-			jugador2.setEstaSeleccionado(true);
-			jugador2.setEstado(new EstadoJugadorNoSeleccionado(jugador2));
-			jugador2.flag=false;
-		}
-		Utils.jugadorLocalMasCercanoAPelota().setEstaSeleccionado(true);
-		Utils.jugadorLocalMasCercanoAPelota().setEstado(new EstadoJugadorSeleccionado(jugador));
-		Utils.jugadorLocalMasCercanoAPelota().flag=true;
-	}
-
-	private void seleccionarJugador(Jugador jugador) {
-		if (jugador instanceof JugadorVisitante) {
-			jugador.setEstaSeleccionado(true);
-			jugador.setEstadoSeleccionado(jugador);
-			jugador.flag=true;
-		}else{
-			jugador.setEstaSeleccionado(true);
-			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
-			jugador.flag=true;
-		}
 	}
 
 	private void moverCamara(DeltaState deltaState) {
