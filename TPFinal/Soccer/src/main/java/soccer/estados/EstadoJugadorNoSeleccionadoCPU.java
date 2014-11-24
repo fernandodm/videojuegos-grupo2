@@ -20,6 +20,7 @@ public class EstadoJugadorNoSeleccionadoCPU extends EstadoJugador {
 			return;
 		}
 		
+		
 		int direccion = Utils.direccionPelota(this.getJugador().getX(),this.getJugador().getY());
 		switch (direccion) {
 		case Direccion.UP:
