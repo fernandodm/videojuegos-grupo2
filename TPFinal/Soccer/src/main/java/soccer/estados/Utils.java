@@ -128,4 +128,21 @@ public class Utils {
 
 		return pelota.getUltimaDireccion();
 	}
+	
+	public static int obtenerDireccionDeRemateVisitante(){
+		int[] direcciones={Direccion.DOWN,Direccion.DOWNLEFT,Direccion.DOWNRIGHT};
+		return direcciones[(int) (Math.random()*direcciones.length)];
+	}
+	
+	public static void marcarJugadoresNoSeleccionadoVisitantes(){
+		List<Jugador> jugadoresv = scene.getJugadoresVisitantes();
+		for (Jugador jv : jugadoresv) {
+			jv.setEstado(new EstadoJugadorNoSeleccionadoCPU(jv));
+		}
+	}
+	
+	public static Jugador jugadorLocalMasCercanoAPelota(){
+		return Utils.jugadorLocalMasCercano(scene.getPelota().getX(), scene.getPelota().getY());
+	}
+	
 }
