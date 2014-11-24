@@ -12,10 +12,14 @@ public class EstadoJugadorNoSeleccionadoCPU extends EstadoJugador {
 	}
 
 	public void update(DeltaState deltaState) {
-		if(Utils.distanciaConPelota(this.getJugador().getX(), this.getJugador().getY())> 180
-				|| Utils.tienePelotaVisitante()){
+		if(Utils.distanciaConPelota(this.getJugador().getX(), this.getJugador().getY())> 180){
 			return;
 		}
+		
+		if(Utils.tienePelotaVisitante()){
+			return;
+		}
+		
 		int direccion = Utils.direccionPelota(this.getJugador().getX(),this.getJugador().getY());
 		switch (direccion) {
 		case Direccion.UP:
