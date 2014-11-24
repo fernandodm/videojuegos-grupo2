@@ -16,12 +16,13 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 
 		if(Utils.distanciaConArcoLocal(this.getJugador().getX(), this.getJugador().getY())< 250){
 				Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.obtenerDireccionDeRemateVisitante());
-				this.getJugador().setFlag(false);
 				this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
 		}
 		
 		if(!Utils.tienePelotaVisitante()){
-
+			this.getJugador().setFlag(false);
+			this.getJugador().setEstaSeleccionado(false);
+			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
 			return;
 		}
 		
@@ -49,7 +50,6 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 				this.getJugador().ejecutarSprite(deltaState, Direccion.DOWN, 0);
 				break;
 			case Direccion.UP:
-			
 				this.getJugador().getScene().getPelota().setUltimaDireccion(Direccion.UP); 
 				this.getJugador().getScene().getPelota().setY(this.getJugador().getY()-14);
 				this.getJugador().getScene().getPelota().setX(this.getJugador().getX() + 3);

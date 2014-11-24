@@ -126,15 +126,18 @@ public class Pelota extends GameComponent<SoccerScene> {
 			for (Jugador jv : jugadoresv) {
 				jv.setEstado(new EstadoJugadorNoSeleccionadoCPU(jv));
 				jv.setEstaSeleccionado(false);
+				jv.flag=false;
 			}
 			jugador.setEstadoSeleccionado(jugador);
 			jugador.setEstaSeleccionado(true);
+			jugador.flag=true;
 			
 			List<Jugador> jugadores = super.getScene().getJugadoresLocales();
 
 			for (Jugador j : jugadores) {
 				j.setEstado(new EstadoJugadorNoSeleccionado(j));
 				j.setEstaSeleccionado(false);
+				j.flag=false;
 			}
 			this.getJugador().setEstado(new EstadoJugadorSeleccionado(this.getJugador()));
 			this.getJugador().setEstaSeleccionado(true);
@@ -143,8 +146,10 @@ public class Pelota extends GameComponent<SoccerScene> {
 				&& this.getJugador() instanceof JugadorVisitante){
 			jugador.setEstadoSeleccionado(jugador);
 			jugador.setEstaSeleccionado(true);
+			jugador.flag=true;
 			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
 			this.getJugador().setEstaSeleccionado(false);
+			this.getJugador().flag=false;
 			
 		}else if(!(jugador instanceof JugadorVisitante)
 				&& this.getJugador() instanceof JugadorVisitante){
@@ -154,26 +159,31 @@ public class Pelota extends GameComponent<SoccerScene> {
 			for (Jugador jl : jugadoresl) {
 				jl.setEstado(new EstadoJugadorNoSeleccionado(jl));
 				jl.setEstaSeleccionado(false);
+				jl.flag=false;
 			}
 			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
 			jugador.setEstaSeleccionado(true);
+			jugador.flag=true;
 			
 			List<Jugador> jugadores = super.getScene().getJugadoresVisitantes();
 
 			for (Jugador j : jugadores) {
 				j.setEstado(new EstadoJugadorNoSeleccionadoCPU(j));
 				j.setEstaSeleccionado(false);
+				j.flag=false;
 			}
 			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
 			this.getJugador().setEstaSeleccionado(false);
+			this.getJugador().flag=true;
 			
 		}else if(!(jugador instanceof JugadorVisitante)
 				&& !(this.getJugador() instanceof JugadorVisitante)){
 			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
 			jugador.setEstaSeleccionado(true);
-
+			jugador.flag=true;
 			this.getJugador().setEstado(new EstadoJugadorNoSeleccionado(this.getJugador()));
 			this.getJugador().setEstaSeleccionado(false);
+			this.getJugador().flag=false;
 		}
 		
 
