@@ -138,6 +138,17 @@ public class Utils {
 		List<Jugador> jugadoresv = scene.getJugadoresVisitantes();
 		for (Jugador jv : jugadoresv) {
 			jv.setEstado(new EstadoJugadorNoSeleccionadoCPU(jv));
+			jv.setEstaSeleccionado(false);
+			jv.flag=false;
+		}
+	}
+	
+	public static void marcarJugadoresNoSeleccionadoLocales(){
+		List<Jugador> jugadoresv = scene.getJugadoresLocales();
+		for (Jugador jv : jugadoresv) {
+			jv.setEstado(new EstadoJugadorNoSeleccionado(jv));
+			jv.setEstaSeleccionado(false);
+			jv.flag=false;
 		}
 	}
 	
