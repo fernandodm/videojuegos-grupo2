@@ -13,9 +13,23 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 
 	@Override
 	public void update(DeltaState deltaState) {
+
+		if(Utils.distanciaConArcoLocal(this.getJugador().getX(), this.getJugador().getY())< 250){
+				Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.obtenerDireccionDeRemateVisitante());
+				this.getJugador().setFlag(false);
+				this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+		}
+		
+		if(!Utils.tienePelotaVisitante()){
+			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+			return;
+		}
+		
+		
 		Jugador jugador = Utils.jugadorLocalMasCercano(
 				this.getJugador().getX(), this.getJugador().getY());
 		int direccion;
+		
 		if (jugador.distancia(this.getJugador()) < 85) {
 			direccion = Utils.direccionEsquivar(jugador.getX(),
 					jugador.getY());
