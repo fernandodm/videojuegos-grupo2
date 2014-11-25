@@ -19,6 +19,8 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 	Hashtable<Integer, Integer> estados = new Hashtable<Integer, Integer>();
 	private int time = 0;
 	
+	public Vector posicion;
+	
 	// esto es para mantener bien el focus y saber si el jugador tiene la pelota
 	public boolean flag = false;
 	Hashtable<Integer, List<Sprite>> images = new Hashtable<Integer, List<Sprite>>();
@@ -32,6 +34,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 		estados.put(Direccion.RIGHT, 0);
 		this.setVelocity(vel);
 		this.setImage(Sprite.fromImage(imagePath));
+		posicion=new Vector(x,y+200);
 	}
 
 	public abstract void agregarSprite(int direccion, int principio, int fin,
