@@ -132,7 +132,7 @@ public class Utils {
 	public static int direccionParaAtacar(double x,double y) {
 		Arco arco = Utils.scene.getArcos().get(0);
 		
-		System.out.println(x);
+
 		if(x> 380 &&  x<650){
 				return Direccion.DOWN;
 
@@ -147,11 +147,15 @@ public class Utils {
 	}
 	
 	public static int obtenerDireccionDeRemateVisitante(){
-		if((int) (Math.random()*10) <5){
+		if((int) (Math.random()*10) <2){
 			int[] direcciones={Direccion.DOWN,Direccion.DOWNLEFT,Direccion.DOWNRIGHT};
 			return direcciones[(int) (Math.random()*direcciones.length)];
 		}else{
-			return Utils.scene.getPelota().getUltimaDireccion();
+			if(Utils.scene.getPelota().getX()< Utils.scene.getArcos().get(0).getX()+25){
+				return Direccion.DOWNRIGHT;
+			}else{
+				return Direccion.DOWNLEFT;
+			}
 		}
 		
 	}
