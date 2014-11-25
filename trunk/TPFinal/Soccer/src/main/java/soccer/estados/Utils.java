@@ -1,6 +1,7 @@
 package soccer.estados;
 
 import java.util.List;
+import java.util.Vector;
 
 import soccer.Arco;
 import soccer.Direccion;
@@ -23,6 +24,13 @@ public class Utils {
 		Arco Arco = Utils.scene.getArcos().get(1);
 		double distanciaActual = Math.sqrt(Math.pow((x - Arco.getX()), 2)
 				+ Math.pow((y - Arco.getY()), 2));
+		return distanciaActual;
+	}
+	
+	public static double distanciaPosicion(Jugador jugador) {
+		soccer.Vector pos = jugador.posicion;
+		double distanciaActual = Math.sqrt(Math.pow((jugador.getX()- pos.getX()), 2)
+				+ Math.pow((jugador.getY() - pos.getY()), 2));
 		return distanciaActual;
 	}
 
@@ -181,5 +189,43 @@ public class Utils {
 	public static Jugador jugadorLocalMasCercanoAPelota(){
 		return Utils.jugadorLocalMasCercano(scene.getPelota().getX(), scene.getPelota().getY());
 	}
+
+	public static int direccionConPosicion(Jugador jugador) {
+	soccer.Vector pelota = jugador.posicion;
+		
+		if((int)pelota.getX() == (int) jugador.getX()){
+			if(pelota.getY()> jugador.getY()){
+				return Direccion.DOWN;
+			}else{
+				return Direccion.UP;
+			}
+		}
+		
+		if((int)pelota.getY() == (int) jugador.getY()){
+			if(pelota.getX()>  jugador.getX()){
+				return Direccion.RIGHT;
+			}else{
+				return Direccion.LEFT;
+			}
+		}
+		
+		if(pelota.getY()>  jugador.getY()){
+			if(pelota.getX()<  jugador.getX()){
+				return Direccion.DOWNLEFT;
+			}else{
+				return Direccion.DOWNRIGHT;
+			}
+		}
+		if(pelota.getY()< jugador.getY()){
+			if(pelota.getX()< jugador.getX()){
+
+				return Direccion.UPLEFT;
+			}else{
+				return Direccion.UPRIGHT;
+			}
+		}
+		return 0;
+	}
+		
 	
 }
