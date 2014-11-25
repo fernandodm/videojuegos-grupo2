@@ -35,7 +35,8 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 			direccion = Utils.direccionEsquivar(jugador.getX(),
 					jugador.getY());
 		}else{
-			direccion = Direccion.DOWN;
+			direccion = Utils.direccionParaAtacar(jugador.getX(),
+					jugador.getY());
 		}
 		
 		switch (direccion) {

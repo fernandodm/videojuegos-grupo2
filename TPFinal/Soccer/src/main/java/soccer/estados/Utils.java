@@ -129,9 +129,31 @@ public class Utils {
 		return pelota.getUltimaDireccion();
 	}
 	
+	public static int direccionParaAtacar(double x,double y) {
+		Arco arco = Utils.scene.getArcos().get(0);
+		
+		System.out.println(x);
+		if(x> 380 &&  x<650){
+				return Direccion.DOWN;
+
+		}
+		
+
+		if(arco.getX()< x){
+				return Direccion.DOWNLEFT;
+		}else{
+				return Direccion.DOWNRIGHT;
+		}
+	}
+	
 	public static int obtenerDireccionDeRemateVisitante(){
-		int[] direcciones={Direccion.DOWN,Direccion.DOWNLEFT,Direccion.DOWNRIGHT};
-		return direcciones[(int) (Math.random()*direcciones.length)];
+		if((int) (Math.random()*10) <5){
+			int[] direcciones={Direccion.DOWN,Direccion.DOWNLEFT,Direccion.DOWNRIGHT};
+			return direcciones[(int) (Math.random()*direcciones.length)];
+		}else{
+			return Utils.scene.getPelota().getUltimaDireccion();
+		}
+		
 	}
 	
 	public static void marcarJugadoresNoSeleccionadoVisitantes(){
