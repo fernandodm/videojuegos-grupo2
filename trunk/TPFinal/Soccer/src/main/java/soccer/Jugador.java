@@ -34,7 +34,7 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 		estados.put(Direccion.RIGHT, 0);
 		this.setVelocity(vel);
 		this.setImage(Sprite.fromImage(imagePath));
-		posicion=new Vector(x,y+200);
+		posicion=new Vector(x,y);
 	}
 
 	public abstract void agregarSprite(int direccion, int principio, int fin,

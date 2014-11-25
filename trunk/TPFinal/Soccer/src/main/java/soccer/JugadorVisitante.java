@@ -22,7 +22,7 @@ public class JugadorVisitante extends Jugador {
 		agregarSprite(Direccion.LEFT,8,16,32,224);
 		agregarSprite(Direccion.RIGHT,16,19,32,160);
 		this.setEstado(new EstadoJugadorNoSeleccionadoCPU(this));
-	
+		this.posicion=new Vector(posicion.getX(),posicion.getY()+200);
 	}
 	
 	public void agregarSprite(int direccion,int principio,int fin,int x,int y){

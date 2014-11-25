@@ -25,6 +25,7 @@ public class JugadorLocal extends Jugador {
 		agregarSprite(Direccion.RIGHT, 16, 19, 32, 0);
 		
 		this.labelSeleccionado = label;
+		this.posicion=new Vector(posicion.getX(),posicion.getY()-200);
 
 	}
 
