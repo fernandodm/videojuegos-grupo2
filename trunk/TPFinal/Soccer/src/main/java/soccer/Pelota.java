@@ -118,6 +118,19 @@ public class Pelota extends GameComponent<SoccerScene> {
 	public void cambiarJugadorSeleccionado(Jugador jugador) {
 		this.setY(jugador.getY());
 		this.setX(jugador.getX());
+//		PARCHE
+		if(this.jugador == null){
+			
+////////////////////////////////////////////////
+			
+			
+			
+			
+			
+			
+/////////////////////////////////////////////////
+			
+		}else{
 		
 		if(jugador instanceof JugadorVisitante
 				&& !(this.getJugador() instanceof JugadorVisitante)){
@@ -184,6 +197,8 @@ public class Pelota extends GameComponent<SoccerScene> {
 			this.getJugador().setEstado(new EstadoJugadorNoSeleccionado(this.getJugador()));
 			this.getJugador().setEstaSeleccionado(false);
 			this.getJugador().flag=false;
+		}
+		
 		}
 		
 

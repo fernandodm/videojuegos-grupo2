@@ -31,11 +31,11 @@ public class Marcador extends GameComponent<SoccerScene>{
 		boolean arcoInferior = pelota.getY() > 528 && gol;
 		if(arcoSuperior){
 			this.marcadorLocal++;
-			super.getScene().resetScene(this);
+			super.getScene().resetSceneGL(this);
 		}
 		if(arcoInferior){
 			this.marcadorVisitante++;
-			super.getScene().resetScene(this);
+			super.getScene().resetSceneGV(this);
 		}
 	}
 

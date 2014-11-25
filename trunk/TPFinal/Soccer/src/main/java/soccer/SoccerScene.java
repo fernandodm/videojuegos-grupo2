@@ -382,7 +382,15 @@ public class SoccerScene extends GameScene {
 
 	public void resetScene(Marcador marcador){
 		this.setMarcador(marcador);
-		((SoccerGame)this.getGame()).resetGame(marcador,this.getTiempo());	
+//		((SoccerGame)this.getGame()).resetGame(marcador,this.getTiempo());	
+	}
+	
+	public void resetSceneGV(Marcador marcador){
+		((SoccerGame)this.getGame()).resetGolLoc(marcador,this.getTiempo());	
+	}
+	
+	public void resetSceneGL(Marcador marcador){
+		((SoccerGame)this.getGame()).resetGolVis(marcador,this.getTiempo());	
 	}
 
 }
