@@ -40,10 +40,24 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		}
 
 		this.getPelota().moverPelotaPorRemate(deltaState);
+		this.verificarPaloIzq();
 		this.verificarCorner();
 		this.verificarLateral();
 	}
 	
+	private void verificarPaloIzq() {/*
+		System.out.println("X" + " = " + this.getPelota().getX());
+		System.out.println("Y" + " = " + this.getPelota().getY());
+		int paloX = 550 ; 
+		int paloY = 67 ; 
+		if(this.getPelota().getX() > paloX-10 && this.getPelota().getX() < (paloX+10 ) &&  
+				this.getPelota().getY() < paloY){
+			System.out.println("entreeeeeeeeee");
+			this.getPelota().setY(paloY*-1);
+		}
+		*/
+	}
+
 	public void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
 	
 		if(getPelota().getJugador() instanceof JugadorLocal){
