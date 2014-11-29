@@ -137,7 +137,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 			
 			List<Jugador> jugadoresv = super.getScene().getJugadoresVisitantes();
 			for (Jugador jv : jugadoresv) {
-				jv.setEstado(new EstadoJugadorNoSeleccionadoCPU(jv));
+				jv.setEstadoNoSeleccionado();
 				jv.setEstaSeleccionado(false);
 				jv.flag=false;
 			}
@@ -148,11 +148,11 @@ public class Pelota extends GameComponent<SoccerScene> {
 			List<Jugador> jugadores = super.getScene().getJugadoresLocales();
 
 			for (Jugador j : jugadores) {
-				j.setEstado(new EstadoJugadorNoSeleccionado(j));
+				j.setEstadoNoSeleccionado();
 				j.setEstaSeleccionado(false);
 				j.flag=false;
 			}
-			this.getJugador().setEstado(new EstadoJugadorSeleccionado(this.getJugador()));
+			this.getJugador().setEstadoSeleccionado();
 			this.getJugador().setEstaSeleccionado(true);
 			
 		}else if(jugador instanceof JugadorVisitante
@@ -160,7 +160,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 			jugador.setEstadoSeleccionado();
 			jugador.setEstaSeleccionado(true);
 			jugador.flag=true;
-			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+			this.getJugador().setEstadoNoSeleccionado();
 			this.getJugador().setEstaSeleccionado(false);
 			this.getJugador().flag=false;
 			
@@ -170,31 +170,31 @@ public class Pelota extends GameComponent<SoccerScene> {
 			List<Jugador> jugadoresl = super.getScene().getJugadoresLocales();
 
 			for (Jugador jl : jugadoresl) {
-				jl.setEstado(new EstadoJugadorNoSeleccionado(jl));
+				jl.setEstadoNoSeleccionado();
 				jl.setEstaSeleccionado(false);
 				jl.flag=false;
 			}
-			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
+			jugador.setEstadoSeleccionado();
 			jugador.setEstaSeleccionado(true);
 			jugador.flag=true;
 			
 			List<Jugador> jugadores = super.getScene().getJugadoresVisitantes();
 
 			for (Jugador j : jugadores) {
-				j.setEstado(new EstadoJugadorNoSeleccionadoCPU(j));
+				j.setEstadoNoSeleccionado();
 				j.setEstaSeleccionado(false);
 				j.flag=false;
 			}
-			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+			this.getJugador().setEstadoNoSeleccionado();
 			this.getJugador().setEstaSeleccionado(false);
 			this.getJugador().flag=true;
 			
 		}else if(!(jugador instanceof JugadorVisitante)
 				&& !(this.getJugador() instanceof JugadorVisitante)){
-			jugador.setEstado(new EstadoJugadorSeleccionado(jugador));
+			jugador.setEstadoSeleccionado();
 			jugador.setEstaSeleccionado(true);
 			jugador.flag=true;
-			this.getJugador().setEstado(new EstadoJugadorNoSeleccionado(this.getJugador()));
+			this.getJugador().setEstadoNoSeleccionado();
 			this.getJugador().setEstaSeleccionado(false);
 			this.getJugador().flag=false;
 		}
