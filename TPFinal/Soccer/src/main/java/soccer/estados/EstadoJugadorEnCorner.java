@@ -69,13 +69,7 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 		}
 		
 	}
-	
-	
-	
-	
-		
-	
-	
+
 	
 	public void ejecutarEsquinaInferiorIzquierda(DeltaState deltaState) {
 		int direccion = obtenerDireccion(deltaState);
@@ -112,9 +106,6 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 			break;
 		}
 	}
-	
-	
-	
 	
 	
 	public void ejecutarEsquinaSuperiorDerecha(DeltaState deltaState){
@@ -155,13 +146,6 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	public void ejecutarEsquinaSuperiorIzquierda(DeltaState deltaState){
 		int direccion = obtenerDireccion(deltaState);
 		//por si no se apreto ninguna tecla
@@ -170,7 +154,6 @@ public class EstadoJugadorEnCorner extends EstadoJugador {
 		
 		switch (direccion) {
 		case Direccion.UP:
-			
 			if(seMovioUp == 1){
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.DOWN).get(3));
 				this.getJugador().setY(this.getJugador().getY() - 22);

@@ -71,17 +71,17 @@ public class EstadoArqueroLocal extends EstadoArquero {
 		
 		if(this.getJugador().getX() > 625 && this.getJugador().getX() < 700 ){
 			this.getJugador().left(deltaState);
-//			this.getJugador().ejecutarSprite(deltaState, Direccion.LEFT,0);
+			this.getJugador().ejecutarSprite(deltaState, Direccion.LEFT,0);
 			
 		}
 		if(this.getJugador().getX() < 625 && this.getJugador().getX() > 500 ){
 			this.getJugador().right(deltaState);
-//			this.getJugador().ejecutarSprite(deltaState, Direccion.RIGHT,0);
+			this.getJugador().ejecutarSprite(deltaState, Direccion.RIGHT,0);
 		}
 		
 		if(this.getJugador().getY() < 510 ){
 			this.getJugador().down(deltaState);
-//			this.getJugador().ejecutarSprite(deltaState, Direccion.DOWN,0);
+			this.getJugador().ejecutarSprite(deltaState, Direccion.DOWN,0);
 		}
 	}
 

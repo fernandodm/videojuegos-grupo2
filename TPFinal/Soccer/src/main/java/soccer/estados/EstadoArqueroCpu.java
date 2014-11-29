@@ -55,21 +55,19 @@ public class EstadoArqueroCpu extends EstadoArquero{
 	}
 
 	public void resetPos(DeltaState deltaState) {
-//		this.getJugador().setY(-10);
-//		this.getJugador().setX(622);
 		if(this.getJugador().getX() > 625 && this.getJugador().getX() < 700 ){
 			this.getJugador().left(deltaState);
-//			this.getJugador().ejecutarSprite(deltaState, Direccion.LEFT,0);
+			this.getJugador().ejecutarSprite(deltaState, Direccion.LEFT,0);
 			
 		}
 		if(this.getJugador().getX() < 625 && this.getJugador().getX() > 500 ){
 			this.getJugador().right(deltaState);
-//			this.getJugador().ejecutarSprite(deltaState, Direccion.RIGHT,0);
+			this.getJugador().ejecutarSprite(deltaState, Direccion.RIGHT,0);
 		}
 		
 		if(this.getJugador().getY() > 70 ){
 			this.getJugador().up(deltaState);
-//			this.getJugador().ejecutarSprite(deltaState, Direccion.UP,0);
+			this.getJugador().ejecutarSprite(deltaState, Direccion.UP,0);
 		}
 	}
 	

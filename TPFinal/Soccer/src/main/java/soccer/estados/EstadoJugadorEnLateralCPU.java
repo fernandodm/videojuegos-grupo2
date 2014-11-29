@@ -4,16 +4,12 @@ import java.util.Random;
 
 import soccer.Direccion;
 import soccer.Jugador;
-
 import com.uqbar.vainilla.DeltaState;
-import com.uqbar.vainilla.events.constants.Key;
 
 public class EstadoJugadorEnLateralCPU extends EstadoJugador {
 
 	int time = 0;
-	
-	
-	
+
 	public EstadoJugadorEnLateralCPU(Jugador jugador) {
 		this.setJugador(jugador);
 	}
