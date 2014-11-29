@@ -1,8 +1,6 @@
 package soccer.estados;
 
 import java.util.List;
-import java.util.Vector;
-
 import soccer.Arco;
 import soccer.Direccion;
 import soccer.Jugador;

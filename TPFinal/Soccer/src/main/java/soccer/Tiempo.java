@@ -5,7 +5,6 @@ import java.awt.Font;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
-import com.uqbar.vainilla.GameScene;
 import com.uqbar.vainilla.appearances.Label;
 
 public class Tiempo extends GameComponent<SoccerScene> {
