@@ -59,14 +59,14 @@ public class JugadorLocal extends Jugador {
 	}
 
 	@Override
-	public void setEstadoSeleccionado(Jugador jugadorCerca) {
-		this.setEstado(new EstadoJugadorSeleccionado(jugadorCerca));
+	public void setEstadoSeleccionado() {
+		this.setEstado(new EstadoJugadorSeleccionado(this));
 
 	}
 
 	@Override
-	public void setEstadoNoSeleccionado(Jugador jugador) {
-		this.setEstado(new EstadoJugadorNoSeleccionado(jugador));
+	public void setEstadoNoSeleccionado() {
+		this.setEstado(new EstadoJugadorNoSeleccionado(this));
 	}
 	
 	public LabelSeleccionado getLabelSeleccionado() {
@@ -85,8 +85,8 @@ public class JugadorLocal extends Jugador {
 	}
 
 	@Override
-	public void setEstadoAlLateral(Jugador jugador) {
-		this.setEstado(new EstadoJugadorEnLateral(jugador));
+	public void setEstadoAlLateral() {
+		this.setEstado(new EstadoJugadorEnLateral(this));
 		
 	}
 

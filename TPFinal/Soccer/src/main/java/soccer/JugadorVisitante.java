@@ -53,14 +53,14 @@ public class JugadorVisitante extends Jugador {
 	}
 
 	@Override
-	public void setEstadoSeleccionado(Jugador jugadorCerca) {
-		this.setEstado(new EstadoJugadorSeleccionadoCPU(jugadorCerca));
+	public void setEstadoSeleccionado() {
+		this.setEstado(new EstadoJugadorSeleccionadoCPU(this));
 		
 	}
 
 	@Override
-	public void setEstadoNoSeleccionado(Jugador jugador) {
-		this.setEstado(new EstadoJugadorNoSeleccionadoCPU(jugador));
+	public void setEstadoNoSeleccionado() {
+		this.setEstado(new EstadoJugadorNoSeleccionadoCPU(this));
 		
 	}
 
@@ -68,8 +68,8 @@ public class JugadorVisitante extends Jugador {
 	public void moverLabel(double x, double y) {}
 
 	@Override
-	public void setEstadoAlLateral(Jugador jugador) {
-		this.setEstado(new EstadoJugadorEnLateralCPU(jugador));
+	public void setEstadoAlLateral() {
+		this.setEstado(new EstadoJugadorEnLateralCPU(this));
 	}
 
 }

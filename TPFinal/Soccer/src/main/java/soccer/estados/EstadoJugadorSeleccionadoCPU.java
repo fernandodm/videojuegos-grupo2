@@ -15,7 +15,7 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 	public void update(DeltaState deltaState) {
 
 		if(Utils.distanciaConArcoLocal(this.getJugador().getX(), this.getJugador().getY())< 250){
-				Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.obtenerDireccionDeRemateVisitante());
+				Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.obtenerDireccionDeRemateVisitante());				
 				this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
 		}
 		
