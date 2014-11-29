@@ -15,11 +15,7 @@ public class Cancha extends GameComponent<SoccerScene> {
 
 	@Override
 	public void update(DeltaState deltaState) {
-//		boolean ahiSeleccionado = false;
-//		for (Jugador jugador : super.getScene().getJugadores()) {
-//			ahiSeleccionado = jugador.flag || ahiSeleccionado;
-//		}
-//		&& !ahiSeleccionado
+		
 		if (deltaState.isKeyPressed(Key.C) ) {
 			/* Busco al jugador selecionado para deseleccionarlo */
 

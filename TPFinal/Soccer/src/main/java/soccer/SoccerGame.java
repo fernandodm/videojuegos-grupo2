@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import soccer.estados.EstadoArqueroCpu;
+import soccer.estados.EstadoArqueroLocal;
 import soccer.estados.EstadoJugadorNoSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionado;
 import soccer.estados.Utils;
@@ -20,27 +21,28 @@ public class SoccerGame extends Game {
         
         public void resetGolVis(Marcador marcador, Tiempo tiempo){
         	LabelSeleccionado label = new LabelSeleccionado(625, 240);
-        	JugadorLocal jl = new JugadorLocal("jugadores.png", 150, 622, 300, label);
-        	jl.setEstado(new EstadoJugadorSeleccionado(jl));
-        	jl.setEstaSeleccionado(true);
-        	jl.setAppearance(jl.images.get(Direccion.DOWN).get(3));
-        	JugadorVisitante jv = new JugadorVisitante("jugadores.png", 85, 800, 200);
-        	this.resetGame(marcador, tiempo, jl, jv);
-        }
-        
-        public void resetGolLoc(Marcador marcador, Tiempo tiempo){
-        	LabelSeleccionado label = new LabelSeleccionado(625, 240);
         	JugadorLocal jl = new JugadorLocal("jugadores.png", 150, 622, 400, label);
         	jl.setEstado(new EstadoJugadorSeleccionado(jl));
         	jl.setEstaSeleccionado(true);
         	jl.setAppearance(jl.images.get(Direccion.DOWN).get(3));
         	JugadorVisitante jv = new JugadorVisitante("jugadores.png", 85, 522, 300);
-        	this.resetGame(marcador, tiempo, jl, jv);
+        	this.resetGame(marcador, tiempo, jl, jv, label);
+        	
+        }
+        
+        public void resetGolLoc(Marcador marcador, Tiempo tiempo){
+        	LabelSeleccionado label = new LabelSeleccionado(625, 240);
+        	JugadorLocal jl = new JugadorLocal("jugadores.png", 150, 622, 265, label);
+        	jl.setEstado(new EstadoJugadorSeleccionado(jl));
+        	jl.setEstaSeleccionado(true);
+        	jl.setAppearance(jl.images.get(Direccion.DOWN).get(3));
+        	JugadorVisitante jv = new JugadorVisitante("jugadores.png", 85, 800, 200);
+        	this.resetGame(marcador, tiempo, jl, jv, label);
         }
 
 
         
-        public void resetGame(Marcador marcador, Tiempo tiempo, Jugador jl, Jugador jv){
+        public void resetGame(Marcador marcador, Tiempo tiempo, Jugador jl, Jugador jv, LabelSeleccionado label){
         	
         	SoccerScene scene = new SoccerScene("sonido1.wav");
         	Utils.scene=scene;
@@ -49,7 +51,6 @@ public class SoccerGame extends Game {
         	Arco arcoAbajo = new Arco("arco.png", 3.14, 525, 953);
         	Pelota pelota = new Pelota("pelota1.png");
 	
-        	LabelSeleccionado label = new LabelSeleccionado(625, 240);
 	                
         		
         	JugadorLocal jugadorLocal1 = new JugadorLocal("jugadores.png", 150, 440, 300, label);
@@ -59,7 +60,7 @@ public class SoccerGame extends Game {
         	JugadorLocal jugadorLocal5 = new JugadorLocal("jugadores.png", 150, 350, 700, label);
         	JugadorLocal jugadorLocal6 = new JugadorLocal("jugadores.png", 150, 625, 720, label);
         	JugadorLocal jugadorLocal7 = new JugadorLocal("jugadores.png", 150, 622, 500, label);
-        	JugadorLocal arqueroLocal = new JugadorLocal("arqueros.png", 150, 622, 960, label);
+        	ArqueroLocal arqueroLocal = new ArqueroLocal("arqueros.png", 150, 622, 960, label);
 	               
         	jugadorLocal1.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal1));
 //        	jugadorLocal2.setEstado(new EstadoJugadorSeleccionado(jugadorLocal2));
@@ -68,7 +69,7 @@ public class SoccerGame extends Game {
         	jugadorLocal5.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal5));
         	jugadorLocal6.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal6));
         	jugadorLocal7.setEstado(new EstadoJugadorNoSeleccionado(jugadorLocal7));
-        	arqueroLocal.setEstado(new EstadoJugadorNoSeleccionado(arqueroLocal));
+        	arqueroLocal.setEstado(new EstadoArqueroLocal(arqueroLocal));
         	
         	JugadorVisitante jugadorVisitante1 = new JugadorVisitante("jugadores.png", 85, 440, 250);
         	JugadorVisitante jugadorVisitante2 = new JugadorVisitante("jugadores.png", 85, 622, 155);
@@ -77,7 +78,7 @@ public class SoccerGame extends Game {
         	JugadorVisitante jugadorVisitante5 = new JugadorVisitante("jugadores.png", 85, 350, -150);
         	JugadorVisitante jugadorVisitante6 = new JugadorVisitante("jugadores.png", 85, 625, -170);
         	JugadorVisitante jugadorVisitante7 = new JugadorVisitante("jugadores.png", 85, 622, -25);
-        	JugadorVisitante arqueroVisitante = new JugadorVisitante("arqueros.png", 150, 622, -390 );
+        	ArqueroVisitante arqueroVisitante = new ArqueroVisitante("arqueros.png", 150, 622, -390 );
         	arqueroVisitante.setEstado(new EstadoArqueroCpu(arqueroVisitante));
         
         	
@@ -146,7 +147,7 @@ public class SoccerGame extends Game {
         	Marcador marcador = new Marcador();	                
         	Tiempo tiempo = new Tiempo(300, 10, Color.lightGray);
         	
-        	this.resetGolVis(marcador, tiempo);
+        	this.resetGolLoc(marcador, tiempo);
         	
         }	
        
