@@ -27,8 +27,6 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			if (Colision.mustApply(this.getPelota(), jugador, nuevaPosicion)
 					&& jugador.isEstaSeleccionado()) {
 				this.getPelota().setJugador(jugador);
-//				this.getPelota().ejecutarMovimiento(deltaState, jugador.getX(),
-//						jugador.getY());
 				this.ejecutarMovimiento(deltaState, jugador.getX(),
 						jugador.getY());
 				jugador.flag = true;
@@ -121,7 +119,6 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		|| this.getPelota().getY() > 528 && gol){
 						
 			if(fueCorner()){
-				this.getPelota().setEstadoPelota(new EstadoPelotaCorner(this.getPelota()));
 				seleccionarJugadorAlCorner();
 			}else{
 				saqueDeArco();
@@ -131,7 +128,8 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 	
 
 	private void saqueDeArco() {
-		
+		this.getPelota().setEnRemate(false);
+		this.getPelota().setPotencia(2);
 		Jugador jugador = this.getPelota().getJugador();
 		
 		if(jugador instanceof JugadorVisitante){
@@ -151,7 +149,6 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		arquero.setEstadoSeleccionado();
 		setearAparienciaArquero(arquero);
 		this.posicionarSaqueDeArco(arquero);
-		this.getPelota().setEnRemate(false);
 		
 	}
 
@@ -199,14 +196,19 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 	}
 
 	private void seleccionarJugadorAlCorner() {
-		
+		this.getPelota().setEnRemate(false);
+		this.getPelota().setPotencia(2);
 		Jugador jugador = this.getPelota().getJugador();
 
-		
-		for(Jugador jug: this.getPelota().getScene().getJugadores()){
-			jug.setFlag(false);
-			jug.setEstaSeleccionado(false);
-			jug.setEstadoNoSeleccionado();
+		if(jugador instanceof JugadorLocal){
+			this.getPelota().setEstadoPelota(new EstadoPelotaEnCornerCPU(this.getPelota()));
+		}else{
+			this.getPelota().setEstadoPelota(new EstadoPelotaCorner(this.getPelota()));
+			for(Jugador jug: this.getPelota().getScene().getJugadores()){
+				jug.setFlag(false);
+				jug.setEstaSeleccionado(false);
+				jug.setEstadoNoSeleccionado();
+			}
 		}
 	
 		
@@ -218,9 +220,9 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		jugadorAlCorner.setFlag(true);
 		jugadorAlCorner.setEstaSeleccionado(true);
 		this.getPelota().setJugador(jugadorAlCorner);
-		jugadorAlCorner.setEstado(new EstadoJugadorEnCorner(jugadorAlCorner));
+		jugadorAlCorner.setEstadoAlCorner();
 		this.posicionarJugadorCorner(jugadorAlCorner, jugadorCercanoAlCorner);
-		this.getPelota().setEnRemate(false);
+		
 	}
 
 	private void posicionarJugadorCorner(Jugador jugador, Jugador jugadorCercanoAlCorner) {
@@ -244,7 +246,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		if(this.getPelota().getX() < 640){
 			jugador.setAppearance(jugador.getImages().get(Direccion.RIGHT).get(0).rotate(0.3));
 			jugador.setX(145);
-			this.getPelota().setX(172);
+			this.getPelota().setX(174);
 			jugador.moverLabel(jugador.getX() - 10, jugador.getY() + 6);
 			
 			jugadorCercanoAlCorner.setAppearance(jugador.getImages().get(Direccion.RIGHT).get(0));
@@ -298,7 +300,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		jugadorAlLateral.setAppearance(jugadorAlLateral.getImages().get(Direccion.RIGHT).get(0));
 		this.posicionarJugadorLateral(jugadorAlLateral);
 		this.getPelota().setEnRemate(false);
-		
+		this.getPelota().setPotencia(2);
 		//acerco un jugador cerca del lateral
 		this.acercarJugadorAlLateral(juagdores);
 	}

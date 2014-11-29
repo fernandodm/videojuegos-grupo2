@@ -3,6 +3,7 @@ package soccer;
 import java.util.LinkedList;
 import java.util.List;
 
+import soccer.estados.EstadoJugadorEnCorner;
 import soccer.estados.EstadoJugadorEnLateral;
 import soccer.estados.EstadoJugadorNoSeleccionado;
 import soccer.estados.EstadoJugadorSeleccionado;
@@ -87,6 +88,12 @@ public class JugadorLocal extends Jugador {
 	@Override
 	public void setEstadoAlLateral() {
 		this.setEstado(new EstadoJugadorEnLateral(this));
+		
+	}
+
+	@Override
+	public void setEstadoAlCorner() {
+		this.setEstado(new EstadoJugadorEnCorner(this));
 		
 	}
 

@@ -3,6 +3,7 @@ package soccer;
 import java.util.LinkedList;
 import java.util.List;
 
+import soccer.estados.EstadoJugadorEnCornerCPU;
 import soccer.estados.EstadoJugadorEnLateral;
 import soccer.estados.EstadoJugadorEnLateralCPU;
 import soccer.estados.EstadoJugadorNoSeleccionadoCPU;
@@ -70,6 +71,11 @@ public class JugadorVisitante extends Jugador {
 	@Override
 	public void setEstadoAlLateral() {
 		this.setEstado(new EstadoJugadorEnLateralCPU(this));
+	}
+
+	@Override
+	public void setEstadoAlCorner() {
+		this.setEstado(new EstadoJugadorEnCornerCPU(this));
 	}
 
 }
