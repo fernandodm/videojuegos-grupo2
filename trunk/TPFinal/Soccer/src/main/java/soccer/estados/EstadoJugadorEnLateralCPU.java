@@ -49,7 +49,7 @@ public class EstadoJugadorEnLateralCPU extends EstadoJugador {
 			this.getJugador().setY(this.getJugador().getY() + 20);
 			this.getJugador().getScene().getPelota().setDireccionRemate(upright);		
 		}
-		this.getJugador().setEstadoNoSeleccionado(this.getJugador());
+		this.getJugador().setEstadoNoSeleccionado();
 		this.getJugador().getScene().getPelota().setEnRemate(true);
 		time = 0;
 		}

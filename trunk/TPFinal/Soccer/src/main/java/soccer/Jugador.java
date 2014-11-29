@@ -295,8 +295,8 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 
 	}
 	
-	public abstract void setEstadoSeleccionado(Jugador jugadorCerca);
-	public abstract void setEstadoNoSeleccionado(Jugador jugador);
-	public abstract void setEstadoAlLateral(Jugador jugador);
+	public abstract void setEstadoSeleccionado();
+	public abstract void setEstadoNoSeleccionado();
+	public abstract void setEstadoAlLateral();
 	
 }

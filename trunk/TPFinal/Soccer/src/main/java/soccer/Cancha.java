@@ -60,7 +60,7 @@ public class Cancha extends GameComponent<SoccerScene> {
 		}
 
 		/* Selecciono al jugador mas cercano */
-		jugadorCerca.setEstadoSeleccionado(jugadorCerca);
+		jugadorCerca.setEstadoSeleccionado();
 		jugadorCerca.setEstaSeleccionado(true);
 		jugadorCerca.moverLabel(jugadorCerca.getX() + 7, jugadorCerca.getY() + 28);
 	}

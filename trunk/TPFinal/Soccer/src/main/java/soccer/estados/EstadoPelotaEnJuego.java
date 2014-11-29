@@ -138,7 +138,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			for(Jugador jug: this.getPelota().getScene().getJugadores()){
 				jug.setFlag(false);
 				jug.setEstaSeleccionado(false);
-				jug.setEstadoNoSeleccionado(jug);
+				jug.setEstadoNoSeleccionado();
 			}
 		}
 		
@@ -148,7 +148,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		arquero.setEstaSeleccionado(true);
 		this.getPelota().setJugador(arquero);
 		
-		arquero.setEstadoSeleccionado(arquero);
+		arquero.setEstadoSeleccionado();
 		setearAparienciaArquero(arquero);
 		this.posicionarSaqueDeArco(arquero);
 		this.getPelota().setEnRemate(false);
@@ -206,7 +206,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		for(Jugador jug: this.getPelota().getScene().getJugadores()){
 			jug.setFlag(false);
 			jug.setEstaSeleccionado(false);
-			jug.setEstadoNoSeleccionado(jug);
+			jug.setEstadoNoSeleccionado();
 		}
 	
 		
@@ -279,7 +279,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			for(Jugador jug: this.getPelota().getScene().getJugadores()){
 				jug.setFlag(false);
 				jug.setEstaSeleccionado(false);
-				jug.setEstadoNoSeleccionado(jug);
+				jug.setEstadoNoSeleccionado();
 			}
 		}
 		/*Si el jugador esta muy cerca del lateral y se va con la pelota
@@ -294,7 +294,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		jugadorAlLateral.setFlag(true);
 		jugadorAlLateral.setEstaSeleccionado(true);
 		this.getPelota().setJugador(jugadorAlLateral);
-		jugadorAlLateral.setEstadoAlLateral(jugadorAlLateral);
+		jugadorAlLateral.setEstadoAlLateral();
 		jugadorAlLateral.setAppearance(jugadorAlLateral.getImages().get(Direccion.RIGHT).get(0));
 		this.posicionarJugadorLateral(jugadorAlLateral);
 		this.getPelota().setEnRemate(false);

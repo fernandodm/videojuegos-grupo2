@@ -141,7 +141,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 				jv.setEstaSeleccionado(false);
 				jv.flag=false;
 			}
-			jugador.setEstadoSeleccionado(jugador);
+			jugador.setEstadoSeleccionado();
 			jugador.setEstaSeleccionado(true);
 			jugador.flag=true;
 			
@@ -157,7 +157,7 @@ public class Pelota extends GameComponent<SoccerScene> {
 			
 		}else if(jugador instanceof JugadorVisitante
 				&& this.getJugador() instanceof JugadorVisitante){
-			jugador.setEstadoSeleccionado(jugador);
+			jugador.setEstadoSeleccionado();
 			jugador.setEstaSeleccionado(true);
 			jugador.flag=true;
 			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
