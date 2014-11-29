@@ -66,7 +66,7 @@ public class EstadoJugadorEnCornerCPU extends EstadoJugador {
 			Random rnd = new Random();
 			int direccion = rnd.nextInt(3);
 			
-			switch (2) {
+			switch (direccion) {
 			case 2:
 				this.getJugador().setAppearance(this.getJugador().getImages().get(Direccion.RIGHT).get(0).rotate(0));
 				this.getJugador().setY(this.getJugador().getY() - 22);

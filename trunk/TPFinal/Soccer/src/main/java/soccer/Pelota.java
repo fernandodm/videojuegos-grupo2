@@ -3,10 +3,6 @@ package soccer;
 import java.util.ArrayList;
 import java.util.List;
 
-import soccer.estados.EstadoJugadorNoSeleccionado;
-import soccer.estados.EstadoJugadorNoSeleccionadoCPU;
-import soccer.estados.EstadoJugadorSeleccionado;
-import soccer.estados.EstadoJugadorSeleccionadoCPU;
 import soccer.estados.EstadoPelota;
 import soccer.estados.EstadoPelotaEnJuego;
 

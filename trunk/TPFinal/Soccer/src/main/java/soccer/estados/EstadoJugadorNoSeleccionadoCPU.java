@@ -30,7 +30,6 @@ public class EstadoJugadorNoSeleccionadoCPU extends EstadoJugador {
 			return;
 		}
 		
-		
 		int direccion = Utils.direccionPelota(this.getJugador().getX(),this.getJugador().getY());
 		switch (direccion) {
 		case Direccion.UP:
@@ -65,8 +64,7 @@ public class EstadoJugadorNoSeleccionadoCPU extends EstadoJugador {
 			this.getJugador().downLeft(deltaState);
 			this.getJugador().ejecutarSprite(deltaState, Direccion.UP,-2);
 			break;
-//		}		
-	}
+		}		
 	}
 
 	private void moverAPosicionOriginal(DeltaState deltaState) {
@@ -105,8 +103,7 @@ public class EstadoJugadorNoSeleccionadoCPU extends EstadoJugador {
 			this.getJugador().downLeft(deltaState);
 			this.getJugador().ejecutarSprite(deltaState, Direccion.UP,-2);
 			break;
-//		}		
-	}
+		}		
 	}
 
 }
