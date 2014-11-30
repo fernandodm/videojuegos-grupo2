@@ -288,7 +288,7 @@ public class Utils {
 	}
 
 	public static boolean hacerPase() {
-		return (Math.random()*100) > 65;
+		return (Math.random()*100) > 75;
 	}
 		
 	
