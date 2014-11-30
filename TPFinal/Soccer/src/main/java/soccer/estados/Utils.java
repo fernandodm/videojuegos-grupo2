@@ -73,6 +73,68 @@ public class Utils {
 		}
 		return jugadorCerca;
 	}
+	
+	public static double distanciaConJugadorVisitanteMasCercano(double x, double y) {
+		Jugador jugador = Utils.jugadorVisitanteMasCercano(x, y);
+		double distanciaActual = Math.sqrt(Math.pow((x - jugador.getX()), 2)
+				+ Math.pow((y - jugador.getY()), 2));
+		return distanciaActual;
+	}
+	
+	public static Jugador jugadorVisitanteMasCercano(double x,double y) {
+		Jugador jugadorCerca = null;
+		double distancia = 100000; //es la maxima distancia entre dos jugadores
+		List<Jugador> Jugadores = Utils.scene.getJugadoresVisitantes();
+		for (Jugador jugador : Jugadores) {
+				if(jugador.getX() != x && jugador.getY() != y){
+				
+					double distanciaActual = Math.sqrt(Math.pow((x - jugador.getX()), 2)
+							+ Math.pow((y - jugador.getY()), 2));
+					if(distanciaActual <= distancia){
+						distancia  = distanciaActual;
+						jugadorCerca = jugador;
+					}
+				}
+		}
+		return jugadorCerca;
+	}
+	
+	public static int direccionJugadorVisitanteCercano(double x,double y) {
+		Jugador jugador = Utils.jugadorVisitanteMasCercano(x, y);
+		
+		if((int)jugador.getX() == (int) x){
+			if(jugador.getY()> y){
+				return Direccion.DOWN;
+			}else{
+				return Direccion.UP;
+			}
+		}
+		
+		if((int)jugador.getY() == (int) y){
+			if(jugador.getX()> x){
+				return Direccion.RIGHT;
+			}else{
+				return Direccion.LEFT;
+			}
+		}
+		
+		if(jugador.getY()> y){
+			if(jugador.getX()< x){
+				return Direccion.DOWNLEFT;
+			}else{
+				return Direccion.DOWNRIGHT;
+			}
+		}
+		if(jugador.getY()< y){
+			if(jugador.getX()< x){
+
+				return Direccion.UPLEFT;
+			}else{
+				return Direccion.UPRIGHT;
+			}
+		}
+		return 0;
+	}
 
 	public static int direccionPelota(double x,double y) {
 		Pelota pelota = Utils.scene.getPelota();
@@ -223,6 +285,10 @@ public class Utils {
 			}
 		}
 		return 0;
+	}
+
+	public static boolean hacerPase() {
+		return (Math.random()*100) > 65;
 	}
 		
 	
