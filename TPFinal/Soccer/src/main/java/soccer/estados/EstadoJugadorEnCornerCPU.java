@@ -10,6 +10,7 @@ import com.uqbar.vainilla.DeltaState;
 public class EstadoJugadorEnCornerCPU extends EstadoJugador {
 	
 	int time = 0;
+	boolean cambiarEstado;
 	
 	public EstadoJugadorEnCornerCPU(Jugador jugador) {
 		this.setJugador(jugador);
@@ -31,8 +32,20 @@ public class EstadoJugadorEnCornerCPU extends EstadoJugador {
 				this.ejecutarEsquinaInferiorDerecha(deltaState);
 			}
 		}
+		
+		if(this.cambiarEstado && time == 200){
+			this.cambiarEstados();
+		}
 	}
 		
+	private void cambiarEstados() {
+		for(Jugador jug: this.getJugador().getScene().getJugadores()){
+			if(!jug.isEstaSeleccionado())
+				jug.setEstadoNoSeleccionado();
+		}
+		this.cambiarEstado = false;		
+	}
+
 	private void ejecutarEsquinaInferiorDerecha(DeltaState deltaState) {
 		if(time == 200){
 			Random rnd = new Random();

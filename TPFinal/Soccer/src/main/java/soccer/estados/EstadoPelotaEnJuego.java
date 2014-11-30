@@ -207,7 +207,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			for(Jugador jug: this.getPelota().getScene().getJugadores()){
 				jug.setFlag(false);
 				jug.setEstaSeleccionado(false);
-				jug.setEstadoNoSeleccionado();
+				jug.setEstadoParaPelotaFueraDeJuego();
 			}
 		}
 	
