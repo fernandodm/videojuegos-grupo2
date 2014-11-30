@@ -61,12 +61,12 @@ public class EstadoArqueroLocal extends EstadoArquero {
 	@Override
 	public void resetPos(DeltaState deltaState) {
 		
-		if(this.getJugador().getX() > 625 && this.getJugador().getX() < 700 ){
+		if(this.getJugador().getX() > 620){
 			this.getJugador().left(deltaState);
 			this.getJugador().ejecutarSprite(deltaState, Direccion.LEFT,0);
 			
 		}
-		if(this.getJugador().getX() < 625 && this.getJugador().getX() > 500 ){
+		if(this.getJugador().getX() < 630){
 			this.getJugador().right(deltaState);
 			this.getJugador().ejecutarSprite(deltaState, Direccion.RIGHT,0);
 		}
