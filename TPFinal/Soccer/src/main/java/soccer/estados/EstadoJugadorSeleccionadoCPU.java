@@ -35,7 +35,6 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 		}
 		
 		double distanciaConJugadorVisitanteMasCercano=Utils.distanciaConJugadorVisitanteMasCercano(this.getJugador().getX(), this.getJugador().getY());
-		System.out.println(distanciaConJugadorVisitanteMasCercano);
 		if(distanciaConJugadorVisitanteMasCercano < 50 
 				&& distanciaConJugadorVisitanteMasCercano > 15 && Utils.hacerPase()){
 			Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.direccionJugadorVisitanteCercano(this.getJugador().getX(), this.getJugador().getY()));				
