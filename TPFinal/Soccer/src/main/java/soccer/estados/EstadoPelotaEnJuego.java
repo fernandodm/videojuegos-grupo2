@@ -281,13 +281,13 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			for(Jugador jug: this.getPelota().getScene().getJugadores()){
 				jug.setFlag(false);
 				jug.setEstaSeleccionado(false);
-				jug.setEstadoNoSeleccionado();
+				jug.setEstadoParaPelotaFueraDeJuego();
 			}
 		}
 		/*Si el jugador esta muy cerca del lateral y se va con la pelota
 		 * lo corro para abajo al jugador q la tiro para q no colisionen 
 		 * dos jugadores con la pelota*/
-		if(jugador.getX() < 202 || jugador.getX() > 1050 && !jugador.isEstaSeleccionado())
+		if(jugador.getX() < 202 || jugador.getX() > 1050)
 			jugador.setY(jugador.getY() + 200);
 		
 		List<Jugador> juagdores = jugador.equipoContrario().getJugadores();

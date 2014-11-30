@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 import soccer.estados.EstadoJugador;
+import soccer.estados.EstadoJugadorEnEspera;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
@@ -295,10 +296,13 @@ public abstract class Jugador extends GameComponent<SoccerScene> {
 
 	}
 	
+	public void setEstadoParaPelotaFueraDeJuego(){
+		this.setEstado(new EstadoJugadorEnEspera());
+	}
+	
 	public abstract void setEstadoSeleccionado();
 	public abstract void setEstadoNoSeleccionado();
 	public abstract void setEstadoAlLateral();
-
 	public abstract void setEstadoAlCorner();
 	
 }

@@ -96,5 +96,4 @@ public class JugadorLocal extends Jugador {
 		this.setEstado(new EstadoJugadorEnCorner(this));
 		
 	}
-
 }
