@@ -14,6 +14,7 @@ public class EstadoPelotaEnCornerCPU extends EstadoPelota {
 	public void update(DeltaState deltaState) {
 		if(this.getPelota().isEnRemate()){
 			this.getPelota().moverPelotaPorRemate(deltaState);
+			this.reanudarTiempo();
 		}
 	}
 }

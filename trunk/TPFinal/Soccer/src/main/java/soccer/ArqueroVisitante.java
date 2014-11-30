@@ -1,6 +1,7 @@
 package soccer;
 
 import soccer.estados.EstadoArqueroCpu;
+import soccer.estados.EstadoArqueroSaqueDeArcoCPU;
 
 public class ArqueroVisitante extends JugadorVisitante {
 
@@ -10,11 +11,14 @@ public class ArqueroVisitante extends JugadorVisitante {
 		
 	}
 	
-	
 	@Override
 	public void setEstadoNoSeleccionado() {
 		this.setEstado(new EstadoArqueroCpu(this));
-		
+	}
+	
+	@Override
+	public void setEstadoArqueroSaqueDeArco() {
+		this.setEstado(new EstadoArqueroSaqueDeArcoCPU(this));
 	}
 
 }

@@ -76,4 +76,7 @@ public class JugadorVisitante extends Jugador {
 		this.setEstado(new EstadoJugadorEnCornerCPU(this));
 	}
 
+	@Override
+	public void setEstadoArqueroSaqueDeArco() {}
+
 }

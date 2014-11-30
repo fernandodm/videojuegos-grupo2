@@ -4,9 +4,9 @@ import soccer.Pelota;
 
 import com.uqbar.vainilla.DeltaState;
 
-public class EstadoPelotaEnLateralCPU extends EstadoPelota {
+public class EstadoPelotaEnLateralOSaqueArcoCPU extends EstadoPelota {
 
-	public EstadoPelotaEnLateralCPU(Pelota pelota) {
+	public EstadoPelotaEnLateralOSaqueArcoCPU(Pelota pelota) {
 		this.setPelota(pelota);
 	}
 
@@ -15,6 +15,7 @@ public class EstadoPelotaEnLateralCPU extends EstadoPelota {
 
 		if(this.getPelota().isEnRemate()){
 			this.getPelota().moverPelotaPorRemate(deltaState);
+			this.reanudarTiempo();
 		}
 	}
 
