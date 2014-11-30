@@ -11,6 +11,7 @@ public class Tiempo extends GameComponent<SoccerScene> {
 	private int minutos = 0;
 	private int segundos = 0;
 	private int actualizar;
+	private boolean tieneQueParar = false;
 	
 	public Tiempo(double x, double y, Color color) {		
 		super(new Label(new Font("verdana",  Font.BOLD, 18), color, "0" ), x, y);
@@ -19,20 +20,23 @@ public class Tiempo extends GameComponent<SoccerScene> {
 
 	@Override
 	public void update(DeltaState deltaState) {
-		if(minutos == 4){
-			String resultado = "Resultado: " + this.getScene().getMarcador().getMarcadorLocal() + " - " + this.getScene().getMarcador().getMarcadorVisitante();
-			if(this.getScene().getMarcador().getMarcadorLocal() > this.getScene().getMarcador().getMarcadorVisitante()){
-				this.getGame().setCurrentScene(((SoccerGame)this.getGame()).buildScene("Ganaste!!! Presione N para volver a jugar.", resultado));
-			}else{
-				if(this.getScene().getMarcador().getMarcadorLocal() < this.getScene().getMarcador().getMarcadorVisitante()){
-					this.getGame().setCurrentScene(((SoccerGame)this.getGame()).buildScene("Perdiste!!! Presione N para volver a jugar.", resultado));
+		
+		if(!this.isTieneQueParar()){
+			if(minutos == 4){
+				String resultado = "Resultado: " + this.getScene().getMarcador().getMarcadorLocal() + " - " + this.getScene().getMarcador().getMarcadorVisitante();
+				if(this.getScene().getMarcador().getMarcadorLocal() > this.getScene().getMarcador().getMarcadorVisitante()){
+					this.getGame().setCurrentScene(((SoccerGame)this.getGame()).buildScene("Ganaste!!! Presione N para volver a jugar.", resultado));
 				}else{
-					this.getGame().setCurrentScene(((SoccerGame)this.getGame()).buildScene("Empataron!!! Presione N para volver a jugar.", resultado));
+					if(this.getScene().getMarcador().getMarcadorLocal() < this.getScene().getMarcador().getMarcadorVisitante()){
+						this.getGame().setCurrentScene(((SoccerGame)this.getGame()).buildScene("Perdiste!!! Presione N para volver a jugar.", resultado));
+					}else{
+						this.getGame().setCurrentScene(((SoccerGame)this.getGame()).buildScene("Empataron!!! Presione N para volver a jugar.", resultado));
+					}
 				}
 			}
+			((Label)this.getAppearance()).setText("Tiempo: " + this.minutos + ":" + this.segundos);
+			this.ejecutar();
 		}
-		((Label)this.getAppearance()).setText("Tiempo: " + this.minutos + ":" + this.segundos);
-		this.ejecutar();
 		super.update(deltaState);
 	}
 	
@@ -49,5 +53,15 @@ public class Tiempo extends GameComponent<SoccerScene> {
 		}
 		
 		actualizar++;
+	}
+
+
+	public boolean isTieneQueParar() {
+		return tieneQueParar;
+	}
+
+
+	public void setTieneQueParar(boolean tieneQueParar) {
+		this.tieneQueParar = tieneQueParar;
 	}
 }

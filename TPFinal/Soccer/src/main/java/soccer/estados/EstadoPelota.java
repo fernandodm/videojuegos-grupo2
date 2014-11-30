@@ -17,6 +17,14 @@ public abstract class EstadoPelota extends GameComponent<SoccerScene> {
 		this.pelota = pelota;
 	}
 	
+	public void frenarTiempo() {
+		this.getPelota().getScene().getTiempo().setTieneQueParar(true);		
+	}
+	
+	public void reanudarTiempo(){
+		this.getPelota().getScene().getTiempo().setTieneQueParar(false);	
+	}
+	
 	public abstract void update(DeltaState deltaState);
 
 }

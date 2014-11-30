@@ -1,6 +1,7 @@
 package soccer;
 
 import soccer.estados.EstadoArqueroLocal;
+import soccer.estados.EstadoArqueroSaqueDeArco;
 
 public class ArqueroLocal extends JugadorLocal {
 
@@ -11,10 +12,13 @@ public class ArqueroLocal extends JugadorLocal {
 		
 	}
 	
-	
 	@Override
 	public void setEstadoNoSeleccionado() {
 		this.setEstado(new EstadoArqueroLocal(this));
-		
+	}
+	
+	@Override
+	public void setEstadoArqueroSaqueDeArco() {
+		this.setEstado(new EstadoArqueroSaqueDeArco(this));
 	}
 }

@@ -96,4 +96,7 @@ public class JugadorLocal extends Jugador {
 		this.setEstado(new EstadoJugadorEnCorner(this));
 		
 	}
+
+	@Override
+	public void setEstadoArqueroSaqueDeArco(){}
 }

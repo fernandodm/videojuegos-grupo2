@@ -6,7 +6,6 @@ import soccer.Colision;
 import soccer.Direccion;
 import soccer.Jugador;
 import soccer.JugadorLocal;
-import soccer.JugadorVisitante;
 import soccer.Pelota;
 import soccer.Vector;
 
@@ -118,26 +117,32 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		if((this.getPelota().getY() < 50 && gol) 
 		|| this.getPelota().getY() > 528 && gol){
 						
-			if(fueCorner()){
-				seleccionarJugadorAlCorner();
+			if(this.fueCorner()){
+				this.frenarTiempo();
+				this.seleccionarJugadorAlCorner();
 			}else{
-				saqueDeArco();
+				this.getPelota().getScene().getTiempo().setTieneQueParar(true);
+				this.saqueDeArco();
 			}
 		}
 	}
 	
-
 	private void saqueDeArco() {
 		this.getPelota().setEnRemate(false);
 		this.getPelota().setPotencia(2);
 		Jugador jugador = this.getPelota().getJugador();
 		
-		if(jugador instanceof JugadorVisitante){
-			for(Jugador jug: this.getPelota().getScene().getJugadores()){
-				jug.setFlag(false);
-				jug.setEstaSeleccionado(false);
-				jug.setEstadoNoSeleccionado();
-			}
+		if(jugador instanceof JugadorLocal){
+			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateralOSaqueArcoCPU(this.getPelota()));
+		}else{
+			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateralOSaqueArco(this.getPelota()));
+
+		}
+		
+		for(Jugador jug: this.getPelota().getScene().getJugadores()){
+			jug.setFlag(false);
+			jug.setEstaSeleccionado(false);
+			jug.setEstadoParaPelotaFueraDeJuego();
 		}
 		
 		List<Jugador> juagdores = jugador.equipoContrario().getJugadores();
@@ -146,7 +151,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		arquero.setEstaSeleccionado(true);
 		this.getPelota().setJugador(arquero);
 		
-		arquero.setEstadoSeleccionado();
+		arquero.setEstadoArqueroSaqueDeArco();
 		setearAparienciaArquero(arquero);
 		this.posicionarSaqueDeArco(arquero);
 		
@@ -169,8 +174,8 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			this.getPelota().setX(550);
 			arquero.moverLabel(arquero.getX() - 10, arquero.getY() + 6);
 		}else{
-			arquero.setX(550);
-			arquero.setY(490);
+			arquero.setX(545);
+			arquero.setY(485);
 			this.getPelota().setY(470);
 			this.getPelota().setX(550);
 			arquero.moverLabel(arquero.getX() + 25, arquero.getY() + 10);
@@ -267,6 +272,7 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 
 	private void verificarLateral() {
 		if(this.getPelota().getX() < 162 || this.getPelota().getX() > 1090){
+			this.frenarTiempo();
 			seleccionarJugadorAlLateral();
 		}
 	}
@@ -275,9 +281,9 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		Jugador jugador = this.getPelota().getJugador();
 	
 		if(jugador instanceof JugadorLocal){
-			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateralCPU(this.getPelota()));
+			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateralOSaqueArcoCPU(this.getPelota()));
 		}else{
-			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateral(this.getPelota()));
+			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateralOSaqueArco(this.getPelota()));
 			for(Jugador jug: this.getPelota().getScene().getJugadores()){
 				jug.setFlag(false);
 				jug.setEstaSeleccionado(false);

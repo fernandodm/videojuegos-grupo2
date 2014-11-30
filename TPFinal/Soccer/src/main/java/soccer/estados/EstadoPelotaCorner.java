@@ -19,6 +19,7 @@ public class EstadoPelotaCorner extends EstadoPelota {
 
 		if(this.noApretoDireccion(direccion) || this.getPelota().isEnRemate()){
 			if(deltaState.isKeyPressed(Key.ENTER)){
+				this.reanudarTiempo();
 				this.cambiarEstados();
 				this.getPelota().activarRemate(deltaState);
 				this.getPelota().getJugador().setEstado(new EstadoJugadorSeleccionado(this.getPelota().getJugador()));

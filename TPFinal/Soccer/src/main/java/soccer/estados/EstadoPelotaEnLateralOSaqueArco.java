@@ -8,10 +8,10 @@ import soccer.Pelota;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.events.constants.Key;
 
-public class EstadoPelotaEnLateral extends EstadoPelota {
+public class EstadoPelotaEnLateralOSaqueArco extends EstadoPelota {
 
 
-	public EstadoPelotaEnLateral(Pelota pelota) {
+	public EstadoPelotaEnLateralOSaqueArco(Pelota pelota) {
 		this.setPelota(pelota);
 	
 	}
@@ -21,6 +21,7 @@ public class EstadoPelotaEnLateral extends EstadoPelota {
 		int direccion = Direccion.obtenerDireccion(deltaState);
 		if(noApretoDireccion(direccion) || this.getPelota().isEnRemate()){
 			if(deltaState.isKeyPressed(Key.ENTER) && this.getPelota().getJugador() instanceof JugadorLocal){
+				this.reanudarTiempo();
 				this.cambiarEstados();
 				this.getPelota().activarRemate(deltaState);
 				this.getPelota().getJugador().setEstado(new EstadoJugadorSeleccionado(this.getPelota().getJugador()));
