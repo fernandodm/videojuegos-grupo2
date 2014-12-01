@@ -25,7 +25,7 @@ public class SoccerGame extends Game {
         	jl.setEstado(new EstadoJugadorSeleccionado(jl));
         	jl.setEstaSeleccionado(true);
         	jl.setAppearance(jl.images.get(Direccion.DOWN).get(3));
-        	JugadorVisitante jv = new JugadorVisitante("jugadores.png", 86, 550, 300);
+        	JugadorVisitante jv = new JugadorVisitante("jugadores.png", 150, 622, 265);
         	this.resetGame(marcador, tiempo, jl, jv, label);
         	
         }
