@@ -18,6 +18,8 @@ public class Marcador extends GameComponent<SoccerScene>{
 	
 	@Override
 	public void update(DeltaState deltaState) {
+//		System.out.println("pelota = " + super.getScene().getPelota().getY());
+//		System.out.println("scene = " + super.getScene().getCancha().getY());
 		((Label)this.getAppearance()).setText(this.marcadorLocal + ":" + this.marcadorVisitante);
 		this.actualizarMarcadores();
 		super.update(deltaState);
@@ -27,8 +29,8 @@ public class Marcador extends GameComponent<SoccerScene>{
 	private void actualizarMarcadores() {
 		Pelota pelota = super.getScene().getPelota();
 		boolean gol = (pelota.getX()>550 && pelota.getX()<700 );
-		boolean arcoSuperior = pelota.getY() < 50 && gol; 
-		boolean arcoInferior = pelota.getY() > 528 && gol;
+		boolean arcoSuperior = pelota.getY() < 50 && gol && super.getScene().getCancha().getY() > -7 ; 
+		boolean arcoInferior = pelota.getY() > 528 && gol && super.getScene().getCancha().getY() < -930 ;
 		if(arcoSuperior){
 			this.marcadorLocal++;
 			super.getScene().resetSceneGL(this);
