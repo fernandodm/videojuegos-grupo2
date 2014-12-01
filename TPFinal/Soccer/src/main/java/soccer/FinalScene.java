@@ -17,7 +17,7 @@ public class FinalScene extends GameComponent<GanasteOPerdisteScene> {
 	@Override
 	public void update(DeltaState deltaState) {
 		if(deltaState.isKeyPressed(Key.N)) {
-//			((SoccerGame) this.getGame()).resetGame(new Marcador(),new Tiempo(300, 10, Color.lightGray));
+			((SoccerGame) this.getGame()).setUpScenes();
 		}
 		super.update(deltaState);
 	}
