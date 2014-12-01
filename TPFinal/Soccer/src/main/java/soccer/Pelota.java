@@ -27,6 +27,8 @@ public class Pelota extends GameComponent<SoccerScene> {
 	private double gravedad = 4;
 	private int ultimaDireccion = Direccion.DOWN; //para que el jugador remate cuando esta quieto
 	private boolean remateEnCorner = false;
+	
+	private boolean puedeEjecutarMovimiento = true;
 		
 
 	public Pelota(String pelotaPath){
@@ -100,13 +102,17 @@ public class Pelota extends GameComponent<SoccerScene> {
 	public void colisionoConJugador() {
 		List<Jugador> jugadores = super.getScene().getJugadores();
 
+		
 		for (Jugador jugador : jugadores) {
 			Vector nuevaPosicion = new Vector(jugador.getX(), jugador.getY());
 			if (Colision.mustApply(this, jugador, nuevaPosicion)
 					&& !jugador.isEstaSeleccionado()) {
+				
 				this.cambiarJugadorSeleccionado(jugador);
 				this.estadoPelota = new EstadoPelotaEnJuego(this);
 				this.remateEnCorner = false;
+				this.enRemate = false;
+				this.puedeEjecutarMovimiento = false;
 			}
 		}
 	}
@@ -114,21 +120,44 @@ public class Pelota extends GameComponent<SoccerScene> {
 	public void cambiarJugadorSeleccionado(Jugador jugador) {
 		this.setY(jugador.getY());
 		this.setX(jugador.getX());
-//		PARCHE
+
 		if(this.jugador == null){
-			
-////////////////////////////////////////////////
-			
-			
-			
-			
-			
-			
-/////////////////////////////////////////////////
+
 			
 		}else{
-		
-		if(jugador instanceof JugadorVisitante
+			
+		if(jugador instanceof ArqueroVisitante
+				&& this.getJugador() instanceof JugadorLocal){
+			
+			List<Jugador> jugadoresv = super.getScene().getJugadoresVisitantes();
+
+			for (Jugador jv : jugadoresv) {
+				jv.setEstadoNoSeleccionado();
+				jv.setEstaSeleccionado(false);
+				jv.flag=false;
+			}
+			
+			jugador.flag = true;
+			jugador.setEstaSeleccionado(true);
+			jugador.setEstadoSeleccionado();
+			
+		}else 
+			if(jugador instanceof JugadorLocal
+				&& this.getJugador() instanceof ArqueroVisitante){
+				
+			List<Jugador> jugadoresl = super.getScene().getJugadoresLocales();
+			for (Jugador jl : jugadoresl) {
+				jl.setEstadoNoSeleccionado();
+				jl.setEstaSeleccionado(false);
+				jl.flag=false;
+			}
+			
+			jugador.flag = true;
+			jugador.setEstaSeleccionado(true);
+			jugador.setEstadoSeleccionado();
+			
+		}else 
+			if(jugador instanceof JugadorVisitante
 				&& !(this.getJugador() instanceof JugadorVisitante)){
 			
 			List<Jugador> jugadoresv = super.getScene().getJugadoresVisitantes();
@@ -200,7 +229,6 @@ public class Pelota extends GameComponent<SoccerScene> {
 
 
 		this.setJugador(jugador);
-		enRemate = false;
 	}
 
 	private void moverCamara(DeltaState deltaState){
@@ -462,5 +490,15 @@ public class Pelota extends GameComponent<SoccerScene> {
 
 	public void setDireccionRemate(int direccionRemate) {
 		this.direccionRemate = direccionRemate;
+	}
+
+
+	public boolean isPuedeEjecutarMovimiento() {
+		return puedeEjecutarMovimiento;
+	}
+
+
+	public void setPuedeEjecutarMovimiento(boolean puedeEjecutarMovimiento) {
+		this.puedeEjecutarMovimiento = puedeEjecutarMovimiento;
 	}
 }

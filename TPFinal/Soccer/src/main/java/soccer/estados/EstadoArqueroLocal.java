@@ -16,12 +16,28 @@ public class EstadoArqueroLocal extends EstadoArquero {
 	public void update(DeltaState deltaState) {
 		Pelota pelota = this.getJugador().getScene().getPelota();
 		double y= this.getJugador().getScene().getCancha().getY() ;
-		
+				
 		if(pelota.getY() < 528 && pelota.getY() > 390 && y < -900){
 			this.achicar(deltaState);
 		}else{
 			this.resetPos(deltaState);
 		}		
+	}
+	
+	public void moverseHaciaCostados(DeltaState deltaState) {
+		if(this.getJugador().getScene().getPelota().getX() > 640){
+			if(this.getJugador().getX() < 660){
+			this.getJugador().right(deltaState);
+			this.getJugador().ejecutarSprite(deltaState, Direccion.RIGHT,0);
+			}
+		}
+		
+		if(this.getJugador().getScene().getPelota().getX() < 640){
+			if(this.getJugador().getX() > 590){
+			this.getJugador().left(deltaState);
+			this.getJugador().ejecutarSprite(deltaState, Direccion.LEFT,0);
+			}
+		}
 	}
 
 	@Override
@@ -64,15 +80,7 @@ public class EstadoArqueroLocal extends EstadoArquero {
 	@Override
 	public void resetPos(DeltaState deltaState) {
 		
-		if(this.getJugador().getX() > 620){
-			this.getJugador().left(deltaState);
-			this.getJugador().ejecutarSprite(deltaState, Direccion.LEFT,0);
-			
-		}
-		if(this.getJugador().getX() < 630){
-			this.getJugador().right(deltaState);
-			this.getJugador().ejecutarSprite(deltaState, Direccion.RIGHT,0);
-		}
+		this.moverseHaciaCostados(deltaState);
 		
 		if(this.getJugador().getY() < 500 ){
 			this.getJugador().down(deltaState);

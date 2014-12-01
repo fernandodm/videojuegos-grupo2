@@ -26,8 +26,11 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 			if (Colision.mustApply(this.getPelota(), jugador, nuevaPosicion)
 					&& jugador.isEstaSeleccionado()) {
 				this.getPelota().setJugador(jugador);
-				this.ejecutarMovimiento(deltaState, jugador.getX(),
-						jugador.getY());
+				this.ejecutarMovimiento(deltaState, jugador);
+				
+				if(this.getPelota().getJugador() instanceof JugadorLocal)
+					this.getPelota().setEnRemate(false);
+				
 				jugador.flag = true;
 				if(this.getPelota().getJugador() instanceof JugadorLocal)
 					this.getPelota().activarRemate(deltaState);
@@ -55,60 +58,60 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		*/
 	}
 
-	public void ejecutarMovimiento(DeltaState deltaState, double x, double y) {
-	
+	public void ejecutarMovimiento(DeltaState deltaState, Jugador jugador) {
+
 		if(getPelota().getJugador() instanceof JugadorLocal){
-		int direccion = Direccion.obtenerDireccion(deltaState);
-		switch (direccion) {
-		case Direccion.UP:
-			this.getPelota().setUltimaDireccion(Direccion.UP); 
-			this.getPelota().setY(y-14);
-			this.getPelota().setX(x + 3);
-			this.getPelota().ejecutarSpritePelota();
-			break;
-		case Direccion.DOWN:
-			this.getPelota().setUltimaDireccion(Direccion.DOWN); 
-			this.getPelota().setY(y+31);
-			this.getPelota().setX(x);
-			this.getPelota().ejecutarSpritePelota();
-			break;
-		case Direccion.LEFT:
-			this.getPelota().setUltimaDireccion(Direccion.LEFT); 
-			this.getPelota().setX(x-14);
-			this.getPelota().setY(y+4);
-			this.getPelota().ejecutarSpritePelota();
-			break;
-		case Direccion.RIGHT:
-			this.getPelota().setUltimaDireccion(Direccion.RIGHT); 
-			this.getPelota().setX(x+31);
-			this.getPelota().setY(y+9);
-			this.getPelota().ejecutarSpritePelota();
-			break;
-		case Direccion.UPRIGHT:
-			this.getPelota().setUltimaDireccion(Direccion.UPRIGHT); 
-			this.getPelota().setX(x + 25);
-			this.getPelota().setY(y - 10);
-			this.getPelota().ejecutarSpritePelota();
-			break;
-		case Direccion.UPLEFT:
-			this.getPelota().setUltimaDireccion(Direccion.UPLEFT); 
-			this.getPelota().setX(x - 8);
-			this.getPelota().setY(y - 10);
-			this.getPelota().ejecutarSpritePelota();
-			break;
-		case Direccion.DOWNRIGHT:
-			this.getPelota().setUltimaDireccion(Direccion.DOWNRIGHT); 
-			this.getPelota().setX(x + 30);
-			this.getPelota().setY(y + 23);
-			this.getPelota().ejecutarSpritePelota();
-			break;
-		case Direccion.DOWNLEFT:
-			this.getPelota().setUltimaDireccion(Direccion.DOWNLEFT); 
-			this.getPelota().setX(x - 13);
-			this.getPelota().setY(y + 21);
-			this.getPelota().ejecutarSpritePelota();
-			break;
-		}
+			int direccion = Direccion.obtenerDireccion(deltaState);
+			switch (direccion) {
+			case Direccion.UP:
+				this.getPelota().setUltimaDireccion(Direccion.UP); 
+				this.getPelota().setY(jugador.getY()-14);
+				this.getPelota().setX(jugador.getX() + 3);
+				this.getPelota().ejecutarSpritePelota();
+				break;
+			case Direccion.DOWN:
+				this.getPelota().setUltimaDireccion(Direccion.DOWN); 
+				this.getPelota().setY(jugador.getY()+31);
+				this.getPelota().setX(jugador.getX());
+				this.getPelota().ejecutarSpritePelota();
+				break;
+			case Direccion.LEFT:
+				this.getPelota().setUltimaDireccion(Direccion.LEFT); 
+				this.getPelota().setX(jugador.getX()-14);
+				this.getPelota().setY(jugador.getY()+4);
+				this.getPelota().ejecutarSpritePelota();
+				break;
+			case Direccion.RIGHT:
+				this.getPelota().setUltimaDireccion(Direccion.RIGHT); 
+				this.getPelota().setX(jugador.getX()+31);
+				this.getPelota().setY(jugador.getY()+9);
+				this.getPelota().ejecutarSpritePelota();
+				break;
+			case Direccion.UPRIGHT:
+				this.getPelota().setUltimaDireccion(Direccion.UPRIGHT); 
+				this.getPelota().setX(jugador.getX() + 25);
+				this.getPelota().setY(jugador.getY() - 10);
+				this.getPelota().ejecutarSpritePelota();
+				break;
+			case Direccion.UPLEFT:
+				this.getPelota().setUltimaDireccion(Direccion.UPLEFT); 
+				this.getPelota().setX(jugador.getX() - 8);
+				this.getPelota().setY(jugador.getY()- 10);
+				this.getPelota().ejecutarSpritePelota();
+				break;
+			case Direccion.DOWNRIGHT:
+				this.getPelota().setUltimaDireccion(Direccion.DOWNRIGHT); 
+				this.getPelota().setX(jugador.getX() + 30);
+				this.getPelota().setY(jugador.getY() + 23);
+				this.getPelota().ejecutarSpritePelota();
+				break;
+			case Direccion.DOWNLEFT:
+				this.getPelota().setUltimaDireccion(Direccion.DOWNLEFT); 
+				this.getPelota().setX(jugador.getX() - 13);
+				this.getPelota().setY(jugador.getY() + 21);
+				this.getPelota().ejecutarSpritePelota();
+				break;
+			}
 		}
 	}
 
@@ -118,12 +121,11 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		|| this.getPelota().getY() > 528 && gol && this.getPelota().getScene().getCancha().getY() < -930){
 						
 			if(this.fueCorner()){
-				this.frenarTiempo();
 				this.seleccionarJugadorAlCorner();
 			}else{
-				this.getPelota().getScene().getTiempo().setTieneQueParar(true);
 				this.saqueDeArco();
 			}
+			this.frenarTiempo();
 		}
 	}
 	
@@ -134,7 +136,11 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		
 		if(jugador instanceof JugadorLocal){
 			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateralOSaqueArcoCPU(this.getPelota()));
+			Jugador jugav = this.getPelota().getScene().getEquipoVisitante().getJugadores().get(5);
+			this.acercarJugadorAlArquero(jugav, 500, 150);
 		}else{
+			Jugador jugal = this.getPelota().getScene().getEquipoLocal().getJugadores().get(5);
+			this.acercarJugadorAlArquero(jugal, 500, 400);
 			this.getPelota().setEstadoPelota(new EstadoPelotaEnLateralOSaqueArco(this.getPelota()));
 
 		}
@@ -155,6 +161,13 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 		setearAparienciaArquero(arquero);
 		this.posicionarSaqueDeArco(arquero);
 		
+	}
+
+	private void acercarJugadorAlArquero(Jugador jugador, double x, double y) {
+		
+		jugador.setY(y);
+		jugador.setX(x);
+			
 	}
 
 	public void setearAparienciaArquero(Jugador arquero) {
