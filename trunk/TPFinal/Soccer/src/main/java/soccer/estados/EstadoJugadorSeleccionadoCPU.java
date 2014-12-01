@@ -16,20 +16,20 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 	public void update(DeltaState deltaState) {
 		if(this.getJugador() instanceof ArqueroVisitante){
 			Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.obtenerDireccionDeRemateVisitante());				
-			this.getJugador().setEstadoArqueroSaqueDeArco();
+			this.getJugador().setEstado(new EstadoArqueroCpu(this.getJugador()) );
 			return;
 		}
 		
 
 		if(Utils.distanciaConArcoLocal(this.getJugador().getX(), this.getJugador().getY())< 250){
 				Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.obtenerDireccionDeRemateVisitante());				
-				this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+				this.getJugador().setEstadoNoSeleccionado();
 		}
 		
 		if(!Utils.tienePelotaVisitante()){
 			this.getJugador().setFlag(false);
 			this.getJugador().setEstaSeleccionado(false);
-			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+			this.getJugador().setEstadoNoSeleccionado();
 			return;
 		}
 		
@@ -37,7 +37,7 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 		if(distanciaConJugadorVisitanteMasCercano < 50 
 				&& distanciaConJugadorVisitanteMasCercano > 15 && Utils.hacerPase()){
 			Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.direccionJugadorVisitanteCercano(this.getJugador().getX(), this.getJugador().getY()));				
-			this.getJugador().setEstado(new EstadoJugadorNoSeleccionadoCPU(this.getJugador()));
+			this.getJugador().setEstadoNoSeleccionado();
 			return;
 		}
 		

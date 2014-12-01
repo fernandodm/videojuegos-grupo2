@@ -44,7 +44,7 @@ public class SoccerGame extends Game {
         
         public void resetGame(Marcador marcador, Tiempo tiempo, Jugador jl, Jugador jv, LabelSeleccionado label){
         	
-        	SoccerScene scene = new SoccerScene("sonido1.wav");
+        	SoccerScene scene = new SoccerScene("SonidoMenu.wav");
         	Utils.scene=scene;
         	Cancha cancha = new Cancha("cancha.png", 0, -460);
         	Arco arcoArriba = new Arco("arco.png", 0, 525, -452);
