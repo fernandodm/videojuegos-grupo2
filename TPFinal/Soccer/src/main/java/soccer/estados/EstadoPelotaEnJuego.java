@@ -114,8 +114,8 @@ public class EstadoPelotaEnJuego extends EstadoPelota {
 
 	private void verificarCorner() {
 		boolean gol = !(this.getPelota().getX()>550 && this.getPelota().getX()<700 );
-		if((this.getPelota().getY() < 50 && gol) 
-		|| this.getPelota().getY() > 528 && gol){
+		if((this.getPelota().getY() < 50 && gol && this.getPelota().getScene().getCancha().getY() > -7 ) 
+		|| this.getPelota().getY() > 528 && gol && this.getPelota().getScene().getCancha().getY() < -930){
 						
 			if(this.fueCorner()){
 				this.frenarTiempo();
