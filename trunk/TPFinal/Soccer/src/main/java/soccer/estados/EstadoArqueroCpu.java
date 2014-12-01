@@ -15,8 +15,9 @@ public class EstadoArqueroCpu extends EstadoArquero{
 	@Override
 	public void update(DeltaState deltaState) {
 		Pelota pelota = this.getJugador().getScene().getPelota();
+		double y= this.getJugador().getScene().getCancha().getY() ;
 		
-		if(pelota.getY() < 217 && pelota.getY() > 67){
+		if(pelota.getY() < 217 && pelota.getY() > 67 && (y > -10) ){
 			this.achicar(deltaState);
 		
 		}else{

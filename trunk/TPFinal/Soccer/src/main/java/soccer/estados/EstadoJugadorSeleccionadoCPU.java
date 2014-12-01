@@ -14,7 +14,6 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 
 	@Override
 	public void update(DeltaState deltaState) {
-		
 		if(this.getJugador() instanceof ArqueroVisitante){
 			Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.obtenerDireccionDeRemateVisitante());				
 			this.getJugador().setEstadoArqueroSaqueDeArco();
