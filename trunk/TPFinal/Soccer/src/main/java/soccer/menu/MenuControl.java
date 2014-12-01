@@ -22,7 +22,7 @@ public class MenuControl extends GameComponent<MenuScene>{
 	public void update(DeltaState deltaState) {
 		
 		if(deltaState.isKeyPressed(Key.ENTER)){
-//			new DesktopGameLauncher(new SoccerGame()).launch();
+			new DesktopGameLauncher(new SoccerGame()).launch();
 			SoccerScene scene = new SoccerScene("sonido1.wav");
 			this.getGame().setCurrentScene(scene);
 		}
