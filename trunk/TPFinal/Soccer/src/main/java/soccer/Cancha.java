@@ -1,5 +1,8 @@
 package soccer;
 
+import soccer.estados.EstadoArqueroSaqueDeArco;
+import soccer.estados.EstadoJugadorEnCorner;
+import soccer.estados.EstadoJugadorEnLateral;
 import soccer.estados.EstadoJugadorNoSeleccionado;
 
 import com.uqbar.vainilla.DeltaState;
@@ -16,7 +19,16 @@ public class Cancha extends GameComponent<SoccerScene> {
 	@Override
 	public void update(DeltaState deltaState) {
 		
-		if (deltaState.isKeyPressed(Key.C) ) {
+		Jugador JugadorActual = this.getScene().getPelota().getJugador();
+		boolean puedeCambiar = true;
+		
+		if(JugadorActual != null){
+			puedeCambiar = !(JugadorActual.getEstado() instanceof EstadoJugadorEnLateral)
+								&& !(JugadorActual.getEstado() instanceof EstadoJugadorEnCorner)
+								&& !(JugadorActual.getEstado() instanceof EstadoArqueroSaqueDeArco);
+		}
+		
+		if (deltaState.isKeyPressed(Key.C) &&  puedeCambiar) {
 			/* Busco al jugador selecionado para deseleccionarlo */
 
 			for (Jugador jugador : super.getScene().getEquipoLocal().getJugadores()) {
