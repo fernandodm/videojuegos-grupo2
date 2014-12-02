@@ -147,7 +147,7 @@ public class SoccerGame extends Game {
         	Marcador marcador = new Marcador();	                
         	Tiempo tiempo = new Tiempo(300, 10, Color.lightGray);
         	
-        	this.resetGolVis(marcador, tiempo);
+        	this.resetGolLoc(marcador, tiempo);
         	
         }	
        
