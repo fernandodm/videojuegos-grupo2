@@ -13,7 +13,6 @@ public class EstadoJugadorSeleccionado extends EstadoJugador {
 
 	@Override
 	public void update(DeltaState deltaState) {
-//		if(!(this.getScene().getPelota().getX() < 173) && !(this.getScene().getPelota().getX() > 1091) ){
 			int direccion = Direccion.obtenerDireccion(deltaState);
 				switch (direccion) {
 				case Direccion.UP:
@@ -48,7 +47,6 @@ public class EstadoJugadorSeleccionado extends EstadoJugador {
 					this.getJugador().downLeft(deltaState);
 					this.getJugador().ejecutarSprite(deltaState, Direccion.UP,-2);
 					break;
-//				}		
 			}
 		}
 }

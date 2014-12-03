@@ -18,8 +18,6 @@ public class Marcador extends GameComponent<SoccerScene>{
 	
 	@Override
 	public void update(DeltaState deltaState) {
-//		System.out.println("pelota = " + super.getScene().getPelota().getY());
-//		System.out.println("scene = " + super.getScene().getCancha().getY());
 		((Label)this.getAppearance()).setText(this.marcadorLocal + ":" + this.marcadorVisitante);
 		this.actualizarMarcadores();
 		super.update(deltaState);
