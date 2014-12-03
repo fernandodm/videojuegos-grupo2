@@ -53,9 +53,6 @@ public class EstadoArqueroLocal extends EstadoArquero {
 			if (this.getJugador().getY() > pelota.getY()) {
 				this.getJugador().up(deltaState);
 				this.getJugador().ejecutarSprite(deltaState, Direccion.UP, 0);
-			} else {
-				// this.getJugador().up(deltaState);
-				// this.getJugador().ejecutarSprite(deltaState, Direccion.UP,0);
 			}
 
 		}
@@ -67,11 +64,7 @@ public class EstadoArqueroLocal extends EstadoArquero {
 			if (this.getJugador().getY() > pelota.getY()) {
 				this.getJugador().up(deltaState);
 				this.getJugador().ejecutarSprite(deltaState, Direccion.UP, 0);
-			} else {
-				// this.getJugador().up(deltaState);
-				// this.getJugador().ejecutarSprite(deltaState, Direccion.UP,0);
-			}
-
+			} 
 		}
 
 	}

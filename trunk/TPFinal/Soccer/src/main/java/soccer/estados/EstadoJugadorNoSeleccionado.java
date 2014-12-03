@@ -65,8 +65,7 @@ public class EstadoJugadorNoSeleccionado extends EstadoJugador {
 			this.getJugador().downLeft(deltaState);
 			this.getJugador().ejecutarSprite(deltaState, Direccion.UP,-2);
 			break;
-//		}		
-	}
+		}
 	}
 
 	private void moverAPosicionOriginal(DeltaState deltaState) {

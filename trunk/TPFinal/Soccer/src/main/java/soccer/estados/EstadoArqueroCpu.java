@@ -74,8 +74,6 @@ public class EstadoArqueroCpu extends EstadoArquero{
 
 	public void resetPos(DeltaState deltaState) {
 		
-		double yCancha = this.getJugador().getScene().getCancha().getY();
-		
 		this.moverseHaciaCostados(deltaState);
 		
 		if(this.getJugador().getY() > 70 ){

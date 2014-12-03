@@ -17,8 +17,6 @@ public class EstadoJugadorSeleccionadoCPU extends EstadoJugador {
 		if(this.getJugador() instanceof ArqueroVisitante){
 			Utils.scene.getPelota().activarRemateCPU(deltaState,Utils.obtenerDireccionDeRemateVisitante());				
 			this.getJugador().setEstado(new EstadoArqueroCpu(this.getJugador()) );
-//			this.getJugador().setFlag(false);
-//			this.getJugador().setEstaSeleccionado(false);
 			return;
 		}
 		
